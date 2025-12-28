@@ -1,13 +1,12 @@
 import {
   Pause,
   Play,
-  FileText,
   Volume2,
   VolumeX,
   Maximize,
   RotateCcw,
 } from "lucide-react";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 
 export default function VideoSection() {
   const [isPlaying, setIsPlaying] = useState(false);

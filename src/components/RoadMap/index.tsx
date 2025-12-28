@@ -1,4 +1,4 @@
-const LocationItem = ({ city, count, status }) => (
+const LocationItem = ({ city, count, status }: any) => (
   <div className="flex items-center justify-between py-6 border-b border-gray-100 group cursor-pointer">
     <div className="flex items-center gap-6">
       <span className="text-gray-300 font-mono group-hover:text-blue-600 transition">

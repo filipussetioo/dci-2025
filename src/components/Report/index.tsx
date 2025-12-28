@@ -1,31 +1,4 @@
-import React from "react";
-import { FileText, Download, ArrowRight, Table } from "lucide-react";
-
-const DownloadCard = ({ title, size, type, color }) => (
-  <div className="group relative bg-white border border-gray-100 p-8 rounded-sm hover:shadow-xl transition-all duration-500 cursor-pointer">
-    <div
-      className={`w-12 h-12 ${color} mb-6 flex items-center justify-center rounded-sm text-white transition-transform group-hover:scale-110`}
-    >
-      {type === "excel" ? <Table size={24} /> : <FileText size={24} />}
-    </div>
-
-    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-      {title}
-    </h3>
-
-    <div className="flex items-center justify-between mt-8">
-      <span className="text-xs font-mono text-gray-400 uppercase tracking-widest">
-        PDF — {size}
-      </span>
-      <div className="flex items-center text-sm font-bold text-gray-900 group-hover:gap-2 transition-all">
-        Download <Download size={16} className="ml-2" />
-      </div>
-    </div>
-
-    {/* Decorative Border Bottom */}
-    <div className="absolute bottom-0 left-0 w-0 h-1 bg-blue-600 transition-all duration-500 group-hover:w-full" />
-  </div>
-);
+import { FileText, Download} from "lucide-react";
 
 export const DownloadSection = () => {
   return (

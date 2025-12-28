@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 
-const AccordionItem = ({ title, content, isOpen, onClick }) => (
+const AccordionItem = ({ title, content, isOpen, onClick }: any) => (
   <div className="border-b border-gray-200">
     <button
       onClick={onClick}

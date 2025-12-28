@@ -1,6 +1,4 @@
-import React from "react";
-
-const StatCard = ({ label, value, subtext }) => (
+const StatCard = ({ label, value, subtext }: any) => (
   <div className="group border-t border-gray-200 pt-8 pb-12 hover:border-blue-600 transition-colors duration-500">
     <p className="text-sm font-medium text-gray-400 uppercase tracking-[0.2em] mb-4">
       {label}
