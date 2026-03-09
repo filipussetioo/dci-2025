@@ -1,2 +1,165 @@
 /* ./src/index.css */
 @import "tailwindcss";
+
+@theme {
+  --font-quantico: "Quantico", system-ui, sans-serif;
+  --font-archivo: "Archivo", system-ui, sans-serif;
+  --color-blue-primary: #03b5de;
+  --color-dark-blue: #141c22;
+  --color-dark-blue-300: #12294a;
+  --color-cream: #f3ede3;
+  --color-cream-300: #ede5cc;
+}
+
+@font-face {
+  font-family: "Quantico";
+  src: url("./assets/fonts/quantico/Quantico-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Quantico";
+  src: url("./assets/fonts/quantico/Quantico-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Quantico";
+  src: url("./assets/fonts/quantico/Quantico-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Quantico";
+  src: url("./assets/fonts/quantico/Quantico-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src: url("./assets/fonts/archivo/Archivo-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src: url("./assets/fonts/archivo/Archivo-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src: url("./assets/fonts/archivo/Archivo-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src: url("./assets/fonts/archivo/Archivo-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src: url("./assets/fonts/archivo/Archivo-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src: url("./assets/fonts/archivo/Archivo-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-archivo);
+    margin: 0;
+  }
+}
+
+@keyframes card-slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes card-slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.tab-transition {
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vertical-text {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-header {
+  animation: fade-in-up 1s ease-out forwards;
+}
+
+.side-tab-text {
+  transition:
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.5s ease;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.side-tab-button {
+  transition:
+    width 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.3s ease;
+  overflow: hidden;
+}
+
+@keyframes title-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-title-entry {
+  animation: title-slide-up 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}

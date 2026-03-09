@@ -1,52 +1,243 @@
-import { ArrowRight } from "lucide-react";
+import iconArrowDown from "../../assets/icons/icon-arrow-down.svg";
 
-export const Hero = () => (
-  <section className="relative min-h-screen flex items-center pt-20 bg-white overflow-hidden">
-    <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      {/* Content Side */}
-      <div className="z-10">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 mb-6">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
-          </span>
-          <span className="text-xs font-bold text-blue-700 uppercase tracking-widest">
-            2024 Annual Report
-          </span>
-        </div>
+const scrollTo = (id: string) => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const navHeight = 60;
+  const y = el.getBoundingClientRect().top + window.scrollY - navHeight;
+  window.scrollTo({ top: y, behavior: "smooth" });
+  // setIsMobileMenuOpen(false);
+};
 
-        <h1 className="text-6xl md:text-8xl font-light text-gray-900 leading-[0.9] tracking-tighter mb-8">
-          Expanding <br />
-          <span className="font-semibold italic text-blue-600">
-            Boundaries.
-          </span>
-        </h1>
+export const Hero = ({ isDark }: { isDark: boolean }) => (
+  // <section
+  //   id="hero"
+  //   className="relative min-h-screen h-full flex flex-col items-center overflow-hidden px-6 pb-12"
+  // >
+  //   <div className="h-20 md:h-24 shrink-0" />
+  //   {/* Batik pattern — TOP LEFT corner */}
+  //   <div className="absolute top-0 left-0 w-[45%] h-[55%] pointer-events-none">
+  //     <svg
+  //       viewBox="0 0 500 500"
+  //       className="w-full h-full"
+  //       style={{
+  //         color: isDark ? "#1a3a5a" : "#c5b990",
+  //         opacity: isDark ? 0.15 : 0.3,
+  //         transition: "color 0.5s, opacity 0.5s",
+  //       }}
+  //     >
+  //       <pattern
+  //         id="batik-l"
+  //         x="0"
+  //         y="0"
+  //         width="60"
+  //         height="60"
+  //         patternUnits="userSpaceOnUse"
+  //       >
+  //         <path
+  //           d="M30 0L60 30L30 60L0 30Z"
+  //           fill="none"
+  //           stroke="currentColor"
+  //           strokeWidth="0.8"
+  //         />
+  //         <circle
+  //           cx="30"
+  //           cy="30"
+  //           r="6"
+  //           fill="none"
+  //           stroke="currentColor"
+  //           strokeWidth="0.6"
+  //         />
+  //         <circle cx="30" cy="30" r="2" fill="currentColor" opacity="0.4" />
+  //         <circle cx="0" cy="0" r="3" fill="currentColor" opacity="0.2" />
+  //         <circle cx="60" cy="0" r="3" fill="currentColor" opacity="0.2" />
+  //         <circle cx="0" cy="60" r="3" fill="currentColor" opacity="0.2" />
+  //         <circle cx="60" cy="60" r="3" fill="currentColor" opacity="0.2" />
+  //         <path
+  //           d="M15 15L45 15L45 45L15 45Z"
+  //           fill="none"
+  //           stroke="currentColor"
+  //           strokeWidth="0.3"
+  //           opacity="0.5"
+  //         />
+  //       </pattern>
+  //       <rect width="500" height="500" fill="url(#batik-l)" />
+  //     </svg>
+  //   </div>
 
-        <p className="text-xl text-gray-500 max-w-lg leading-relaxed mb-10">
-          Scaling Southeast Asia's digital landscape through sustainable
-          infrastructure and world-class operational excellence.
-        </p>
+  //   {/* Batik pattern — TOP RIGHT corner */}
+  //   <div className="absolute top-0 right-0 w-[45%] h-[55%] pointer-events-none">
+  //     <svg
+  //       viewBox="0 0 500 500"
+  //       className="w-full h-full"
+  //       style={{
+  //         color: isDark ? "#1a3a5a" : "#c5b990",
+  //         opacity: isDark ? 0.15 : 0.3,
+  //         transition: "color 0.5s, opacity 0.5s",
+  //       }}
+  //     >
+  //       <pattern
+  //         id="batik-r"
+  //         x="0"
+  //         y="0"
+  //         width="60"
+  //         height="60"
+  //         patternUnits="userSpaceOnUse"
+  //       >
+  //         <path
+  //           d="M30 0L60 30L30 60L0 30Z"
+  //           fill="none"
+  //           stroke="currentColor"
+  //           strokeWidth="0.8"
+  //         />
+  //         <circle
+  //           cx="30"
+  //           cy="30"
+  //           r="6"
+  //           fill="none"
+  //           stroke="currentColor"
+  //           strokeWidth="0.6"
+  //         />
+  //         <circle cx="30" cy="30" r="2" fill="currentColor" opacity="0.4" />
+  //         <circle cx="0" cy="0" r="3" fill="currentColor" opacity="0.2" />
+  //         <circle cx="60" cy="0" r="3" fill="currentColor" opacity="0.2" />
+  //         <circle cx="0" cy="60" r="3" fill="currentColor" opacity="0.2" />
+  //         <circle cx="60" cy="60" r="3" fill="currentColor" opacity="0.2" />
+  //         <path
+  //           d="M15 15L45 15L45 45L15 45Z"
+  //           fill="none"
+  //           stroke="currentColor"
+  //           strokeWidth="0.3"
+  //           opacity="0.5"
+  //         />
+  //       </pattern>
+  //       <rect width="500" height="500" fill="url(#batik-r)" />
+  //     </svg>
+  //   </div>
 
-        <div className="flex flex-wrap gap-4">
-          <button className="bg-gray-900 text-white px-8 py-4 font-bold rounded-sm flex items-center group hover:bg-blue-600 transition-colors">
-            View Financials
-            <ArrowRight
-              className="ml-2 group-hover:translate-x-1 transition-transform"
-              size={20}
-            />
-          </button>
-          <button className="px-8 py-4 font-bold text-gray-900 border border-gray-200 rounded-sm hover:bg-gray-50 transition">
-            Our ESG Roadmap
-          </button>
-        </div>
-      </div>
+  //   {/* Content */}
+  //   {/* <div className="flex flex-col justify-between h-full"> */}
+  //   <div className="flex flex-col justify-between h-full">
+  //     <div className="relative z-10 text-center mx-auto">
+  //       <h1
+  //         className="font-quantico font-normal text-[clamp(4rem,15vw,6.3rem)] leading-[0.95] tracking-[-0.04em] uppercase text-center"
+  //         style={{
+  //           color: isDark ? "#ffffff" : "#111827",
+  //           transition: "color 0.5s",
+  //         }}
+  //       >
+  //         Powering the
+  //         <br />
+  //         Foundations of
+  //         <br />
+  //         Indonesia's AI Future
+  //       </h1>
+  //     </div>
 
-      {/* Visual Side */}
-      <div className="relative h-[500px] lg:h-[700px] bg-gray-100 rounded-sm overflow-hidden">
-        {/* Replace with an actual image of a data center or architecture */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-gray-200 to-transparent" />
-        <div className="absolute bottom-10 left-10 text-gray-400 text-xs font-mono uppercase tracking-[0.3em]">
-          DCI-H1 Cibitung Facility / Stage 2
+  //     <div className="text-center mb-6">
+  //       <p className="font-quantico text-xs md:text-sm  uppercase tracking-[0.25em] text-[#3bb8c4]">
+  //         2025 Annual &amp; Sustainability Report
+  //       </p>
+  //       <div className="mt-2">
+  //         <svg viewBox="0 0 24 14" className="w-5 h-3 mx-auto text-[#3bb8c4]">
+  //           <path
+  //             d="M2 2L12 12L22 2"
+  //             fill="none"
+  //             stroke="currentColor"
+  //             strokeWidth="2"
+  //             strokeLinecap="round"
+  //             strokeLinejoin="round"
+  //           />
+  //         </svg>
+  //       </div>
+  //     </div>
+  //   </div>
+  //   {/* </div> */}
+  // </section>
+  // <section
+  //   id="hero"
+  //   className="relative h-screen w-full flex flex-col overflow-hidden px-6 pb-12"
+  // >
+  //   {/* 1. Navbar Offset: Set this to the height of your navbar */}
+  //   {/* This ensures your headline starts below the navigation */}
+  //   <div className="h-24 md:h-32 shrink-0" />
+
+  //   {/* 2. Main Content Area: flex-grow fills the middle space */}
+  //   <div className="flex-grow flex flex-col items-center justify-center relative z-10 text-center mx-auto w-full">
+  //     <h1
+  //       className="font-Quantico font-normal text-[clamp(2.5rem,7vw,5.5rem)] md:text-[clamp(4rem,9vw,6.3rem)] leading-[1.0] md:leading-[0.95] tracking-[-0.02em] uppercase text-center"
+  //       style={{
+  //         color: isDark ? "#ffffff" : "#1A1A1A",
+  //         transition: "color 0.5s",
+  //       }}
+  //     >
+  //       Powering the
+  //       <br />
+  //       Foundations of
+  //       <br />
+  //       Indonesia's AI Future
+  //     </h1>
+  //   </div>
+
+  //   {/* 3. Bottom Footer: shrink-0 keeps it at the very bottom */}
+  //   <div className="shrink-0 relative z-10 text-center">
+  //     <p className="text-sm md:text-base font-medium text-[#4bbbd2] tracking-wide">
+  //       2025 Annual &amp; Sustainability Report
+  //     </p>
+  //     <div className="mt-3 flex justify-center">
+  //       <svg viewBox="0 0 24 14" className="w-8 h-3 text-[#4bbbd2]">
+  //         <path
+  //           d="M2 2L12 12L22 2"
+  //           fill="none"
+  //           stroke="currentColor"
+  //           strokeWidth="1.5"
+  //           strokeLinecap="round"
+  //           strokeLinejoin="round"
+  //         />
+  //       </svg>
+  //     </div>
+  //   </div>
+  // </section>
+  <section
+    id="hero"
+    className="relative flex-1 w-full flex flex-col overflow-hidden px-6"
+  >
+    {/* 2. Headline Container */}
+    <div className="grow flex flex-col items-center pt-10 md:pt-48 relative z-10 text-center mx-auto w-full">
+      <h1
+        className="font-quantico font-normal text-[clamp(2.2rem,7vw,5.5rem)] md:text-[clamp(4rem,9vw,6.3rem)] leading-[1.1] md:leading-[0.95] tracking-[-0.02em] uppercase text-center"
+        style={{
+          color: isDark ? "#F3EDE3" : "#141C22",
+          transition: "color 0.5s",
+        }}
+      >
+        Powering the
+        <br />
+        Foundations of
+        <br />
+        Indonesia's AI Future
+      </h1>
+    </div>
+
+    {/* 3. Footer: Adjusted for "Elevation" */}
+    {/* Added mb-20 to lift it significantly from the screen edge */}
+    <div
+      className="shrink-0 relative z-10 text-center mb-16 md:mb-28 flex flex-col gap-10"
+      onClick={() => scrollTo("downloads")}
+    >
+      <p
+        className={`md:text-2xl font-archivo tracking-widest text-2xl font-normal`}
+        style={{
+          color: isDark ? "#F3EDE3" : "#03B5DE",
+          transition: "color 0.5s",
+        }}
+      >
+        2025 Annual &amp; Sustainability Report
+      </p>
+      <div className="flex justify-center">
+        {/* Animated or static arrow */}
+        <div className="w-10 h-[0.875] text-blue-primary">
+          <img src={iconArrowDown} className="w-full h-full" />
         </div>
       </div>
     </div>

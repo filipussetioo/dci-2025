@@ -7,18 +7,19 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { useRef, useState } from "react";
+import iconPlay from "../../assets/icons/icon-play.svg";
+import batikLow from "../../assets/graphics/batik-low.png";
+import batikLowLight from "../../assets/graphics/batik-low-light.png";
 
-export default function VideoSection() {
+export default function VideoSection({ isDark }: { isDark: boolean }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
 
-  // 1. Fixed the 'null' type error by specifying the element type
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const togglePlay = () => {
-    // 2. Add the null check here to satisfy TypeScript
     if (videoRef.current) {
       if (videoRef.current.paused) {
         videoRef.current.play();
@@ -31,7 +32,7 @@ export default function VideoSection() {
   };
 
   const toggleMute = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevents triggering the play/pause on the container
+    e.stopPropagation();
     if (videoRef.current) {
       videoRef.current.muted = !videoRef.current.muted;
       setIsMuted(videoRef.current.muted);
@@ -65,19 +66,22 @@ export default function VideoSection() {
   };
 
   return (
-    <section className="py-12 px-6 md:px-12 bg-gray-50">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center gap-4 mb-8">
-          <h2 className="text-sm font-bold tracking-[0.3em] text-blue-600 uppercase">
-            Corporate Vision
-          </h2>
-          <div className="h-[1px] flex-grow bg-gray-200"></div>
-        </div>
+    <section className="relative px-6 md:px-12 h-screen flex items-center overflow-hidden">
+      {/* Batik pattern at bottom */}
+      <img
+        src={isDark ? batikLow : batikLowLight}
+        alt=""
+        className="absolute bottom-0 left-0 w-full pointer-events-none"
+      />
 
-        {/* Container Ref added here for Fullscreen support */}
+      <div className="relative z-10 max-w-350 mx-auto">
         <div
           ref={containerRef}
-          className="relative group aspect-video w-full bg-black shadow-2xl overflow-hidden rounded-sm"
+          className="relative group aspect-video w-full shadow-lg overflow-hidden"
+          style={{
+            backgroundColor: isDark ? "#0d1424" : "#e8e4d8",
+            transition: "background-color 0.5s",
+          }}
         >
           <video
             ref={videoRef}
@@ -92,11 +96,10 @@ export default function VideoSection() {
             onClick={togglePlay}
           />
 
+          {/* Diamond play button centered */}
           {!isPlaying && progress === 0 && (
-            <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center p-6 pointer-events-none">
-              <h3 className="text-white text-3xl md:text-5xl font-light tracking-tight mb-4">
-                2024 <span className="font-semibold">Strategic Outlook</span>
-              </h3>
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <img src={iconPlay} className="w-10 md:w-16"></img>
             </div>
           )}
 
@@ -106,7 +109,7 @@ export default function VideoSection() {
               <div className="flex items-center gap-4">
                 <button
                   onClick={togglePlay}
-                  className="text-white hover:text-blue-400"
+                  className="text-white hover:text-[#3bb8c4]"
                 >
                   {isPlaying ? (
                     <Pause size={24} fill="currentColor" />
@@ -117,7 +120,7 @@ export default function VideoSection() {
 
                 <button
                   onClick={toggleMute}
-                  className="text-white hover:text-blue-400"
+                  className="text-white hover:text-[#3bb8c4]"
                 >
                   {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
                 </button>
@@ -126,14 +129,14 @@ export default function VideoSection() {
               <div className="flex items-center gap-4">
                 <button
                   onClick={(e) => skip(e, -10)}
-                  className="text-white hover:text-blue-400 flex flex-col items-center"
+                  className="text-white hover:text-[#3bb8c4] flex flex-col items-center"
                 >
                   <RotateCcw size={18} />
                   <span className="text-[8px] font-bold">-10s</span>
                 </button>
                 <button
                   onClick={toggleFullscreen}
-                  className="text-white hover:text-blue-400"
+                  className="text-white hover:text-[#3bb8c4]"
                 >
                   <Maximize size={20} />
                 </button>
@@ -144,7 +147,7 @@ export default function VideoSection() {
           {/* Progress Bar */}
           <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 z-30">
             <div
-              className="h-full bg-blue-600 transition-all duration-100"
+              className="h-full bg-[#3bb8c4] transition-all duration-100"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
