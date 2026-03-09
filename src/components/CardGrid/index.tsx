@@ -118,7 +118,7 @@ const FinancialContent = ({ isDark }: { isDark: boolean }) => (
             >
               IDR
             </span>
-            <span className="text-[clamp(3rem,min(12vw,18vh),179px)] text-blue-primary leading-none tracking-tighter">
+            <span className="text-[clamp(3rem,16vh,179px)] text-blue-primary leading-none tracking-tighter">
               {item.val}
             </span>
             <div className="text-left self-start pt-2">
@@ -564,9 +564,9 @@ export default function CardGrid({ isDark }: { isDark: boolean }) {
                 className={`font-quantico uppercase transition-colors duration-500
                 ${isClosed ? "text-2xl md:text-5xl whitespace-pre-line text-center" : ""}
                 ${isActive ? "text-3xl lg:text-5xl xl:text-7xl text-left whitespace-pre-line" : ""}
-                ${isInactiveSide ? "text-[10px] tracking-[0.2em]" : ""}
+                ${isInactiveSide ? "text-2xl" : ""}
               `}
-                style={{ color: isDark ? "#ffffff" : "#111827" }}
+                style={{ color: isDark ? "#03B5DE" : "#D1AB78" }}
               >
                 {isInactiveSide
                   ? tab.titleFlat

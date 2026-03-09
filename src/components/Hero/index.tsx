@@ -236,7 +236,7 @@ export const Hero = ({ isDark }: { isDark: boolean }) => (
       </p>
       <div className="flex justify-center">
         {/* Animated or static arrow */}
-        <div className="w-10 h-[0.875] text-blue-primary">
+        <div className="w-10 h-3.5 text-blue-primary">
           <img src={iconArrowDown} className="w-full h-full" />
         </div>
       </div>
