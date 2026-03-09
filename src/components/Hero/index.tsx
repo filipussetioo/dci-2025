@@ -203,9 +203,9 @@ export const Hero = ({ isDark }: { isDark: boolean }) => (
     className="relative flex-1 w-full flex flex-col overflow-hidden px-6"
   >
     {/* 2. Headline Container */}
-    <div className="grow flex flex-col items-center pt-10 md:pt-48 relative z-10 text-center mx-auto w-full">
+    <div className="grow flex flex-col items-center pt-10 md:pt-[clamp(6rem,17.8vh,12rem)] relative z-10 text-center mx-auto w-full">
       <h1
-        className="font-quantico font-normal text-[clamp(2.2rem,7vw,5.5rem)] md:text-[clamp(4rem,9vw,6.3rem)] leading-[1.1] md:leading-[0.95] tracking-[-0.02em] uppercase text-center"
+        className="font-quantico font-normal text-[clamp(2.2rem,7vw,5.5rem)] md:text-[clamp(3rem,5.25vw,6.3rem)] leading-[1.1] md:leading-[0.95] tracking-[-0.02em] uppercase text-center"
         style={{
           color: isDark ? "#F3EDE3" : "#141C22",
           transition: "color 0.5s",
@@ -222,7 +222,7 @@ export const Hero = ({ isDark }: { isDark: boolean }) => (
     {/* 3. Footer: Adjusted for "Elevation" */}
     {/* Added mb-20 to lift it significantly from the screen edge */}
     <div
-      className="shrink-0 relative z-10 text-center mb-16 md:mb-28 flex flex-col gap-10 cursor-pointer"
+      className="shrink-0 relative z-10 text-center mb-[clamp(2rem,5.2vh,7rem)] flex flex-col gap-[clamp(1.5rem,3.7vh,2.5rem)] cursor-pointer"
       onClick={() => scrollTo("downloads")}
     >
       <p

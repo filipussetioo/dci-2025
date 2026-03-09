@@ -60,25 +60,25 @@ const FinancialContent = ({ isDark }: { isDark: boolean }) => (
       ].map((item, idx, arr) => (
         <div
           key={idx}
-          className={`border-t border-blue-primary w-full flex flex-col md:flex-row md:items-center justify-between gap-6 px-8 md:px-20 py-[clamp(1rem,3vh,2rem)] ${idx === arr.length - 1 ? "border-b" : ""}`}
+          className={`border-t border-blue-primary w-full flex flex-col md:flex-row md:items-center justify-between gap-[1vh] px-8 md:px-20 py-[clamp(0.5rem,2vh,2rem)] ${idx === arr.length - 1 ? "border-b" : ""}`}
         >
           {/* Left side: label + badges */}
-          <div className="space-y-[clamp(1rem,4vh,3rem)]">
+          <div className="space-y-[clamp(0.5rem,2.5vh,3rem)]">
             <div>
               <p
-                className="text-2xl uppercase"
+                className="text-[clamp(1rem,2.2vh,1.5rem)] uppercase"
                 style={{ color: isDark ? "#F3EDE3" : "#141C22" }}
               >
                 {item.label}
               </p>
-              <p className="text-lg text-blue-primary">{item.eng}</p>
+              <p className="text-[clamp(0.875rem,1.7vh,1.125rem)] text-blue-primary">{item.eng}</p>
             </div>
-            <div className="flex items-end gap-3 pt-2">
+            <div className="flex items-end gap-3">
               {/* Up arrow + percentage */}
               <div className="flex items-center gap-1">
-                <img src={iconArrowUp} alt="" className="w-7 h-7" />
+                <img src={iconArrowUp} alt="" className="w-[clamp(1.2rem,2.5vh,1.75rem)] h-[clamp(1.2rem,2.5vh,1.75rem)]" />
                 <span
-                  className="px-5 py-1 bg-blue-primary text-dark-blue text-lg uppercase"
+                  className="px-5 py-0.5 bg-blue-primary text-dark-blue text-[clamp(0.75rem,1.7vh,1.125rem)] uppercase"
                   style={{
                     clipPath:
                       "polygon(10px 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0% 50%)",
@@ -91,13 +91,13 @@ const FinancialContent = ({ isDark }: { isDark: boolean }) => (
               {item.margin && (
                 <div className="flex flex-col items-center gap-1">
                   <span
-                    className="text-sm uppercase tracking-widest"
+                    className="text-[clamp(0.6rem,1.3vh,0.875rem)] uppercase tracking-widest"
                     style={{ color: isDark ? "#F3EDE3" : "#141C22" }}
                   >
                     Margin
                   </span>
                   <span
-                    className="px-5 py-1 bg-blue-primary text-dark-blue text-lg uppercase"
+                    className="px-5 py-0.5 bg-blue-primary text-dark-blue text-[clamp(0.75rem,1.7vh,1.125rem)] uppercase"
                     style={{
                       clipPath:
                         "polygon(10px 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0% 50%)",
@@ -113,22 +113,22 @@ const FinancialContent = ({ isDark }: { isDark: boolean }) => (
           {/* Right side: IDR + number + Miliar */}
           <div className="flex items-center gap-4">
             <span
-              className="text-xl lg:text-3xl uppercase self-start pt-2"
+              className="text-[clamp(1rem,2.5vh,1.875rem)] uppercase self-start pt-1"
               style={{ color: isDark ? "#F3EDE3" : "#141C22" }}
             >
               IDR
             </span>
-            <span className="text-[clamp(3rem,16vh,179px)] text-blue-primary leading-none tracking-tighter">
+            <span className="text-[clamp(3rem,15vh,179px)] text-blue-primary leading-none tracking-tighter">
               {item.val}
             </span>
-            <div className="text-left self-start pt-2">
+            <div className="text-left self-start pt-1">
               <p
-                className="text-xl lg:text-3xl uppercase leading-none"
+                className="text-[clamp(1rem,2.5vh,1.875rem)] uppercase leading-none"
                 style={{ color: isDark ? "#F3EDE3" : "#141C22" }}
               >
                 Miliar
               </p>
-              <p className="text-2xl text-blue-primary">Billion</p>
+              <p className="text-[clamp(0.875rem,2vh,1.5rem)] text-blue-primary">Billion</p>
             </div>
           </div>
         </div>
@@ -360,7 +360,7 @@ const ecosystemItems = [
 ];
 
 const EcosystemContent = ({ isDark }: { isDark: boolean }) => (
-  <div className="h-full relative flex flex-col pl-8 md:pl-20 pb-8 md:pb-12 w-full font-quantico">
+  <div className="h-full relative flex flex-col pl-8 md:pl-[clamp(2.5rem,4.17vw,5rem)] pb-8 md:pb-[clamp(1.5rem,2.22vh,3rem)] w-full font-quantico">
     <div className="flex-1 flex flex-col justify-center w-full relative z-10">
       {ecosystemItems.map((item, idx) => (
         <div key={idx} className="group cursor-default">
@@ -399,7 +399,7 @@ const EcosystemContent = ({ isDark }: { isDark: boolean }) => (
             >
               {item.label}
             </p>
-            <span className="relative z-10 text-5xl md:text-8xl text-blue-primary leading-none tracking-tighter shrink-0 group-hover:scale-150 transition-transform duration-500 origin-right">
+            <span className="relative z-10 text-5xl md:text-[clamp(3rem,8.89vh,6rem)] text-blue-primary leading-none tracking-tighter shrink-0 group-hover:scale-150 transition-transform duration-500 origin-right">
               {item.val}
             </span>
           </div>
@@ -415,11 +415,11 @@ const EcosystemContent = ({ isDark }: { isDark: boolean }) => (
       >
         TRUSTED BY
       </p>
-      <p className="text-7xl md:text-[10rem] text-blue-primary leading-none tracking-tighter">
+      <p className="text-7xl md:text-[clamp(5rem,14.8vh,10rem)] text-blue-primary leading-none tracking-tighter">
         270+
       </p>
       <p
-        className="text-2xl md:text-3xl uppercase tracking-widest leading-none"
+        className="text-2xl md:text-[clamp(1.5rem,2.78vh,1.875rem)] uppercase tracking-widest leading-none"
         style={{ color: isDark ? "#F3EDE3" : "#141C22" }}
       >
         CUSTOMERS
@@ -429,7 +429,7 @@ const EcosystemContent = ({ isDark }: { isDark: boolean }) => (
 );
 
 const OperationalContent = ({ isDark }: { isDark: boolean }) => (
-  <div className="h-full flex flex-col px-8 md:px-20 w-full pb-12 pt-[clamp(1rem,4vh,3rem)]">
+  <div className="h-full flex flex-col px-8 md:px-20 w-full pb-12 pt-[clamp(1rem,4.5vh,3rem)]">
     <div className="relative mb-12">
       <div className="flex items-center gap-3 mb-2">
         <span className="w-6 h-6 rounded-full border border-cyan-500/50 flex items-center justify-center text-[10px] font-black text-cyan-500">
@@ -450,7 +450,7 @@ const OperationalContent = ({ isDark }: { isDark: boolean }) => (
     <div className="grid md:grid-cols-2 gap-8">
       <div className="p-8 border border-cyan-500/10 bg-cyan-500/5 backdrop-blur-sm">
         <h4
-          className="text-xl font-black uppercase mb-2 tracking-tight"
+          className="text-[clamp(0.875rem,1.85vh,1.25rem)] font-black uppercase mb-2 tracking-tight"
           style={{ color: isDark ? "#ffffff" : "#111827" }}
         >
           Reliable Infrastructure
@@ -529,7 +529,7 @@ export default function CardGrid({ isDark }: { isDark: boolean }) {
 
             {/* Hexagonal number badge at top center (visible when closed) */}
             {isClosed && (
-              <div className="absolute top-16 left-1/2 -translate-x-1/2 z-40 pointer-events-none">
+              <div className="absolute top-[clamp(2rem,5.9vh,4rem)] left-1/2 -translate-x-1/2 z-40 pointer-events-none">
                 <svg width="114" height="49" viewBox="0 0 114 49">
                   <polygon
                     points="16,1 98,1 113,24.5 98,48 16,48 1,24.5"
@@ -539,7 +539,7 @@ export default function CardGrid({ isDark }: { isDark: boolean }) {
                   />
                 </svg>
                 <span
-                  className={`absolute inset-0 flex items-center justify-center text-2xl font-quantico ${isDark ? "text-cream" : "text-dark-blue"}`}
+                  className={`absolute inset-0 flex items-center justify-center text-[clamp(1rem,2.2vh,1.5rem)] font-quantico ${isDark ? "text-cream" : "text-dark-blue"}`}
                 >
                   {tab.num}
                 </span>
@@ -563,7 +563,7 @@ export default function CardGrid({ isDark }: { isDark: boolean }) {
               <h3
                 className={`font-quantico uppercase transition-colors duration-500
                 ${isClosed ? "text-2xl md:text-5xl whitespace-pre-line text-center" : ""}
-                ${isActive ? "text-3xl lg:text-5xl xl:text-7xl text-left whitespace-pre-line" : ""}
+                ${isActive ? "text-3xl lg:text-[clamp(2.5rem,4.44vh,3rem)] xl:text-[clamp(3rem,6.67vh,4.5rem)] text-left whitespace-pre-line" : ""}
                 ${isInactiveSide ? "text-2xl" : ""}
               `}
                 style={{ color: isDark ? "#03B5DE" : "#D1AB78" }}
@@ -584,7 +584,7 @@ export default function CardGrid({ isDark }: { isDark: boolean }) {
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20, transition: { duration: 0.2 } }} // Hides FASTER on close
-                  className="absolute inset-0 w-full h-full z-10 overflow-hidden pt-[clamp(8rem,22vh,18rem)]"
+                  className="absolute inset-0 w-full h-full z-10 overflow-hidden pt-[clamp(7rem,21vh,18rem)]"
                 >
                   <Content isDark={isDark} />
 
@@ -594,7 +594,7 @@ export default function CardGrid({ isDark }: { isDark: boolean }) {
                       e.stopPropagation();
                       setActiveTab(null);
                     }}
-                    className="absolute top-12 right-12 md:top-24 md:right-24 w-12 h-12 z-50 group"
+                    className="absolute top-[3vh] right-[3vh] md:top-[clamp(3rem,8.89vh,6rem)] md:right-[clamp(3rem,8.89vh,6rem)] w-[clamp(2rem,4.44vh,3rem)] h-[clamp(2rem,4.44vh,3rem)] z-50 group"
                   >
                     <svg
                       viewBox="0 0 100 100"

@@ -9,7 +9,7 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
       id="downloads"
       className="relative overflow-hidden h-screen"
       style={{
-        color: isDark ? "#ffffff" : "#1a1a1a",
+        color: isDark ? "#F3EDE3" : "#141C22",
         transition: "color 0.5s",
       }}
     >
@@ -38,8 +38,8 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
         alt=""
         className="absolute bottom-0 px-8 w-full pointer-events-none"
       />
-      <div className="relative z-10 pt-[clamp(3rem,6vh,7rem)] text-center px-6">
-        <h2 className="font-quantico text-5xl sm:text-6xl md:text-7xl lg:text-[clamp(4.5rem,12vh,8rem)] uppercase leading-[1.05] tracking-tight">
+      <div className="relative z-10 pt-[clamp(3rem,10.4vh,7rem)] text-center px-6">
+        <h2 className="font-quantico text-5xl sm:text-6xl md:text-7xl lg:text-[clamp(4.5rem,11.85vh,8rem)] uppercase leading-[1.05] tracking-tight">
           Read the Full
           <br />
           Report
@@ -47,7 +47,7 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
 
         {/* DOWNLOAD REPORT button */}
         <button
-          className="mt-[clamp(1.5rem,3vh,2.5rem)] inline-block cursor-pointer font-quantico px-10 py-3 text-3xl uppercase tracking-[0.2em] bg-blue-primary text-dark-blue"
+          className="mt-[clamp(1.5rem,3.7vh,2.5rem)] inline-block cursor-pointer font-quantico px-[clamp(1.5rem,2.08vw,2.5rem)] py-[clamp(0.5rem,1.11vh,0.75rem)] text-[clamp(1.25rem,2.78vh,1.875rem)] uppercase tracking-[0.2em] bg-blue-primary text-dark-blue"
           style={{
             clipPath:
               "polygon(30px 0%, calc(100% - 30px) 0%, 100% 50%, calc(100% - 30px) 100%, 30px 100%, 0% 50%)",
@@ -58,14 +58,14 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
       </div>
 
       {/* Footer section */}
-      <div className="relative z-10 mt-[clamp(3rem,10vh,11.875rem)] pb-10 text-center text-xs md:text-sm tracking-[0.15em] uppercase">
-        <div className="relative z-10 flex flex-col gap-[clamp(1.5rem,3vh,2.5rem)]">
+      <div className="relative z-10 mt-[clamp(3rem,17.6vh,11.875rem)] pb-[clamp(1rem,1.85vh,2.5rem)] text-center text-[clamp(0.625rem,1.3vh,0.875rem)] tracking-[0.15em] uppercase">
+        <div className="relative z-10 flex flex-col gap-[clamp(1.5rem,3.7vh,2.5rem)]">
           {/* DCI Logo */}
           <div className="flex justify-center">
             <img
               src={isDark ? logoLight : logoDark}
               alt="DCI Logo"
-              className="h-auto w-20"
+              className="h-auto w-[clamp(3.5rem,4.17vw,5rem)]"
             />
           </div>
 
@@ -74,7 +74,7 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
 
           {/* Description text */}
           <p
-            className="font-archivo leading-[2] mx-auto py-[clamp(1.5rem,3vh,2.5rem)]"
+            className="font-archivo text-[clamp(0.75rem,1.48vh,1rem)] leading-[2] mx-auto py-[clamp(1.5rem,3.7vh,2.5rem)]"
             style={{
               backgroundImage:
                 "linear-gradient(var(--color-blue-primary), var(--color-blue-primary)), linear-gradient(var(--color-blue-primary), var(--color-blue-primary))",
@@ -90,8 +90,8 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
 
           {/* Links */}
           <div
-            className="flex items-center justify-center gap-8 font-quantico uppercase"
-            style={{ color: isDark ? "#ffffff" : "#1a1a1a" }}
+            className="flex items-center justify-center gap-[clamp(1rem,1.67vw,2rem)] font-quantico text-[clamp(0.625rem,1.3vh,0.875rem)] uppercase"
+            style={{ color: isDark ? "#F3EDE3" : "#141C22" }}
           >
             <a
               href="https://www.dci-indonesia.com/"

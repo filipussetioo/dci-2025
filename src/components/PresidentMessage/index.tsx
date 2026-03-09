@@ -5,7 +5,7 @@ import batikLight from "../../assets/graphics/batik-message-light.png";
 export const PresidentMessage = ({ isDark }: { isDark: boolean }) => (
   <section
     id="message"
-    className="py-14 md:py-14 px-6 md:px-10 relative overflow-hidden min-h-screen"
+    className="py-[clamp(2rem,5.2vh,3.5rem)] px-6 md:px-10 relative overflow-hidden min-h-screen"
     style={{
       color: isDark ? "#F3EDE3" : "#141C22",
       transition: "color 0.5s",
@@ -65,12 +65,12 @@ export const PresidentMessage = ({ isDark }: { isDark: boolean }) => (
     <div className="max-w-3xl mx-auto relative z-10">
       {/* Decorative geometric cross icon */}
       <div className="flex justify-center">
-        <img src={iconPlus} alt="Icon plus" className="h-24 w-auto" />
+        <img src={iconPlus} alt="Icon plus" className="h-[clamp(3rem,8.9vh,6rem)] w-auto" />
       </div>
 
       {/* Section heading */}
       <div className="text-center border-b-[0.5px] border-blue-primary">
-        <h2 className="font-quantico text-[clamp(2rem,5vw,4.5rem)] uppercase tracking-tight leading-[1.15] py-18">
+        <h2 className="font-quantico text-[clamp(2rem,3.75vw,4.5rem)] uppercase tracking-tight leading-[1.15] py-[clamp(2rem,6.67vh,4.5rem)]">
           Message from
           <br />
           President Director
@@ -81,7 +81,7 @@ export const PresidentMessage = ({ isDark }: { isDark: boolean }) => (
       {/* <div className="w-full h-[0px] bg-blue mx-auto mb-10" /> */}
 
       {/* Message body — paragraph 1 */}
-      <div className="py-18 border-b-[0.5px] border-blue-primary flex flex-col gap-4">
+      <div className="py-[clamp(2rem,6.67vh,4.5rem)] border-b-[0.5px] border-blue-primary flex flex-col gap-4">
         <div className="text-center">
           <p className="font-archivo text-sm md:text-[15px] leading-[1.9]">
             In 2025, the Company continued to strengthen its leading position in
@@ -108,14 +108,14 @@ export const PresidentMessage = ({ isDark }: { isDark: boolean }) => (
 
       {/* Photo + Name — left aligned */}
       <div
-        className="flex items-center justify-center gap-4 py-18"
+        className="flex items-center justify-center gap-4 py-[clamp(2rem,6.67vh,4.5rem)]"
         style={{
           borderTop: `1px solid ${isDark ? "#1f2937" : "#e5e7eb"}`,
           transition: "border-color 0.5s",
         }}
       >
         <div
-          className="w-23.75 h-28 overflow-hidden shrink-0"
+          className="w-[clamp(4rem,4.95vw,5.94rem)] h-[clamp(5rem,10.37vh,7rem)] overflow-hidden shrink-0"
           style={{
             transition: "background-color 0.5s",
           }}

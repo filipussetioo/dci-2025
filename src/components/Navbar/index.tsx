@@ -48,7 +48,7 @@ const Navbar = ({
       <div className="absolute top-0 left-0 w-full h-5" />
 
       <nav
-        className="w-full px-6 md:px-10 py-3 transition-all duration-500"
+        className="w-full px-6 md:px-[clamp(2.5rem,5vw,10rem)] py-3 transition-all duration-500"
         style={{
           backgroundColor: isDark ? "#141C22" : "#f3ede3",
           color: isDark ? "#F3EDE3" : "#141C22",
@@ -65,23 +65,23 @@ const Navbar = ({
             <img
               src={isDark ? logoLight : logoDark}
               alt="DCI Logo"
-              className="h-18 w-auto"
+              className="h-[clamp(3rem,3.75vw,4.5rem)] w-auto"
             />
           </button>
 
           {/* Center Nav Items */}
-          <div className="hidden lg:flex items-center gap-10 font-quantico text-sm">
+          <div className="hidden lg:flex items-center gap-[clamp(1.5rem,2.08vw,2.5rem)] font-quantico text-[clamp(0.625rem,0.73vw,0.875rem)]">
             <button
               onClick={() => scrollTo("message")}
               className="uppercase tracking-[0.2em] cursor-pointer transition-colors"
-              style={{ color: isDark ? "#9ca3af" : "#4b5563" }}
+              style={{ color: isDark ? "#F3EDE3" : "#141C22" }}
             >
               Message from President Director
             </button>
             <button
               onClick={() => scrollTo("highlights")}
               className="uppercase tracking-[0.2em] cursor-pointer transition-colors"
-              style={{ color: isDark ? "#9ca3af" : "#4b5563" }}
+              style={{ color: isDark ? "#F3EDE3" : "#141C22" }}
             >
               Performance Highlights
             </button>
@@ -104,7 +104,7 @@ const Navbar = ({
                     fill="var(--color-blue-primary)"
                   />
                 </svg>
-                <span className="relative px-7 py-2 uppercase tracking-[0.2em] text-dark-blue">
+                <span className="relative px-[clamp(1rem,1.46vw,1.75rem)] py-[clamp(0.375rem,0.42vw,0.5rem)] uppercase tracking-[0.2em] text-dark-blue">
                   Download Report
                 </span>
               </div>
@@ -115,24 +115,24 @@ const Navbar = ({
           <div className="flex items-center gap-3">
             <button
               onClick={onToggle}
-              className="flex items-center gap-4 cursor-pointer group"
+              className="flex items-center gap-[clamp(0.5rem,0.83vw,1rem)] cursor-pointer group"
               aria-label="Toggle Theme"
             >
               <span
-                className="font-quantico text-sm font uppercase tracking-[0.15em] transition-colors"
+                className="font-quantico text-[clamp(0.625rem,0.73vw,0.875rem)] font uppercase tracking-[0.15em] transition-colors"
                 // style={{ color: isDark ? "#ffffff" : "#9ca3af" }}
               >
                 Dark
               </span>
 
               {/* Hexagonal toggle container */}
-              <div className="relative w-21 h-11 flex items-center justify-center">
+              <div className="relative w-[clamp(3.5rem,4.375vw,5.25rem)] h-[clamp(1.75rem,2.29vw,2.75rem)] flex items-center justify-center">
                 {/* Outer shape (acts as border) */}
                 <div
                   className="absolute inset-0 bg-blue-primary"
                   style={{
                     clipPath:
-                      "polygon(22px 0%, calc(100% - 22px) 0%, 100% 50%, calc(100% - 22px) 100%, 22px 100%, 0% 50%)",
+                      "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)",
                   }}
                 />
                 {/* Inner shape (covers interior, leaving ~1px border) */}
@@ -140,26 +140,26 @@ const Navbar = ({
                   className="absolute inset-px"
                   style={{
                     clipPath:
-                      "polygon(22px 0%, calc(100% - 22px) 0%, 100% 50%, calc(100% - 22px) 100%, 22px 100%, 0% 50%)",
+                      "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)",
                     backgroundColor: isDark ? "#141C22" : "#f3ede3",
                   }}
                 />
 
                 {/* The Knob — diamond */}
                 <div
-                  className="relative z-10 w-7 h-7 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  className="relative z-10 w-[clamp(1.2rem,1.46vw,1.75rem)] h-[clamp(1.2rem,1.46vw,1.75rem)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
                   style={{
                     clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
                     backgroundColor: isDark ? "#F3EDE3" : "#141C22",
                     transform: isDark
-                      ? "translateX(-14px)"
-                      : "translateX(14px)",
+                      ? "translateX(clamp(-14px,-0.73vw,-10px))"
+                      : "translateX(clamp(10px,0.73vw,14px))",
                   }}
                 />
               </div>
 
               <span
-                className="font-quantico text-sm uppercase tracking-[0.15em] transition-colors"
+                className="font-quantico text-[clamp(0.625rem,0.73vw,0.875rem)] uppercase tracking-[0.15em] transition-colors"
                 // style={{ color: !isDark ? "#ffffff" : "#9ca3af" }}
               >
                 Light

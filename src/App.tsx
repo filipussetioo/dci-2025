@@ -32,7 +32,7 @@ function App() {
         <img
           src={isDark ? heroGraphic : heroGraphicLight}
           alt=""
-          className="absolute px-10 w-full pointer-events-none z-10 top-[8%]"
+          className="absolute px-[clamp(1.5rem,2.08vw,2.5rem)] w-full pointer-events-none z-10 top-[8%]"
         />
 
         <div className="h-screen flex flex-col relative z-20">
