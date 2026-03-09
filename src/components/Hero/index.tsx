@@ -222,11 +222,11 @@ export const Hero = ({ isDark }: { isDark: boolean }) => (
     {/* 3. Footer: Adjusted for "Elevation" */}
     {/* Added mb-20 to lift it significantly from the screen edge */}
     <div
-      className="shrink-0 relative z-10 text-center mb-16 md:mb-28 flex flex-col gap-10"
+      className="shrink-0 relative z-10 text-center mb-16 md:mb-28 flex flex-col gap-10 cursor-pointer"
       onClick={() => scrollTo("downloads")}
     >
       <p
-        className={`md:text-2xl font-archivo tracking-widest text-2xl font-normal`}
+        className={`md:text-2xl font-archivo tracking-widest text-2xl font-normal `}
         style={{
           color: isDark ? "#F3EDE3" : "#03B5DE",
           transition: "color 0.5s",

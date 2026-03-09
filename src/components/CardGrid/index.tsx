@@ -39,7 +39,7 @@ const tabs = [
 /* ── Content Panels ── */
 
 const FinancialContent = ({ isDark }: { isDark: boolean }) => (
-  <div className="flex-1 flex flex-col justify-center w-full font-quantico">
+  <div className="h-full flex flex-col justify-center w-full font-quantico">
     <div>
       {[
         { label: "Pendapatan", eng: "Revenue", val: "1306", pct: "25,1%" },
@@ -60,10 +60,10 @@ const FinancialContent = ({ isDark }: { isDark: boolean }) => (
       ].map((item, idx, arr) => (
         <div
           key={idx}
-          className={`border-t border-blue-primary w-full py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 px-8 md:px-20 ${idx === arr.length - 1 ? "border-b" : ""}`}
+          className={`border-t border-blue-primary w-full flex flex-col md:flex-row md:items-center justify-between gap-6 px-8 md:px-20 py-[clamp(1rem,3vh,2rem)] ${idx === arr.length - 1 ? "border-b" : ""}`}
         >
           {/* Left side: label + badges */}
-          <div className="space-y-12">
+          <div className="space-y-[clamp(1rem,4vh,3rem)]">
             <div>
               <p
                 className="text-2xl uppercase"
@@ -113,17 +113,17 @@ const FinancialContent = ({ isDark }: { isDark: boolean }) => (
           {/* Right side: IDR + number + Miliar */}
           <div className="flex items-center gap-4">
             <span
-              className="text-3xl uppercase self-start pt-2"
+              className="text-xl lg:text-3xl uppercase self-start pt-2"
               style={{ color: isDark ? "#F3EDE3" : "#141C22" }}
             >
               IDR
             </span>
-            <span className="text-7xl md:text-[179px] text-blue-primary leading-none tracking-tighter">
+            <span className="text-[clamp(3rem,min(12vw,18vh),179px)] text-blue-primary leading-none tracking-tighter">
               {item.val}
             </span>
             <div className="text-left self-start pt-2">
               <p
-                className="text-3xl uppercase leading-none"
+                className="text-xl lg:text-3xl uppercase leading-none"
                 style={{ color: isDark ? "#F3EDE3" : "#141C22" }}
               >
                 Miliar
@@ -360,7 +360,7 @@ const ecosystemItems = [
 ];
 
 const EcosystemContent = ({ isDark }: { isDark: boolean }) => (
-  <div className="flex-1 relative flex flex-col pl-8 md:pl-20 pb-8 md:pb-12 w-full font-quantico">
+  <div className="h-full relative flex flex-col pl-8 md:pl-20 pb-8 md:pb-12 w-full font-quantico">
     <div className="flex-1 flex flex-col justify-center w-full relative z-10">
       {ecosystemItems.map((item, idx) => (
         <div key={idx} className="group cursor-default">
@@ -429,7 +429,7 @@ const EcosystemContent = ({ isDark }: { isDark: boolean }) => (
 );
 
 const OperationalContent = ({ isDark }: { isDark: boolean }) => (
-  <div className="flex-1 flex flex-col px-8 md:px-20 w-full">
+  <div className="h-full flex flex-col px-8 md:px-20 w-full pb-12 pt-[clamp(1rem,4vh,3rem)]">
     <div className="relative mb-12">
       <div className="flex items-center gap-3 mb-2">
         <span className="w-6 h-6 rounded-full border border-cyan-500/50 flex items-center justify-center text-[10px] font-black text-cyan-500">
@@ -551,8 +551,8 @@ export default function CardGrid({ isDark }: { isDark: boolean }) {
               layout
               initial={false}
               animate={{
-                top: isActive ? "5rem" : "50%",
-                left: isActive ? "9rem" : "50%",
+                top: isActive ? "8vh" : "50%",
+                left: isActive ? "5vw" : "50%",
                 x: isActive ? "0%" : "-50%",
                 y: isActive ? "0%" : "-50%",
                 rotate: isInactiveSide ? -90 : 0,
@@ -563,7 +563,7 @@ export default function CardGrid({ isDark }: { isDark: boolean }) {
               <h3
                 className={`font-quantico uppercase transition-colors duration-500
                 ${isClosed ? "text-2xl md:text-5xl whitespace-pre-line text-center" : ""}
-                ${isActive ? "text-5xl md:text-7xl text-left whitespace-pre-line" : ""}
+                ${isActive ? "text-3xl lg:text-5xl xl:text-7xl text-left whitespace-pre-line" : ""}
                 ${isInactiveSide ? "text-[10px] tracking-[0.2em]" : ""}
               `}
                 style={{ color: isDark ? "#ffffff" : "#111827" }}
@@ -584,7 +584,7 @@ export default function CardGrid({ isDark }: { isDark: boolean }) {
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20, transition: { duration: 0.2 } }} // Hides FASTER on close
-                  className="absolute inset-0 w-full h-full z-10 pt-56 md:pt-72 overflow-y-auto"
+                  className="absolute inset-0 w-full h-full z-10 overflow-hidden pt-[clamp(8rem,22vh,18rem)]"
                 >
                   <Content isDark={isDark} />
 

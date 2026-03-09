@@ -5,7 +5,7 @@ import batikLight from "../../assets/graphics/batik-message-light.png";
 export const PresidentMessage = ({ isDark }: { isDark: boolean }) => (
   <section
     id="message"
-    className="py-14 md:py-14 px-6 md:px-10 relative overflow-hidden h-screen"
+    className="py-14 md:py-14 px-6 md:px-10 relative overflow-hidden min-h-screen"
     style={{
       color: isDark ? "#F3EDE3" : "#141C22",
       transition: "color 0.5s",
@@ -70,7 +70,7 @@ export const PresidentMessage = ({ isDark }: { isDark: boolean }) => (
 
       {/* Section heading */}
       <div className="text-center border-b-[0.5px] border-blue-primary">
-        <h2 className="font-quantico text-[4.5rem] md:text-[4.5rem] uppercase tracking-tight leading-[1.15] py-18">
+        <h2 className="font-quantico text-[clamp(2rem,5vw,4.5rem)] uppercase tracking-tight leading-[1.15] py-18">
           Message from
           <br />
           President Director

@@ -38,8 +38,8 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
         alt=""
         className="absolute bottom-0 px-8 w-full pointer-events-none"
       />
-      <div className="relative z-10 pt-20 md:pt-28 text-center px-6">
-        <h2 className="font-quantico text-5xl sm:text-6xl md:text-7xl lg:text-9xl uppercase leading-[1.05] tracking-tight">
+      <div className="relative z-10 pt-[clamp(3rem,6vh,7rem)] text-center px-6">
+        <h2 className="font-quantico text-5xl sm:text-6xl md:text-7xl lg:text-[clamp(4.5rem,12vh,8rem)] uppercase leading-[1.05] tracking-tight">
           Read the Full
           <br />
           Report
@@ -47,7 +47,7 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
 
         {/* DOWNLOAD REPORT button */}
         <button
-          className="mt-10 inline-block cursor-pointer font-quantico px-10 py-3 text-3xl uppercase tracking-[0.2em] bg-blue-primary text-dark-blue"
+          className="mt-[clamp(1.5rem,3vh,2.5rem)] inline-block cursor-pointer font-quantico px-10 py-3 text-3xl uppercase tracking-[0.2em] bg-blue-primary text-dark-blue"
           style={{
             clipPath:
               "polygon(30px 0%, calc(100% - 30px) 0%, 100% 50%, calc(100% - 30px) 100%, 30px 100%, 0% 50%)",
@@ -58,8 +58,8 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
       </div>
 
       {/* Footer section */}
-      <div className="relative z-10 mt-47.5 pb-10 text-center text-xs md:text-sm tracking-[0.15em] uppercase">
-        <div className="relative z-10 flex flex-col gap-10">
+      <div className="relative z-10 mt-[clamp(3rem,10vh,11.875rem)] pb-10 text-center text-xs md:text-sm tracking-[0.15em] uppercase">
+        <div className="relative z-10 flex flex-col gap-[clamp(1.5rem,3vh,2.5rem)]">
           {/* DCI Logo */}
           <div className="flex justify-center">
             <img
@@ -74,7 +74,7 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
 
           {/* Description text */}
           <p
-            className="font-archivo leading-[2] mx-auto py-10"
+            className="font-archivo leading-[2] mx-auto py-[clamp(1.5rem,3vh,2.5rem)]"
             style={{
               backgroundImage:
                 "linear-gradient(var(--color-blue-primary), var(--color-blue-primary)), linear-gradient(var(--color-blue-primary), var(--color-blue-primary))",
