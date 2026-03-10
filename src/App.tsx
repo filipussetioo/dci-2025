@@ -13,6 +13,7 @@ import dciImageOne from "./assets/graphics/dci-1.png";
 import dciImageTwo from "./assets/graphics/dci-2.png";
 import heroGraphic from "./assets/graphics/hero.png";
 import heroGraphicLight from "./assets/graphics/hero-light.png";
+import { MapSection } from "./components/Maps";
 
 function App() {
   const [isDark, setIsDark] = useState(true);
@@ -42,6 +43,7 @@ function App() {
         {/* <DCIDashboard /> */}
         <VideoSection isDark={isDark} />
       </div>
+      <MapSection isDark={isDark} />
       <PresidentMessage isDark={isDark} />
       <img src={dciImageOne} className="w-full h-auto" />
       <CardGrid isDark={isDark} />
