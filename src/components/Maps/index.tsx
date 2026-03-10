@@ -35,13 +35,27 @@ export const MapSection = ({ isDark }: { isDark: boolean }) => {
   const [active, setActive] = useState<string | null>(null);
   const current = LOCATIONS.find((l) => l.id === active);
   const transformRef = useRef<ReactZoomPanPinchContentRef>(null);
+  const wrapperDivRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   const zoomTo = useCallback((locId: string) => {
     setActive(locId);
-    // Small delay so the DOM element with the id is rendered
-    setTimeout(() => {
-      transformRef.current?.zoomToElement(`marker-${locId}`, 2.2, 300);
-    }, 50);
+    const loc = LOCATIONS.find((l) => l.id === locId);
+    if (!loc || !transformRef.current || !wrapperDivRef.current) return;
+
+    const wrapperRect = wrapperDivRef.current.getBoundingClientRect();
+    const imgEl = imgRef.current;
+    const imgWidth = imgEl ? imgEl.offsetWidth : 1000;
+    const imgHeight = imgEl ? imgEl.offsetHeight : 670;
+
+    const markerX = (parseFloat(loc.marker.left) / 100) * imgWidth;
+    const markerY = (parseFloat(loc.marker.top) / 100) * imgHeight;
+
+    const scale = 2.2;
+    const x = -(markerX * scale) + wrapperRect.width / 2;
+    const y = -(markerY * scale) + wrapperRect.height / 2;
+
+    transformRef.current.setTransform(x, y, scale, 300);
   }, []);
 
   const resetView = useCallback(() => {
@@ -145,7 +159,7 @@ export const MapSection = ({ isDark }: { isDark: boolean }) => {
       </div>
 
       {/* Right Panel — Interactive Map */}
-      <div className="w-1/2 relative overflow-hidden">
+      <div ref={wrapperDivRef} className="w-1/2 relative overflow-hidden">
         <TransformWrapper
           ref={transformRef}
           initialScale={1}
@@ -157,6 +171,7 @@ export const MapSection = ({ isDark }: { isDark: boolean }) => {
           <TransformComponent wrapperStyle={{ width: "100%", height: "100%" }}>
             <div style={{ position: "relative", display: "inline-block" }}>
               <img
+                ref={imgRef}
                 src={dci}
                 alt="Map"
                 style={{

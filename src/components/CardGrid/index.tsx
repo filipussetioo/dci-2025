@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import type { ReactZoomPanPinchContentRef } from "react-zoom-pan-pinch";
 import dci from "../../assets/graphics/dci-map.svg";
 import batikLow from "../../assets/graphics/batik-gradient.png";
 import batikLowLight from "../../assets/graphics/batik-gradient-light.png";
@@ -71,12 +73,18 @@ const FinancialContent = ({ isDark }: { isDark: boolean }) => (
               >
                 {item.label}
               </p>
-              <p className="text-[clamp(0.875rem,1.7vh,1.125rem)] text-blue-primary">{item.eng}</p>
+              <p className="text-[clamp(0.875rem,1.7vh,1.125rem)] text-blue-primary">
+                {item.eng}
+              </p>
             </div>
             <div className="flex items-end gap-3">
               {/* Up arrow + percentage */}
               <div className="flex items-center gap-1">
-                <img src={iconArrowUp} alt="" className="w-[clamp(1.2rem,2.5vh,1.75rem)] h-[clamp(1.2rem,2.5vh,1.75rem)]" />
+                <img
+                  src={iconArrowUp}
+                  alt=""
+                  className="w-[clamp(1.2rem,2.5vh,1.75rem)] h-[clamp(1.2rem,2.5vh,1.75rem)]"
+                />
                 <span
                   className="px-5 py-0.5 bg-blue-primary text-dark-blue text-[clamp(0.75rem,1.7vh,1.125rem)] uppercase"
                   style={{
@@ -128,7 +136,9 @@ const FinancialContent = ({ isDark }: { isDark: boolean }) => (
               >
                 Miliar
               </p>
-              <p className="text-[clamp(0.875rem,2vh,1.5rem)] text-blue-primary">Billion</p>
+              <p className="text-[clamp(0.875rem,2vh,1.5rem)] text-blue-primary">
+                Billion
+              </p>
             </div>
           </div>
         </div>
@@ -139,15 +149,11 @@ const FinancialContent = ({ isDark }: { isDark: boolean }) => (
 
 const MAP_LOCATIONS = [
   {
-    id: "bintan",
-    title: "FUTURE PLAN - BINTAN",
+    id: "cibitung",
+    title: "CIBITUNG",
     description:
-      "The company will continue to develop the DCI Platform by constructing data centers in multiple locations, such as Bintan.",
-    origin: "45% 28%",
-    scale: 1.4,
-    marker: { x: "45%", y: "28%" },
-    line: { vertical: 80, left: 180, direction: "down" as const },
-    panel: { top: 38, left: 8 },
+      "Located in the industrial corridor of Cibitung, this campus serves as a key expansion site for DCI's growing infrastructure footprint.",
+    marker: { top: "20%", left: "45%" },
     next: "jakarta",
   },
   {
@@ -155,118 +161,113 @@ const MAP_LOCATIONS = [
     title: "JAKARTA",
     description:
       "Serving as the primary hub for the DCI Platform, our Jakarta campus provides Tier IV infrastructure.",
-    origin: "50% 55%",
-    scale: 1.4,
-    marker: { x: "57%", y: "76%" },
-    line: { vertical: 228, left: 350, direction: "up" as const },
-    panel: { top: 48, left: 8 },
+    marker: { top: "75%", left: "58%" },
     next: "bintan",
+  },
+  {
+    id: "bintan",
+    title: "FUTURE PLAN - BINTAN",
+    description:
+      "The company will continue to develop the DCI Platform by constructing data centers in multiple locations, such as Bintan.",
+    marker: { top: "80%", left: "88%" },
+    next: "cibitung",
   },
 ];
 
-const PlatformContent = ({ isDark }: { isDark: boolean }) => {
-  const [active, setActive] = useState<string | null>(null);
+const PlatformContent = ({
+  isDark,
+  activeMarker,
+  onMarkerChange,
+}: {
+  isDark: boolean;
+  activeMarker: string | null;
+  onMarkerChange: (id: string | null) => void;
+}) => {
+  const active = activeMarker;
   const current = MAP_LOCATIONS.find((l) => l.id === active);
+  const transformRef = useRef<ReactZoomPanPinchContentRef>(null);
+  const wrapperDivRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  const zoomTo = useCallback(
+    (locId: string) => {
+      onMarkerChange(locId);
+      const loc = MAP_LOCATIONS.find((l) => l.id === locId);
+      if (!loc || !transformRef.current || !wrapperDivRef.current) return;
+
+      const wrapperRect = wrapperDivRef.current.getBoundingClientRect();
+      const imgEl = imgRef.current;
+      const imgWidth = imgEl ? imgEl.offsetWidth : 1000;
+      const imgHeight = imgEl ? imgEl.offsetHeight : 670;
+
+      const markerX = (parseFloat(loc.marker.left) / 100) * imgWidth;
+      const markerY = (parseFloat(loc.marker.top) / 100) * imgHeight;
+
+      const scale = 2.2;
+      const x = -(markerX * scale) + wrapperRect.width / 2;
+      const y = -(markerY * scale) + wrapperRect.height / 2;
+
+      transformRef.current.setTransform(x, y, scale, 300);
+    },
+    [onMarkerChange],
+  );
+
+  const resetView = useCallback(() => {
+    onMarkerChange(null);
+    transformRef.current?.resetTransform(300);
+  }, [onMarkerChange]);
+
+  const handleMarkerClick = (locId: string) => {
+    if (active === locId) {
+      resetView();
+    } else {
+      zoomTo(locId);
+    }
+  };
+
+  // Restore zoom to saved marker on remount
+  useEffect(() => {
+    if (active) {
+      const timeout = setTimeout(() => {
+        const loc = MAP_LOCATIONS.find((l) => l.id === active);
+        if (!loc || !transformRef.current || !wrapperDivRef.current) return;
+
+        const wrapperRect = wrapperDivRef.current.getBoundingClientRect();
+        const imgEl = imgRef.current;
+        const imgWidth = imgEl ? imgEl.offsetWidth : 1000;
+        const imgHeight = imgEl ? imgEl.offsetHeight : 670;
+
+        const markerX = (parseFloat(loc.marker.left) / 100) * imgWidth;
+        const markerY = (parseFloat(loc.marker.top) / 100) * imgHeight;
+
+        const scale = 2.2;
+        const x = -(markerX * scale) + wrapperRect.width / 2;
+        const y = -(markerY * scale) + wrapperRect.height / 2;
+
+        transformRef.current.setTransform(x, y, scale, 300);
+      }, 150);
+      return () => clearTimeout(timeout);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <div className="absolute inset-0 pt-0 w-full h-screen text-white overflow-hidden">
-      {/* Zoomable map layer */}
-      <motion.div
-        animate={{
-          scale: active && current ? current.scale : 1,
-          transformOrigin: active && current ? current.origin : "center center",
+    <div className="flex h-full overflow-hidden">
+      {/* Left Panel — Info */}
+      <div
+        className="w-1/2 relative flex flex-col justify-center px-[clamp(2rem,4.17vw,5rem)] py-[clamp(2rem,5.2vh,3.5rem)]"
+        style={{
+          borderRight: `1px solid ${isDark ? "rgba(6,182,212,0.15)" : "#d4cdb8"}`,
         }}
-        transition={{ type: "spring", stiffness: 45, damping: 20 }}
-        className="absolute inset-0 flex items-center justify-center"
       >
-        <div
-          className="relative max-w-full max-h-full"
-          style={{ aspectRatio: "1612 / 1080", width: "100%" }}
-        >
-          <img
-            src={dci}
-            className="absolute inset-0 w-full h-full"
-            style={{ opacity: isDark ? 0.5 : 0.3 }}
-            alt="Map"
-          />
-
-          {MAP_LOCATIONS.map((loc) => (
-            <div
-              key={loc.id}
-              style={{ left: loc.marker.x, top: loc.marker.y }}
-              className="absolute"
-            >
-              <motion.div
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActive(loc.id);
-                }}
-                className="absolute -translate-x-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 pointer-events-auto cursor-pointer rotate-45 border border-cyan-400/50 z-10"
-                style={{
-                  backgroundColor:
-                    active === loc.id ? "#22d3ee" : "transparent",
-                }}
-                animate={{
-                  backgroundColor:
-                    active === loc.id ? "#22d3ee" : "transparent",
-                }}
-              />
-
-              <AnimatePresence>
-                {active === loc.id && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="absolute top-0 left-0 pointer-events-none hidden md:block"
-                  >
-                    {loc.line.vertical > 0 && (
-                      <div
-                        className="absolute left-0 w-[1px] bg-cyan-400"
-                        style={{
-                          height: loc.line.vertical,
-                          top:
-                            loc.line.direction === "up"
-                              ? -loc.line.vertical
-                              : 0,
-                        }}
-                      />
-                    )}
-                    <div
-                      className="absolute h-[1px] bg-cyan-400"
-                      style={{
-                        top:
-                          loc.line.direction === "up"
-                            ? -loc.line.vertical
-                            : loc.line.direction === "down"
-                              ? loc.line.vertical
-                              : 0,
-                        left: -loc.line.left,
-                        width: loc.line.left,
-                      }}
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Info panel — desktop */}
-      <AnimatePresence>
-        {active && current && (
-          <>
+        <AnimatePresence mode="wait">
+          {active && current ? (
             <motion.div
-              key={`desktop-${current.id}`}
+              key={current.id}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0 }}
-              className="hidden md:block absolute z-30 pointer-events-auto w-[320px]"
-              style={{
-                top: `${current.panel.top}%`,
-                left: `${current.panel.left}%`,
-              }}
+              className="w-[320px]"
             >
               <div
                 className="bg-cyan-400 text-black px-6 py-2 text-[11px] font-black italic uppercase"
@@ -280,48 +281,85 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
                 {current.description}
               </p>
               <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActive(current.next);
-                }}
-                className="mt-6 bg-cyan-400 text-black px-5 py-2 rounded-full text-[10px] font-black uppercase"
+                onClick={() => zoomTo(current.next)}
+                className="mt-6 bg-cyan-400 text-black px-5 py-2 rounded-full text-[10px] font-black uppercase cursor-pointer"
               >
                 VIEW {current.next.toUpperCase()} ›
               </button>
             </motion.div>
-
-            {/* Info panel — mobile bottom sheet */}
-            <motion.div
-              key={`mobile-${current.id}`}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 40 }}
-              className="md:hidden absolute bottom-0 left-0 right-0 z-30 pointer-events-auto bg-[#05080d]/90 backdrop-blur-sm border-t border-white/10 px-5 py-5"
+          ) : (
+            <motion.p
+              key="placeholder"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="text-[11px] leading-relaxed italic"
+              style={{
+                color: isDark ? "rgba(243,237,227,0.4)" : "rgba(20,28,34,0.4)",
+              }}
             >
-              <div
-                className="bg-cyan-400 text-black px-4 py-1.5 text-[11px] font-black italic uppercase w-fit"
+              Select a location on the map to view details.
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Right Panel — Interactive Map */}
+      <div ref={wrapperDivRef} className="w-1/2 relative overflow-hidden">
+        <TransformWrapper
+          ref={transformRef}
+          initialScale={1}
+          centerOnInit={true}
+          minScale={0.5}
+          maxScale={5}
+          smooth
+        >
+          <TransformComponent wrapperStyle={{ width: "100%", height: "100%" }}>
+            <div style={{ position: "relative", display: "inline-block" }}>
+              <img
+                ref={imgRef}
+                src={dci}
+                alt="Map"
                 style={{
-                  clipPath: "polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%)",
+                  display: "block",
+                  width: "1000px",
+                  height: "auto",
+                  opacity: isDark ? 0.5 : 0.3,
                 }}
-              >
-                {current.title}
-              </div>
-              <p className="mt-3 text-[11px] text-gray-400 leading-relaxed italic">
-                {current.description}
-              </p>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActive(current.next);
-                }}
-                className="mt-4 bg-cyan-400 text-black px-5 py-2 rounded-full text-[10px] font-black uppercase"
-              >
-                VIEW {current.next.toUpperCase()} ›
-              </button>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+              />
+
+              {MAP_LOCATIONS.map((loc) => (
+                <div
+                  key={loc.id}
+                  id={`marker-${loc.id}`}
+                  style={{
+                    position: "absolute",
+                    top: loc.marker.top,
+                    left: loc.marker.left,
+                  }}
+                  className="absolute"
+                >
+                  <motion.div
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleMarkerClick(loc.id);
+                    }}
+                    className="absolute -translate-x-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 pointer-events-auto cursor-pointer rotate-45 border border-cyan-400/50 z-10"
+                    style={{
+                      backgroundColor:
+                        active === loc.id ? "#22d3ee" : "transparent",
+                    }}
+                    animate={{
+                      backgroundColor:
+                        active === loc.id ? "#22d3ee" : "transparent",
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </TransformComponent>
+        </TransformWrapper>
+      </div>
     </div>
   );
 };
@@ -467,7 +505,8 @@ const OperationalContent = ({ isDark }: { isDark: boolean }) => (
   </div>
 );
 
-const panels = [
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const panels: React.ComponentType<any>[] = [
   FinancialContent,
   PlatformContent,
   EcosystemContent,
@@ -478,6 +517,7 @@ const panels = [
 
 export default function CardGrid({ isDark }: { isDark: boolean }) {
   const [activeTab, setActiveTab] = useState<number | null>(null);
+  const [platformMarker, setPlatformMarker] = useState<string | null>(null);
 
   return (
     <div
@@ -586,7 +626,15 @@ export default function CardGrid({ isDark }: { isDark: boolean }) {
                   exit={{ opacity: 0, x: -20, transition: { duration: 0.2 } }} // Hides FASTER on close
                   className="absolute inset-0 w-full h-full z-10 overflow-hidden pt-[clamp(7rem,21vh,18rem)]"
                 >
-                  <Content isDark={isDark} />
+                  {Content === PlatformContent ? (
+                    <PlatformContent
+                      isDark={isDark}
+                      activeMarker={platformMarker}
+                      onMarkerChange={setPlatformMarker}
+                    />
+                  ) : (
+                    <Content isDark={isDark} />
+                  )}
 
                   {/* CLOSE BUTTON */}
                   <button
