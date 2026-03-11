@@ -6,6 +6,10 @@ import dci from "../../assets/graphics/dci-map.svg";
 import batikLow from "../../assets/graphics/batik-gradient.png";
 import batikLowLight from "../../assets/graphics/batik-gradient-light.png";
 import iconArrowUp from "../../assets/icons/icon-arrow-up-black.svg";
+import highlights1 from "../../assets/graphics/highlights-1.png";
+import highlights2 from "../../assets/graphics/highlights-2.png";
+import iconButtonLeft from "../../assets/icons/icon-button-left.svg";
+import iconButtonRight from "../../assets/icons/icon-button-right.svg";
 
 const tabs = [
   {
@@ -324,7 +328,7 @@ const PlatformContent = ({
                   display: "block",
                   width: "1000px",
                   height: "auto",
-                  opacity: isDark ? 0.5 : 0.3,
+                  // opacity: isDark ? 1 : 1,
                 }}
               />
 
@@ -466,44 +470,274 @@ const EcosystemContent = ({ isDark }: { isDark: boolean }) => (
   </div>
 );
 
-const OperationalContent = ({ isDark }: { isDark: boolean }) => (
-  <div className="h-full flex flex-col px-8 md:px-20 w-full pb-12 pt-[clamp(1rem,4.5vh,3rem)]">
-    <div className="relative mb-12">
-      <div className="flex items-center gap-3 mb-2">
-        <span className="w-6 h-6 rounded-full border border-cyan-500/50 flex items-center justify-center text-[10px] font-black text-cyan-500">
-          01
-        </span>
-        <span className="text-[10px] font-black text-cyan-500 uppercase tracking-widest">
-          Ketersediaan Listrik 100%
-        </span>
-      </div>
-      <p
-        className="text-xs italic"
-        style={{ color: isDark ? "#9ca3af" : "#6b7280" }}
-      >
-        Pencapaian terkait ketersediaan listrik 100%
-      </p>
-    </div>
+const OPERATIONAL_CELLS: (
+  | {
+      type: "text";
+      id: string;
+      titleId: string;
+      titleEn: string;
+      descId: string;
+      descEn: string;
+    }
+  | { type: "image"; src: string; alt: string }
+)[][] = [
+  // Page 1
+  [
+    {
+      type: "text",
+      id: "01",
+      titleId: "Ketersediaan Listrik 100%",
+      titleEn: "100% Power Uptime",
+      descId: "Pencapaian terkait ketersediaan listrik 100%",
+      descEn: "100% Power Uptime Achievement",
+    },
+    { type: "image", src: highlights1, alt: "Control Room" },
+    {
+      type: "text",
+      id: "03",
+      titleId: "Skalabilitas Platform",
+      titleEn: "Platform Scalability",
+      descId:
+        "Mengoperasikan pusat data DCI Platform di beberapa lokasi secara bersamaan",
+      descEn:
+        "Simultaneously operating data centers within the DCI Platform, across multiple locations",
+    },
+    { type: "image", src: highlights2, alt: "Server Racks" },
+    {
+      type: "text",
+      id: "02",
+      titleId: "Otomatisasi",
+      titleEn: "Automation",
+      descId:
+        "Fokus dan investasi pada automation dan predictive maintenance untuk meningkatkan efisiensi operasional",
+      descEn:
+        "Focuses and invests in automation and predictive maintenance to increase operational efficiency",
+    },
+    { type: "image", src: highlights1, alt: "Data Center" },
+  ],
+  // Page 2 — flipped: image-text-image on row 1, text-image-text on row 2
+  [
+    { type: "image", src: highlights2, alt: "Security Systems" },
+    {
+      type: "text",
+      id: "04",
+      titleId: "Keamanan Tier IV",
+      titleEn: "Tier IV Security",
+      descId:
+        "Standar keamanan fisik dan siber tertinggi untuk melindungi data pelanggan",
+      descEn:
+        "Highest physical and cyber security standards to protect customer data",
+    },
+    { type: "image", src: highlights1, alt: "Infrastructure" },
+    {
+      type: "text",
+      id: "05",
+      titleId: "Efisiensi Energi",
+      titleEn: "Energy Efficiency",
+      descId:
+        "Optimalisasi penggunaan energi melalui desain infrastruktur yang efisien",
+      descEn: "Optimizing energy usage through efficient infrastructure design",
+    },
+    { type: "image", src: highlights2, alt: "Green Energy" },
+    {
+      type: "text",
+      id: "06",
+      titleId: "Konektivitas Tinggi",
+      titleEn: "High Connectivity",
+      descId:
+        "Jaringan konektivitas yang luas dengan berbagai operator telekomunikasi",
+      descEn:
+        "Extensive connectivity network with various telecommunications operators",
+    },
+  ],
+];
 
-    <div className="grid md:grid-cols-2 gap-8">
-      <div className="p-8 border border-cyan-500/10 bg-cyan-500/5 backdrop-blur-sm">
-        <h4
-          className="text-[clamp(0.875rem,1.85vh,1.25rem)] font-black uppercase mb-2 tracking-tight"
+const OperationalContent = ({ isDark }: { isDark: boolean }) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const handleScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setScrollProgress(max > 0 ? el.scrollLeft / max : 0);
+  };
+
+  const scroll = (direction: "left" | "right") => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const pageWidth = el.clientWidth;
+    el.scrollBy({
+      left: direction === "left" ? -pageWidth : pageWidth,
+      behavior: "smooth",
+    });
+  };
+
+  const renderTextCell = (cell: {
+    id: string;
+    titleId: string;
+    titleEn: string;
+    descId: string;
+    descEn: string;
+  }) => (
+    <div className="px-[clamp(1.5rem,2.5vw,2.5rem)] py-[clamp(1rem,2vh,2rem)] flex flex-col justify-center h-full">
+      <div className="flex items-center gap-3 mb-1">
+        <div className="relative shrink-0 w-[clamp(2.8rem,3.2vw,3.8rem)] h-[clamp(1.6rem,1.8vw,2.1rem)] flex items-center justify-center">
+          {/* Outer hexagon border */}
+          <div
+            className="absolute inset-0"
+            style={{
+              clipPath:
+                "polygon(20% 0%, 80% 0%, 100% 50%, 80% 100%, 20% 100%, 0% 50%)",
+              backgroundColor: isDark ? "#22d3ee" : "#0891b2",
+            }}
+          />
+          {/* Inner hexagon background */}
+          <div
+            className="absolute inset-[1.5px]"
+            style={{
+              clipPath:
+                "polygon(20% 0%, 80% 0%, 100% 50%, 80% 100%, 20% 100%, 0% 50%)",
+              backgroundColor: isDark ? "#141C22" : "#f3ede3",
+            }}
+          />
+          <span
+            className="relative z-10 text-[clamp(0.6rem,0.7vw,0.75rem)] font-black"
+            style={{ color: isDark ? "#22d3ee" : "#0891b2" }}
+          >
+            {cell.id}
+          </span>
+        </div>
+        <h3
+          className="text-[clamp(1.1rem,2vw,1.5rem)] font-bold tracking-tight"
           style={{ color: isDark ? "#ffffff" : "#111827" }}
         >
-          Reliable Infrastructure
-        </h4>
-        <p
-          className="text-sm leading-relaxed"
-          style={{ color: isDark ? "#9ca3af" : "#4b5563" }}
+          {cell.titleId}
+        </h3>
+      </div>
+      <p
+        className="text-[clamp(0.7rem,1vw,0.85rem)] font-bold mb-3"
+        style={{ color: isDark ? "#22d3ee" : "#0891b2" }}
+      >
+        {cell.titleEn}
+      </p>
+      <p
+        className="text-[clamp(0.65rem,0.9vw,0.78rem)] leading-relaxed mb-1.5"
+        style={{ color: isDark ? "#d1d5db" : "#374151" }}
+      >
+        {cell.descId}
+      </p>
+      <p
+        className="text-[clamp(0.6rem,0.85vw,0.72rem)] italic leading-relaxed"
+        style={{ color: isDark ? "#9ca3af" : "#6b7280" }}
+      >
+        {cell.descEn}
+      </p>
+    </div>
+  );
+
+  const renderImageCell = (cell: { src: string; alt: string }) => (
+    <div className="w-full h-full overflow-hidden">
+      <img
+        src={cell.src}
+        alt={cell.alt}
+        className="w-full h-full object-contain"
+      />
+    </div>
+  );
+
+  return (
+    <div className="h-full flex flex-col w-full relative px-[5.42vw] py-[7.41vh] gap-10">
+      {/* Scrollable pages */}
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="flex-1 min-h-0 overflow-x-auto overflow-y-hidden scrollbar-hide"
+        style={{ scrollSnapType: "x mandatory" }}
+      >
+        <div
+          className="flex h-full"
+          style={{ width: `${OPERATIONAL_CELLS.length * 100}%` }}
         >
-          Maintaining world-class operational excellence and uptime across all
-          campuses.
-        </p>
+          {OPERATIONAL_CELLS.map((page, pageIdx) => (
+            <div
+              key={pageIdx}
+              className="h-full grid grid-rows-2 grid-cols-3"
+              style={{
+                width: `${100 / OPERATIONAL_CELLS.length}%`,
+                scrollSnapAlign: "start",
+              }}
+            >
+              {page.map((cell, cellIdx) => (
+                <div key={cellIdx} className="overflow-hidden">
+                  {cell.type === "text"
+                    ? renderTextCell(cell)
+                    : renderImageCell(cell)}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom bar: progress line + nav buttons */}
+      <div className="flex items-center justify-between px-[clamp(1.5rem,3vw,3rem)] py-3">
+        {/* Progress bar */}
+        <div className="flex-1 mr-8 relative h-[2px]">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundColor: isDark
+                ? "rgba(6,182,212,0.15)"
+                : "rgba(0,0,0,0.1)",
+            }}
+          />
+          <motion.div
+            className="absolute top-0 left-0 h-full"
+            style={{
+              backgroundColor: isDark ? "#22d3ee" : "#0891b2",
+              width: "30%",
+            }}
+            animate={{ left: `${scrollProgress * 70}%` }}
+            transition={{ type: "tween", duration: 0.1 }}
+          />
+          <div
+            className="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-2 rotate-45"
+            style={{ backgroundColor: isDark ? "#22d3ee" : "#0891b2" }}
+          />
+          <div
+            className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rotate-45"
+            style={{ backgroundColor: isDark ? "#22d3ee" : "#0891b2" }}
+          />
+        </div>
+
+        {/* Nav buttons */}
+        <div className="flex gap-3">
+          <button
+            onClick={() => scroll("left")}
+            className="w-10 h-10  flex items-center justify-center cursor-pointer transition-colors hover:bg-cyan-400/10"
+            style={{
+              borderColor: isDark ? "#22d3ee" : "#0891b2",
+              color: isDark ? "#22d3ee" : "#0891b2",
+            }}
+          >
+            <img src={iconButtonLeft} />
+          </button>
+          <button
+            onClick={() => scroll("right")}
+            className="w-10 h-10 flex items-center justify-center cursor-pointer transition-colors hover:bg-cyan-400/10"
+            style={{
+              borderColor: isDark ? "#22d3ee" : "#0891b2",
+              color: isDark ? "#22d3ee" : "#0891b2",
+            }}
+          >
+            <img src={iconButtonRight} />
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const panels: React.ComponentType<any>[] = [

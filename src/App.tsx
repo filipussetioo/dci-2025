@@ -43,7 +43,7 @@ function App() {
         {/* <DCIDashboard /> */}
         <VideoSection isDark={isDark} />
       </div>
-      <MapSection isDark={isDark} />
+      {/* <MapSection isDark={isDark} /> */}
       <PresidentMessage isDark={isDark} />
       <img src={dciImageOne} className="w-full h-auto" />
       <CardGrid isDark={isDark} />
