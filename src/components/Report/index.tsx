@@ -47,13 +47,20 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
 
         {/* DOWNLOAD REPORT button */}
         <button
-          className="mt-[clamp(1.5rem,3.7vh,2.5rem)] inline-block cursor-pointer font-quantico px-[clamp(1.5rem,2.08vw,2.5rem)] py-[clamp(0.5rem,1.11vh,0.75rem)] text-[clamp(1.25rem,2.78vh,1.875rem)] uppercase tracking-[0.2em] bg-blue-primary text-dark-blue"
+          className="group mt-[clamp(1.5rem,3.7vh,2.5rem)] inline-block cursor-pointer font-quantico px-[clamp(1.5rem,2.08vw,2.5rem)] py-[clamp(0.5rem,1.11vh,0.75rem)] text-[clamp(1.25rem,2.78vh,1.875rem)] uppercase tracking-[0.2em] bg-blue-primary text-dark-blue"
           style={{
             clipPath:
               "polygon(30px 0%, calc(100% - 30px) 0%, 100% 50%, calc(100% - 30px) 100%, 30px 100%, 0% 50%)",
           }}
         >
-          Download Report
+          <span className="overflow-hidden block h-[calc(1em+5px)] leading-[calc(1em+5px)]">
+            <span className="block transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-full">
+              Download Report
+            </span>
+            <span className="block transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-full">
+              Download Report
+            </span>
+          </span>
         </button>
       </div>
 

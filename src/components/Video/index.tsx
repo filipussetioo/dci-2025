@@ -6,7 +6,7 @@ import {
   Maximize,
   RotateCcw,
 } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import iconPlay from "../../assets/icons/icon-play.svg";
 import batikLow from "../../assets/graphics/batik-low.png";
 import batikLowLight from "../../assets/graphics/batik-low-light.png";
@@ -16,8 +16,33 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
 
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Expand when 20px of the section is visible from the bottom
+      if (rect.top < windowHeight - 20) {
+        setIsExpanded(true);
+      }
+
+      // Collapse only when section is fully below viewport (scrolled back up)
+      if (rect.top >= windowHeight) {
+        setIsExpanded(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const togglePlay = () => {
     if (videoRef.current) {
@@ -66,7 +91,10 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
   };
 
   return (
-    <section className="relative px-6 md:px-12 h-screen flex items-center overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative px-6 md:px-12 h-screen flex items-center overflow-hidden"
+    >
       {/* Batik pattern at bottom */}
       <img
         src={isDark ? batikLow : batikLowLight}
@@ -74,13 +102,15 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
         className="absolute bottom-0 left-0 w-full pointer-events-none"
       />
 
-      <div className="relative z-10 max-w-350 mx-auto">
+      <div className="relative z-10 md:max-w-300 max-w-350 mx-auto">
         <div
           ref={containerRef}
           className="relative group aspect-video w-full shadow-lg overflow-hidden"
           style={{
             backgroundColor: isDark ? "#0d1424" : "#e8e4d8",
-            transition: "background-color 0.5s",
+            clipPath: isExpanded ? "inset(0 0% 0 0%)" : "inset(0 50% 0 50%)",
+            transition:
+              "background-color 0.5s, clip-path 1s cubic-bezier(0.22, 1, 0.36, 1)",
           }}
         >
           <video

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import iconArrowDown from "../../assets/icons/icon-arrow-down.svg";
 
 const scrollTo = (id: string) => {
@@ -9,7 +10,15 @@ const scrollTo = (id: string) => {
   // setIsMobileMenuOpen(false);
 };
 
-export const Hero = ({ isDark }: { isDark: boolean }) => (
+export const Hero = ({ isDark }: { isDark: boolean }) => {
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsReady(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
   // <section
   //   id="hero"
   //   className="relative min-h-screen h-full flex flex-col items-center overflow-hidden px-6 pb-12"
@@ -211,11 +220,21 @@ export const Hero = ({ isDark }: { isDark: boolean }) => (
           transition: "color 0.5s",
         }}
       >
-        Powering the
-        <br />
-        Foundations of
-        <br />
-        Indonesia's AI Future
+        {["Powering the", "Foundations of", "Indonesia's AI Future"].map(
+          (line, i) => (
+            <span key={line} className="overflow-hidden block">
+              <span
+                className="block"
+                style={{
+                  transform: isReady ? "translateY(0)" : "translateY(100%)",
+                  transition: `transform 1.8s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.15}s`,
+                }}
+              >
+                {line}
+              </span>
+            </span>
+          )
+        )}
       </h1>
     </div>
 
@@ -225,16 +244,25 @@ export const Hero = ({ isDark }: { isDark: boolean }) => (
       className="shrink-0 relative z-10 text-center mb-[clamp(2rem,5.2vh,7rem)] flex flex-col gap-[clamp(1.5rem,3.7vh,2.5rem)] cursor-pointer"
       onClick={() => scrollTo("downloads")}
     >
-      <p
-        className={`md:text-2xl font-archivo tracking-widest text-2xl font-normal `}
+      <div className="overflow-hidden">
+        <p
+          className={`md:text-2xl font-archivo tracking-widest text-2xl font-normal `}
+          style={{
+            color: isDark ? "#F3EDE3" : "#03B5DE",
+            transition: "color 0.5s, transform 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.6s",
+            transform: isReady ? "translateY(0)" : "translateY(100%)",
+          }}
+        >
+          2025 Annual &amp; Sustainability Report
+        </p>
+      </div>
+      <div
+        className="flex justify-center"
         style={{
-          color: isDark ? "#F3EDE3" : "#03B5DE",
-          transition: "color 0.5s",
+          opacity: isReady ? 1 : 0,
+          transition: "opacity 1s ease 1.2s",
         }}
       >
-        2025 Annual &amp; Sustainability Report
-      </p>
-      <div className="flex justify-center">
         {/* Animated or static arrow */}
         <div className="w-10 h-3.5 text-blue-primary">
           <img src={iconArrowDown} className="w-full h-full" />
@@ -242,4 +270,5 @@ export const Hero = ({ isDark }: { isDark: boolean }) => (
       </div>
     </div>
   </section>
-);
+  );
+};

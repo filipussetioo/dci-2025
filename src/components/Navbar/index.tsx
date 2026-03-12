@@ -73,17 +73,21 @@ const Navbar = ({
           <div className="hidden lg:flex items-center gap-[clamp(1.5rem,2.08vw,2.5rem)] font-quantico text-[clamp(0.625rem,0.73vw,0.875rem)]">
             <button
               onClick={() => scrollTo("message")}
-              className="uppercase tracking-[0.2em] cursor-pointer transition-colors"
+              className="group flex items-center gap-2 uppercase tracking-[0.2em] cursor-pointer transition-colors"
               style={{ color: isDark ? "#F3EDE3" : "#141C22" }}
             >
+              <span className="w-1.5 h-1.5 bg-blue-primary rotate-45 opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300" />
               Message from President Director
+              <span className="w-1.5 h-1.5 bg-blue-primary rotate-45 opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300" />
             </button>
             <button
               onClick={() => scrollTo("highlights")}
-              className="uppercase tracking-[0.2em] cursor-pointer transition-colors"
+              className="group flex items-center gap-2 uppercase tracking-[0.2em] cursor-pointer transition-colors"
               style={{ color: isDark ? "#F3EDE3" : "#141C22" }}
             >
+              <span className="w-1.5 h-1.5 bg-blue-primary rotate-45 opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300" />
               Performance Highlights
+              <span className="w-1.5 h-1.5 bg-blue-primary rotate-45 opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300" />
             </button>
 
             {/* DOWNLOAD REPORT — hexagonal outline button */}
@@ -105,7 +109,14 @@ const Navbar = ({
                   />
                 </svg>
                 <span className="relative px-[clamp(1rem,1.46vw,1.75rem)] py-[clamp(0.375rem,0.42vw,0.5rem)] uppercase tracking-[0.2em] text-dark-blue">
-                  Download Report
+                  <span className="overflow-hidden block h-[calc(1em+5px)] leading-[calc(1em+5px)]">
+                    <span className="block transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-full">
+                      Download Report
+                    </span>
+                    <span className="block transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-full">
+                      Download Report
+                    </span>
+                  </span>
                 </span>
               </div>
             </button>
