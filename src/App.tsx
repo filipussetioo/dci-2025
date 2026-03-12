@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Lenis from "lenis";
+import "lenis/dist/lenis.css";
 import "./App.css";
 import CardGrid from "./components/CardGrid";
 // import { Footer } from "./components/Footer";
@@ -17,6 +19,27 @@ import heroGraphicLight from "./assets/graphics/hero-light.png";
 
 function App() {
   const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      lerp: 0.086,
+      smoothWheel: true,
+      touchMultiplier: 2,
+      wheelMultiplier: 1,
+      prevent: (node) => {
+        return node.hasAttribute?.("data-lenis-prevent");
+      },
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => lenis.destroy();
+  }, []);
 
   const toggleDark = () => setIsDark((prev) => !prev);
 
