@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import iconPlus from "../../assets/icons/icon-plus.svg";
 import heartLeft from "../../assets/graphics/heart-left.svg";
 import heartRight from "../../assets/graphics/heart-right.svg";
-import potraitOtto from "../../assets/graphics/potrait-otto.jpg";
+import potraitOtto from "../../assets/graphics/potrait-otto-opt.jpg";
 
 export const PresidentMessage = ({ isDark }: { isDark: boolean }) => {
   const [isExpanded, setIsExpanded] = useState(false);

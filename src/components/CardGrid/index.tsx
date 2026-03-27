@@ -6,32 +6,32 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 // import batikLow from "../../assets/graphics/batik-gradient.png";
 // import batikLowLight from "../../assets/graphics/batik-gradient-light.png";
 import iconArrowUp from "../../assets/icons/icon-arrow-up-black.svg";
-import highlights1 from "../../assets/graphics/ops-1.webp";
-import highlights4 from "../../assets/graphics/ops-4.webp";
-import highlights5 from "../../assets/graphics/ops-5.webp";
-import highlights6 from "../../assets/graphics/ops-6.webp";
+import highlights1 from "../../assets/graphics/ops-1.png";
+import highlights4 from "../../assets/graphics/ops-4.png";
+import highlights5 from "../../assets/graphics/ops-5.png";
+import highlights6 from "../../assets/graphics/ops-6.png";
 // import iconButtonLeft from "../../assets/icons/icon-button-left.svg";
 // import iconButtonRight from "../../assets/icons/icon-button-right.svg";
 import accordionRight from "../../assets/icons/accordion-right.svg";
 import accordionLeft from "../../assets/icons/accordion-left.svg";
 
 // Campus assets
-import h1Bg from "../../assets/graphics/campuses/h1/campus-h1-bg.webp";
-import h1Icon from "../../assets/graphics/campuses/h1/campus-h1-icon.webp";
-import h1Content1 from "../../assets/graphics/campuses/h1/campus-h1-content-1.webp";
-import h1Content2 from "../../assets/graphics/campuses/h1/campus-h1-content-2.webp";
-import h1Content3 from "../../assets/graphics/campuses/h1/campus-h1-content-3.webp";
-import h2Bg from "../../assets/graphics/campuses/h2/campus-h2-bg.webp";
-import h2Icon from "../../assets/graphics/campuses/h2/campus-h2-icon.webp";
-import h2Content1 from "../../assets/graphics/campuses/h2/campus-h2-content-1.webp";
-import h2Content2 from "../../assets/graphics/campuses/h2/campus-h2-content-2.webp";
-import h2Content3 from "../../assets/graphics/campuses/h2/campus-h2-content-3.webp";
-import e1Bg from "../../assets/graphics/campuses/e1/campus-e1-bg.webp";
-import e1Icon from "../../assets/graphics/campuses/e1/campus-e1-icon.webp";
-import e1Content1 from "../../assets/graphics/campuses/e1/campus-e1-content-1.webp";
-import e2Bg from "../../assets/graphics/campuses/e2/campus-e2-bg.webp";
-import e2Icon from "../../assets/graphics/campuses/e2/campus-e2-icon.webp";
-import e2Content1 from "../../assets/graphics/campuses/e2/campus-e2-content-1.webp";
+import h1Bg from "../../assets/graphics/campuses/h1/campus-h1-bg-opt.jpg";
+import h1Icon from "../../assets/graphics/campuses/h1/campus-h1-icon-opt.jpg";
+import h1Content1 from "../../assets/graphics/campuses/h1/campus-h1-content-1-opt.jpg";
+import h1Content2 from "../../assets/graphics/campuses/h1/campus-h1-content-2-opt.jpg";
+import h1Content3 from "../../assets/graphics/campuses/h1/campus-h1-content-3-opt.jpg";
+import h2Bg from "../../assets/graphics/campuses/h2/campus-h2-bg-opt.jpg";
+import h2Icon from "../../assets/graphics/campuses/h2/campus-h2-icon-opt.jpg";
+import h2Content1 from "../../assets/graphics/campuses/h2/campus-h2-content-1-opt.jpg";
+import h2Content2 from "../../assets/graphics/campuses/h2/campus-h2-content-2-opt.jpg";
+import h2Content3 from "../../assets/graphics/campuses/h2/campus-h2-content-3-opt.jpg";
+import e1Bg from "../../assets/graphics/campuses/e1/campus-e1-bg-opt.jpg";
+import e1Icon from "../../assets/graphics/campuses/e1/campus-e1-icon-opt.jpg";
+import e1Content1 from "../../assets/graphics/campuses/e1/campus-e1-content-1-opt.jpg";
+import e2Bg from "../../assets/graphics/campuses/e2/campus-e2-bg-opt.jpg";
+import e2Icon from "../../assets/graphics/campuses/e2/campus-e2-icon-opt.jpg";
+import e2Content1 from "../../assets/graphics/campuses/e2/campus-e2-content-1-opt.jpg";
 import iconButton from "../../assets/icons/icon-button.svg";
 
 const tabs = [
@@ -138,10 +138,11 @@ const FinancialContent = ({
                   {item.eng}
                 </p>
               </div>
-              <div className="flex items-right gap-4 flex-col">
-                <div className="flex items-center gap-2">
+              {/* Mobile: side by side columns | Desktop: stacked rows */}
+              <div className="flex flex-row md:flex-col items-start gap-4">
+                <div className="flex flex-col md:flex-row items-center gap-1 md:gap-2">
                   <span
-                    className="text-[max(0.75rem,0.625vw)] tracking-[0.02em] w-[5.5em]"
+                    className="text-[max(0.75rem,0.625vw)] tracking-[0.02em] md:w-[5.5em]"
                     style={{
                       color: isDark ? "#F3EDE3" : "#141C22",
                       ...floatIn(idx * 0.1 + 0.1),
@@ -149,27 +150,29 @@ const FinancialContent = ({
                   >
                     Meningkat
                   </span>
-                  <span
-                    className="px-[12.5px] py-[2px] bg-blue-primary text-dark-blue text-[0.75rem] font-normal uppercase tracking-[-0.04em]"
-                    style={{
-                      clipPath:
-                        "polygon(10.5px 0%, calc(100% - 10.5px) 0%, 100% 50%, calc(100% - 10.5px) 100%, 10.5px 100%, 0% 50%)",
-                      ...floatIn(idx * 0.1 + 0.15),
-                    }}
-                  >
-                    {item.pct}
-                  </span>
-                  <img
-                    src={iconArrowUp}
-                    alt=""
-                    className="w-5 h-5"
-                    style={floatIn(idx * 0.1 + 0.15)}
-                  />
+                  <div className="flex items-center">
+                    <span
+                      className="px-[12.5px] py-[2px] bg-blue-primary text-dark-blue text-[0.75rem] font-normal uppercase tracking-[-0.04em]"
+                      style={{
+                        clipPath:
+                          "polygon(10.5px 0%, calc(100% - 10.5px) 0%, 100% 50%, calc(100% - 10.5px) 100%, 10.5px 100%, 0% 50%)",
+                        ...floatIn(idx * 0.1 + 0.15),
+                      }}
+                    >
+                      {item.pct}
+                    </span>
+                    <img
+                      src={iconArrowUp}
+                      alt=""
+                      className="w-5 h-5"
+                      style={floatIn(idx * 0.1 + 0.15)}
+                    />
+                  </div>
                 </div>
                 {item.margin && (
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-col md:flex-row items-center gap-1 md:gap-2">
                     <span
-                      className="text-[max(0.75rem,0.625vw)] tracking-[0.02em] w-[5.5em]"
+                      className="text-[max(0.75rem,0.625vw)] tracking-[0.02em] md:w-[5.5em]"
                       style={{
                         color: isDark ? "#F3EDE3" : "#141C22",
                         ...floatIn(idx * 0.1 + 0.2),
