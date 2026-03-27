@@ -393,24 +393,37 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
               >
                 {/* Background image */}
                 <div
-                  className="absolute inset-0"
+                  className="absolute inset-0 transition-opacity duration-700 ease-in-out"
                   style={{
-                    backgroundImage: isActive
-                      ? "none"
-                      : `url(${campus.bgImage})`,
+                    backgroundImage: `url(${campus.bgImage})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
+                    opacity: isActive ? 0 : 1,
                   }}
                 />
 
-                <div className="relative z-10 flex-1 pr-8">
+                <div
+                  className="relative z-10 flex-1 pr-8 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  style={{
+                    transform: isActive ? "translateY(0)" : "translateY(0)",
+                  }}
+                >
                   <p
-                    className="text-[1rem] md:text-[1.33rem] lg:text-[1.78rem] uppercase font-quantico"
-                    style={{ color: isDark ? "#F3EDE3" : "#141C22" }}
+                    className="text-[1rem] md:text-[1.33rem] lg:text-[1.78rem] uppercase font-quantico transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    style={{
+                      color: isDark ? "#F3EDE3" : "#141C22",
+                      transform: isActive ? "translateY(0)" : "translateY(8px)",
+                    }}
                   >
                     {campus.name}
                   </p>
-                  <p className="text-[0.75rem] md:text-[1rem] text-blue-primary tracking-[0.02em]">
+                  <p
+                    className="text-[0.75rem] md:text-[1rem] text-blue-primary tracking-[0.02em] transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    style={{
+                      transform: isActive ? "translateY(0)" : "translateY(8px)",
+                      opacity: isActive ? 1 : 0.7,
+                    }}
+                  >
                     {campus.location}
                   </p>
                 </div>
@@ -420,24 +433,34 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
                   <img
                     src={campus.mapImage}
                     alt={`${campus.name} map`}
-                    className={`w-auto object-contain ${active ? "hidden md:block h-20" : "h-30"}`}
+                    className={`w-auto object-contain transition-[opacity,transform] duration-500 ease-in-out md:!opacity-100 md:!scale-100 ${isActive ? "h-20 opacity-0 scale-75 md:opacity-100" : "h-30 opacity-100 scale-100"}`}
                   />
-                  <motion.img
-                    src={iconButton}
-                    alt="Toggle campus details"
-                    className="w-8 h-8"
-                    animate={{ rotate: isActive ? 180 : 0 }}
-                    transition={{ type: "spring", stiffness: 200, damping: 25 }}
-                  />
+                  <div className="relative w-8 h-8">
+                    <img
+                      src={iconButton}
+                      alt="Toggle campus details"
+                      className="absolute inset-0 w-8 h-8 transition-opacity duration-500 ease-in-out"
+                      style={{ opacity: isActive ? 0 : 1 }}
+                    />
+                    <img
+                      src={iconButton}
+                      alt="Toggle campus details"
+                      className="absolute inset-0 w-8 h-8 rotate-180 transition-opacity duration-500 ease-in-out"
+                      style={{ opacity: isActive ? 1 : 0 }}
+                    />
+                  </div>
                 </div>
               </div>
 
               {/* Expandable content — mobile: gallery + description */}
               <div
-                className="grid transition-[grid-template-rows,opacity] duration-[1s] ease-[cubic-bezier(0.16,1,0.3,1)]"
+                className="grid ease-[cubic-bezier(0.16,1,0.3,1)]"
                 style={{
                   gridTemplateRows: isActive ? "1fr" : "0fr",
                   opacity: isActive ? 1 : 0,
+                  transition: isActive
+                    ? "grid-template-rows 1.2s cubic-bezier(0.16,1,0.3,1), opacity 0.8s ease-out 0.2s"
+                    : "grid-template-rows 1.4s cubic-bezier(0.16,1,0.3,1), opacity 1s ease-in 0.1s",
                 }}
               >
                 <div className="overflow-hidden">
