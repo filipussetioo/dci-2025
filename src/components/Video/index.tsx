@@ -118,7 +118,7 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
           <video
             ref={videoRef}
             className="w-full h-full object-cover cursor-pointer"
-            src="/video/dci.mp4"
+            src="https://ik.imagekit.io/rzu2i5t1r/DCI/video_v2.mp4?updatedAt=1745295449182"
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
             onTimeUpdate={handleTimeUpdate}
