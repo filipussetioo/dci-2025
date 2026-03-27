@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 import "./App.css";
@@ -11,10 +12,10 @@ import { DownloadSection } from "./components/Report";
 import VideoSection from "./components/Video";
 // import IndonesiaMap from "./components/Maps";
 // import DCIDashboard from "./components/Maps";
-import dciImageOne from "./assets/graphics/dci-1.png";
-import dciImageTwo from "./assets/graphics/dci-2.png";
-import heroGraphic from "./assets/graphics/hero.png";
-import heroGraphicLight from "./assets/graphics/hero-light.png";
+import dciImageOne from "./assets/graphics/dci-1.jpg";
+import dciImageTwo from "./assets/graphics/dci-2.jpg";
+// import heroGraphic from "./assets/graphics/hero.png";
+// import heroGraphicLight from "./assets/graphics/hero-light.png";
 // import { MapSection } from "./components/Maps";
 
 function App() {
@@ -41,6 +42,26 @@ function App() {
     return () => lenis.destroy();
   }, []);
 
+  const dciOneRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: dciOneScrollProgress } = useScroll({
+    target: dciOneRef,
+    offset: ["start end", "end start"],
+  });
+  const dciOneScale = useSpring(
+    useTransform(dciOneScrollProgress, [0, 0.5], [0.8, 1.1]),
+    { stiffness: 200, damping: 50, mass: 1 },
+  );
+
+  const dciTwoRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: dciTwoScrollProgress } = useScroll({
+    target: dciTwoRef,
+    offset: ["start end", "end start"],
+  });
+  const dciTwoScale = useSpring(
+    useTransform(dciTwoScrollProgress, [0, 0.5], [0.8, 1.1]),
+    { stiffness: 200, damping: 50, mass: 1 },
+  );
+
   const toggleDark = () => setIsDark((prev) => !prev);
 
   return (
@@ -53,11 +74,11 @@ function App() {
     >
       <div className="relative">
         {/* Batik graphic spanning hero + video */}
-        <img
+        {/* <img
           src={isDark ? heroGraphic : heroGraphicLight}
           alt=""
           className="absolute px-[clamp(1.5rem,2.08vw,2.5rem)] w-full pointer-events-none z-10 top-[8%]"
-        />
+        /> */}
 
         <div className="h-screen flex flex-col relative z-20">
           <Navbar isDark={isDark} onToggle={toggleDark} />
@@ -68,9 +89,27 @@ function App() {
       </div>
       {/* <MapSection isDark={isDark} /> */}
       <PresidentMessage isDark={isDark} />
-      <img src={dciImageOne} className="w-full h-auto" />
+      <div
+        ref={dciOneRef}
+        className="overflow-hidden px-0 min-[1600px]:px-73.25 lg:pt-63.25 "
+      >
+        <motion.img
+          src={dciImageOne}
+          className="w-full h-auto will-change-transform"
+          style={{ scale: dciOneScale }}
+        />
+      </div>
       <CardGrid isDark={isDark} />
-      <img src={dciImageTwo} className="w-full h-auto" />
+      <div
+        ref={dciTwoRef}
+        className="overflow-hidden px-0 min-[1600px]:px-73.25"
+      >
+        <motion.img
+          src={dciImageTwo}
+          className="w-full h-auto will-change-transform"
+          style={{ scale: dciTwoScale }}
+        />
+      </div>
       <DownloadSection isDark={isDark} />
       {/* <Footer isDark={isDark} /> */}
     </div>

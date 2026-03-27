@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import type { ReactZoomPanPinchContentRef } from "react-zoom-pan-pinch";
 import dci from "../../assets/graphics/dci-map.svg";
@@ -32,6 +32,7 @@ const LOCATIONS = [
 ];
 
 export const MapSection = ({ isDark }: { isDark: boolean }) => {
+  const shouldReduceMotion = useReducedMotion();
   const [active, setActive] = useState<string | null>(null);
   const current = LOCATIONS.find((l) => l.id === active);
   const transformRef = useRef<ReactZoomPanPinchContentRef>(null);
@@ -98,9 +99,10 @@ export const MapSection = ({ isDark }: { isDark: boolean }) => {
           {active && current ? (
             <motion.div
               key={current.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -20 }}
+              animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
               className="w-[320px]"
             >
               {/* Title badge — same as PlatformContent */}
@@ -200,14 +202,11 @@ export const MapSection = ({ isDark }: { isDark: boolean }) => {
                       handleMarkerClick(loc.id);
                     }}
                     className="absolute -translate-x-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 pointer-events-auto cursor-pointer rotate-45 border border-cyan-400/50 z-10"
-                    style={{
-                      backgroundColor:
-                        active === loc.id ? "#22d3ee" : "transparent",
-                    }}
                     animate={{
                       backgroundColor:
                         active === loc.id ? "#22d3ee" : "transparent",
                     }}
+                    transition={{ duration: 0.2 }}
                   />
                 </div>
               ))}

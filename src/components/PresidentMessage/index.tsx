@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import iconPlus from "../../assets/icons/icon-plus.svg";
-import batik from "../../assets/graphics/batik-message.png";
-import batikLight from "../../assets/graphics/batik-message-light.png";
+import heartLeft from "../../assets/graphics/heart-left.svg";
+import heartRight from "../../assets/graphics/heart-right.svg";
+import potraitOtto from "../../assets/graphics/potrait-otto.jpg";
 
 export const PresidentMessage = ({ isDark }: { isDark: boolean }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -28,16 +29,16 @@ export const PresidentMessage = ({ isDark }: { isDark: boolean }) => {
   }, []);
 
   return (
-  <section
-    id="message"
-    className="py-[clamp(2rem,5.2vh,3.5rem)] px-6 md:px-10 relative overflow-hidden min-h-screen"
-    style={{
-      color: isDark ? "#F3EDE3" : "#141C22",
-      transition: "color 0.5s",
-    }}
-  >
-    {/* Batik bg pattern */}
-    {/* <div className="absolute inset-0 pointer-events-none">
+    <section
+      id="message"
+      className="py-8 px-6 md:px-10 relative overflow-hidden min-h-screen"
+      style={{
+        color: isDark ? "#F3EDE3" : "#141C22",
+        transition: "color 0.5s",
+      }}
+    >
+      {/* Batik bg pattern */}
+      {/* <div className="absolute inset-0 pointer-events-none">
       <svg
         viewBox="0 0 800 600"
         className="w-full h-full"
@@ -82,139 +83,144 @@ export const PresidentMessage = ({ isDark }: { isDark: boolean }) => {
       </svg>
     </div> */}
 
-    <img
-      src={isDark ? batik : batikLight}
-      alt=""
-      className="absolute px-10 w-full pointer-events-none z-10 top-[8%]"
-    />
-    <div className="max-w-3xl mx-auto relative z-10">
-      {/* Decorative geometric cross icon */}
-      <div className="flex justify-center">
-        <img src={iconPlus} alt="Icon plus" className="h-[clamp(3rem,8.9vh,6rem)] w-auto" />
-      </div>
+      <img
+        src={heartLeft}
+        alt=""
+        className="absolute top-[33%] left-14 w-[30%] pointer-events-none z-0"
+      />
+      <img
+        src={heartRight}
+        alt=""
+        className="absolute top-[33%] right-14 w-[30%] pointer-events-none z-0"
+      />
+      <div className="max-w-xl mx-auto relative z-10  flex flex-col gap-10">
+        {/* Decorative geometric cross icon */}
+        <div className="flex justify-center">
+          <img
+            src={iconPlus}
+            alt="Icon plus"
+            className="h-[max(3rem,2.667vw)] w-auto"
+          />
+        </div>
 
-      {/* Section heading */}
-      <div className="text-center py-[clamp(2rem,6.67vh,4.5rem)]">
-        <div className="overflow-hidden">
+        {/* Section heading */}
+        <div className="text-center ">
+          <div className="overflow-hidden">
+            <div
+              className="font-quantico text-[1.78rem] md:text-[2.37rem] lg:text-[max(3.16rem,2.633vw)] uppercase tracking-tight leading-[1.15]"
+              style={{
+                transform: isExpanded ? "translateY(0)" : "translateY(100%)",
+                transition: "transform 1.8s cubic-bezier(0.22, 1, 0.36, 1)",
+              }}
+            >
+              Message from
+            </div>
+          </div>
+          <div className="overflow-hidden">
+            <div
+              className="font-quantico text-[1.78rem] md:text-[2.37rem] lg:text-[max(3.16rem,2.633vw)] uppercase tracking-tight leading-[1.15]"
+              style={{
+                transform: isExpanded ? "translateY(0)" : "translateY(100%)",
+                transition:
+                  "transform 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s",
+              }}
+            >
+              The CEO
+            </div>
+          </div>
+        </div>
+
+        {/* Message body — paragraph 1 */}
+        <div ref={messageRef} className="relative">
+          {/* Animated top border */}
           <div
-            className="font-quantico text-[clamp(2rem,3.75vw,4.5rem)] uppercase tracking-tight leading-[1.15]"
+            className="h-[0.5px] bg-blue-primary"
             style={{
-              transform: isExpanded ? "translateY(0)" : "translateY(100%)",
+              transformOrigin: "right",
+              transform: isExpanded ? "scaleX(1)" : "scaleX(0)",
               transition: "transform 1.8s cubic-bezier(0.22, 1, 0.36, 1)",
             }}
-          >
-            Message from
-          </div>
-        </div>
-        <div className="overflow-hidden">
+          />
           <div
-            className="font-quantico text-[clamp(2rem,3.75vw,4.5rem)] uppercase tracking-tight leading-[1.15]"
+            className="py-6 flex flex-col gap-4"
             style={{
-              transform: isExpanded ? "translateY(0)" : "translateY(100%)",
-              transition: "transform 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s",
+              clipPath: isExpanded ? "inset(0 0% 0 0%)" : "inset(0 0% 0 100%)",
+              transition: "clip-path 1.8s cubic-bezier(0.22, 1, 0.36, 1)",
             }}
           >
-            President Director
-          </div>
-        </div>
-      </div>
+            <div className="text-center">
+              <p className="font-archivo text-[max(0.75rem,0.625vw)] leading-[1.3] text-cream">
+                In 2025, the Company continued to reinforce its leadership in
+                Indonesia's data center infrastructure industry.
+                <br />
+                Our performance reflects not only sustained financial growth,
+                but also disciplined execution, operational reliability, and the
+                trust placed in us by customers across critical sectors.
+              </p>
+            </div>
 
-      {/* Message body — paragraph 1 */}
-      <div ref={messageRef} className="relative">
-        {/* Animated top border */}
-        <div
-          className="h-[0.5px] bg-blue-primary"
-          style={{
-            transformOrigin: "right",
-            transform: isExpanded ? "scaleX(1)" : "scaleX(0)",
-            transition: "transform 1.8s cubic-bezier(0.22, 1, 0.36, 1)",
-          }}
-        />
-        <div
-          className="py-[clamp(2rem,6.67vh,4.5rem)] flex flex-col gap-4"
-          style={{
-            clipPath: isExpanded
-              ? "inset(0 0% 0 0%)"
-              : "inset(0 0% 0 100%)",
-            transition: "clip-path 1.8s cubic-bezier(0.22, 1, 0.36, 1)",
-          }}
-        >
-          <div className="text-center">
-            <p className="font-archivo text-sm md:text-[15px] leading-[1.9]">
-              In 2025, the Company continued to strengthen its leading position in
-              the data center industry. This achievement reflects not only our
-              track record but also our ongoing commitment to innovation,
-              operational excellence, and meeting the growing demands of our
-              customers.
-            </p>
+            <div className="text-center">
+              <p className="font-archivo text-[max(0.75rem,0.625vw)] leading-[1.3] text-cream">
+                We remain committed to building infrastructure that is not only
+                reliable today, but future-ready. Through continuous investment
+                in technology, local talent development, and sustainable energy
+                initiatives, the Company is positioning itself to support
+                Indonesia's long-term digital and AI-driven growth.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <p className="font-archivo text-[max(0.75rem,0.625vw)] leading-[1.3] text-cream">
+                Looking ahead, our focus remains clear: disciplined expansion,
+                operational excellence, prudent capital management, and the
+                delivery of consistent value to shareholders and stakeholders
+                alike.
+              </p>
+            </div>
           </div>
 
-          {/* Message body — paragraph 2 (italic) */}
-          <div className="text-center">
-            <p className="font-archivo text-sm md:text-[15px] leading-[1.9] italic opacity-50">
-              To support this vision, the Company remains focused on expanding
-              service capacity while advancing innovations that improve quality
-              and provide reliable digital infrastructure solutions. Through
-              consistent capacity growth and continuous improvements that deliver
-              added value, the Company is committed to maintaining its industry
-              leadership and supporting the acceleration of digital transformation
-              in the years ahead.
-            </p>
-          </div>
-        </div>
-
-        {/* Animated bottom border */}
-        <div
-          className="h-[0.5px] bg-blue-primary"
-          style={{
-            transformOrigin: "right",
-            transform: isExpanded ? "scaleX(1)" : "scaleX(0)",
-            transition: "transform 1.8s cubic-bezier(0.22, 1, 0.36, 1)",
-          }}
-        />
-      </div>
-
-      {/* Photo + Name — left aligned */}
-      <div className="overflow-hidden">
-        <div
-          className="flex items-center justify-center gap-4 py-[clamp(2rem,6.67vh,4.5rem)]"
-          style={{
-            borderTop: `1px solid ${isDark ? "#1f2937" : "#e5e7eb"}`,
-            transition: "border-color 0.5s, transform 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s",
-            transform: isExpanded ? "translateY(0)" : "translateY(100%)",
-          }}
-        >
-        <div
-          className="w-[clamp(4rem,4.95vw,5.94rem)] h-[clamp(5rem,10.37vh,7rem)] overflow-hidden shrink-0"
-          style={{
-            transition: "background-color 0.5s",
-          }}
-        >
+          {/* Animated bottom border */}
           <div
-            className="w-full h-full"
+            className="h-[0.5px] bg-blue-primary"
             style={{
-              background: isDark
-                ? "linear-gradient(to bottom right, #374151, #1f2937)"
-                : "linear-gradient(to bottom right, #d1d5db, #e5e7eb)",
+              transformOrigin: "right",
+              transform: isExpanded ? "scaleX(1)" : "scaleX(0)",
+              transition: "transform 1.8s cubic-bezier(0.22, 1, 0.36, 1)",
             }}
           />
         </div>
-        <div>
-          <p
-            className="font-quantico text-xl font-bold uppercase tracking-wider"
+
+        {/* Photo + Name — left aligned */}
+        <div className="overflow-hidden">
+          <div
+            className="flex items-center justify-center gap-4"
             style={{
-              transition: "color 0.5s",
+              transition:
+                "border-color 0.5s, transform 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s",
+              transform: isExpanded ? "translateY(0)" : "translateY(100%)",
             }}
           >
-            Toto Sugiri
-          </p>
-          <p className="font-archivo text-[18px] tracking-[0.15em] uppercase">
-            Chairman of DCI Indonesia
-          </p>
-        </div>
+            <img
+              src={potraitOtto}
+              alt="Otto Toto Sugiri"
+              className="w-20 h-20 object-cover object-top rounded-sm"
+            />
+            <div>
+              <p
+                className="font-quantico text-[1rem] md:text-[1.33rem] lg:text-[1.78rem] font-normal"
+                style={{
+                  transition: "color 0.5s",
+                }}
+              >
+                Otto Toto Sugiri
+              </p>
+              <p className="font-archivo text-[0.75rem] md:text-[1rem] text-blue-primary">
+                Founder & CEO, DCI Indonesia
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
   );
 };

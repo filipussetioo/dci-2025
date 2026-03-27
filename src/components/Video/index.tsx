@@ -96,11 +96,13 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
       className="relative px-6 md:px-12 h-screen flex items-center overflow-hidden"
     >
       {/* Batik pattern at bottom */}
-      <img
-        src={isDark ? batikLow : batikLowLight}
-        alt=""
-        className="absolute bottom-0 left-0 w-full pointer-events-none"
-      />
+      <div className="absolute bottom-0 left-0 w-[208%] pointer-events-none">
+        <img
+          src={isDark ? batikLow : batikLowLight}
+          alt=""
+          className="w-full h-full object-cover"
+        />
+      </div>
 
       <div className="relative z-10 md:max-w-300 max-w-350 mx-auto">
         <div
@@ -116,7 +118,7 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
           <video
             ref={videoRef}
             className="w-full h-full object-cover cursor-pointer"
-            src="https://ik.imagekit.io/rzu2i5t1r/DCI/video_v2.mp4?updatedAt=1745295449182"
+            src="/video/dci.mp4"
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
             onTimeUpdate={handleTimeUpdate}

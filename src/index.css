@@ -2,9 +2,14 @@
 @import "tailwindcss";
 
 @theme {
+  /* Framer breakpoints: S = default (0px), M = md (810px), L = lg (1200px) */
+  --breakpoint-md: 810px;
+  --breakpoint-lg: 1200px;
+
   --font-quantico: "Quantico", system-ui, sans-serif;
   --font-archivo: "Archivo", system-ui, sans-serif;
   --color-blue-primary: #03b5de;
+  --color-blue-hover: #00A8BC;
   --color-dark-blue: #141c22;
   --color-dark-blue-300: #12294a;
   --color-cream: #f3ede3;
@@ -85,6 +90,8 @@
   body {
     font-family: var(--font-archivo);
     margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
