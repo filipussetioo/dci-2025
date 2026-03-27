@@ -9,21 +9,21 @@ import accordionRight from "../../assets/icons/accordion-right.svg";
 import accordionLeft from "../../assets/icons/accordion-left.svg";
 
 // Campus assets
-import h1Bg from "../../assets/graphics/campuses/h1/campus-h1-bg-opt.jpg";
-import h1Icon from "../../assets/graphics/campuses/h1/campus-h1-icon-opt.jpg";
+import h1Bg from "../../assets/graphics/campuses/h1/campus-h1-bg.png";
+import h1Icon from "../../assets/graphics/campuses/h1/campus-h1-icon.png";
 import h1Content1 from "../../assets/graphics/campuses/h1/campus-h1-content-1-opt.jpg";
 import h1Content2 from "../../assets/graphics/campuses/h1/campus-h1-content-2-opt.jpg";
 import h1Content3 from "../../assets/graphics/campuses/h1/campus-h1-content-3-opt.jpg";
-import h2Bg from "../../assets/graphics/campuses/h2/campus-h2-bg-opt.jpg";
-import h2Icon from "../../assets/graphics/campuses/h2/campus-h2-icon-opt.jpg";
+import h2Bg from "../../assets/graphics/campuses/h2/campus-h2-bg.png";
+import h2Icon from "../../assets/graphics/campuses/h2/campus-h2-icon.png";
 import h2Content1 from "../../assets/graphics/campuses/h2/campus-h2-content-1-opt.jpg";
 import h2Content2 from "../../assets/graphics/campuses/h2/campus-h2-content-2-opt.jpg";
 import h2Content3 from "../../assets/graphics/campuses/h2/campus-h2-content-3-opt.jpg";
-import e1Bg from "../../assets/graphics/campuses/e1/campus-e1-bg-opt.jpg";
-import e1Icon from "../../assets/graphics/campuses/e1/campus-e1-icon-opt.jpg";
-import e1Content1 from "../../assets/graphics/campuses/e1/campus-e1-content-1-opt.jpg";
-import e2Bg from "../../assets/graphics/campuses/e2/campus-e2-bg-opt.jpg";
-import e2Icon from "../../assets/graphics/campuses/e2/campus-e2-icon-opt.jpg";
+import e1Bg from "../../assets/graphics/campuses/e1/campus-e1-bg.png";
+import e1Icon from "../../assets/graphics/campuses/e1/campus-e1-icon.png";
+import e1Content1 from "../../assets/graphics/campuses/e1/campus-e1-content-1.png";
+import e2Bg from "../../assets/graphics/campuses/e2/campus-e2-bg.png";
+import e2Icon from "../../assets/graphics/campuses/e2/campus-e2-icon.png";
 import e2Content1 from "../../assets/graphics/campuses/e2/campus-e2-content-1-opt.jpg";
 import iconButton from "../../assets/icons/icon-button.svg";
 
@@ -388,7 +388,7 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
             >
               {/* Header — clickable */}
               <div
-                className={`relative flex items-center justify-between px-16 py-6 cursor-pointer overflow-hidden ${active ? "h-fit" : "min-h-53.5"}`}
+                className={`relative flex items-center justify-between p-8 md:px-16 md:py-6 cursor-pointer overflow-hidden ${active ? "h-fit" : "min-h-53.5"}`}
                 onClick={() => toggleCampus(campus.id)}
               >
                 {/* Background image */}
@@ -403,7 +403,7 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
                   }}
                 />
 
-                <div className="relative z-10 flex-1">
+                <div className="relative z-10 flex-1 pr-8">
                   <p
                     className="text-[1rem] md:text-[1.33rem] lg:text-[1.78rem] uppercase font-quantico"
                     style={{ color: isDark ? "#F3EDE3" : "#141C22" }}
@@ -416,11 +416,11 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
                 </div>
 
                 {/* Map thumbnail + arrow */}
-                <div className="relative z-10 flex items-center gap-32">
+                <div className="relative z-10 flex items-center gap-8">
                   <img
                     src={campus.mapImage}
                     alt=""
-                    className={`w-auto object-contain ${active ? "h-20" : "h-30"}`}
+                    className={`w-auto object-contain ${active ? "hidden md:block h-20" : "h-30"}`}
                   />
                   <motion.img
                     src={iconButton}
@@ -433,18 +433,14 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
               </div>
 
               {/* Expandable content — mobile: gallery + description */}
-              <AnimatePresence initial={false}>
-                {isActive && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{
-                      duration: 1,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                    className="overflow-hidden"
-                  >
+              <div
+                className="grid transition-[grid-template-rows,opacity] duration-[1s] ease-[cubic-bezier(0.16,1,0.3,1)]"
+                style={{
+                  gridTemplateRows: isActive ? "1fr" : "0fr",
+                  opacity: isActive ? 1 : 0,
+                }}
+              >
+                <div className="overflow-hidden">
                     {/* Mobile gallery */}
                     <div className="border-t-[0.5px] border-blue-primary mx-2 lg:hidden" />
                     <div className="lg:hidden flex flex-col py-4 px-4">
@@ -514,9 +510,8 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
                         {campus.description}
                       </p>
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                </div>
+              </div>
             </div>
           );
         })}
@@ -788,8 +783,8 @@ const OperationalContent = ({ isDark }: { isDark: boolean }) => {
               {renderImage(highlights4, "Server Room")}
             </div>,
             <div key="m4" className="flex flex-col">
-              {renderCard(OP_ITEMS["05"])}
               {renderImage(highlights5, "Technician")}
+              {renderCard(OP_ITEMS["05"])}
             </div>,
             <div key="m5" className="flex flex-col">
               {renderCard(OP_ITEMS["06"])}
