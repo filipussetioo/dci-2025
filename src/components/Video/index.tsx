@@ -66,7 +66,11 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
 
   const toggleFullscreen = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (containerRef.current) {
+    const video = videoRef.current as HTMLVideoElement & { webkitEnterFullscreen?: () => void };
+    if (video?.webkitEnterFullscreen) {
+      // iOS Safari — only supports fullscreen on the video element itself
+      video.webkitEnterFullscreen();
+    } else if (containerRef.current) {
       if (!document.fullscreenElement) {
         containerRef.current.requestFullscreen();
       } else {
