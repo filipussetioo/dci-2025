@@ -203,7 +203,7 @@ export const PresidentMessage = ({ isDark }: { isDark: boolean }) => {
             <img
               src={potraitOtto}
               alt="Otto Toto Sugiri"
-              className="w-20 h-20 object-cover object-top rounded-sm"
+              className="w-24 h-auto object-cover object-top"
             />
             <div>
               <p

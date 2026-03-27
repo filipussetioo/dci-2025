@@ -114,7 +114,7 @@ const Navbar = ({
               }}
             >
               <div
-                className="bg-blue-primary px-[27.5px] py-2 uppercase text-dark-blue text-[0.75rem] md:text-[1rem] font-normal tracking-[-0.04em]"
+                className="bg-blue-primary group-hover:bg-blue-hover px-[27.5px] py-2 uppercase text-dark-blue text-[0.75rem] md:text-[1rem] font-normal tracking-[-0.04em]"
                 style={{
                   clipPath:
                     "polygon(19.5px 0%, calc(100% - 19.5px) 0%, 100% 50%, calc(100% - 19.5px) 100%, 19.5px 100%, 0% 50%)",

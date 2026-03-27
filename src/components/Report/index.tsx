@@ -55,9 +55,9 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
         </h2>
 
         {/* DOWNLOAD REPORT button */}
-        <button className="group mt-16 inline-block cursor-pointer font-quantico">
+        <button className="group mt-16 inline-block cursor-pointer font-quantico ">
           <div
-            className="bg-blue-primary px-[24.5px] py-2 uppercase text-black text-[1em] font-normal tracking-[-0.04em]"
+            className="bg-blue-primary group-hover:bg-blue-hover px-[24.5px] py-2 uppercase text-black text-[1em] font-normal tracking-[-0.04em]"
             style={{
               clipPath:
                 "polygon(16.5px 0%, calc(100% - 16.5px) 0%, 100% 50%, calc(100% - 16.5px) 100%, 16.5px 100%, 0% 50%)",

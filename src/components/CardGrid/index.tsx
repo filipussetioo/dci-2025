@@ -1,17 +1,38 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import type { ReactZoomPanPinchContentRef } from "react-zoom-pan-pinch";
-import dci from "../../assets/graphics/dci-map.svg";
+// import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+// import type { ReactZoomPanPinchContentRef } from "react-zoom-pan-pinch";
+// import dci from "../../assets/graphics/dci-map.svg";
 // import batikLow from "../../assets/graphics/batik-gradient.png";
 // import batikLowLight from "../../assets/graphics/batik-gradient-light.png";
 import iconArrowUp from "../../assets/icons/icon-arrow-up-black.svg";
-import highlights1 from "../../assets/graphics/highlights-1.png";
-import highlights2 from "../../assets/graphics/highlights-2.png";
+import highlights1 from "../../assets/graphics/ops-1.webp";
+import highlights4 from "../../assets/graphics/ops-4.webp";
+import highlights5 from "../../assets/graphics/ops-5.webp";
+import highlights6 from "../../assets/graphics/ops-6.webp";
 // import iconButtonLeft from "../../assets/icons/icon-button-left.svg";
 // import iconButtonRight from "../../assets/icons/icon-button-right.svg";
 import accordionRight from "../../assets/icons/accordion-right.svg";
 import accordionLeft from "../../assets/icons/accordion-left.svg";
+
+// Campus assets
+import h1Bg from "../../assets/graphics/campuses/h1/campus-h1-bg.webp";
+import h1Icon from "../../assets/graphics/campuses/h1/campus-h1-icon.webp";
+import h1Content1 from "../../assets/graphics/campuses/h1/campus-h1-content-1.webp";
+import h1Content2 from "../../assets/graphics/campuses/h1/campus-h1-content-2.webp";
+import h1Content3 from "../../assets/graphics/campuses/h1/campus-h1-content-3.webp";
+import h2Bg from "../../assets/graphics/campuses/h2/campus-h2-bg.webp";
+import h2Icon from "../../assets/graphics/campuses/h2/campus-h2-icon.webp";
+import h2Content1 from "../../assets/graphics/campuses/h2/campus-h2-content-1.webp";
+import h2Content2 from "../../assets/graphics/campuses/h2/campus-h2-content-2.webp";
+import h2Content3 from "../../assets/graphics/campuses/h2/campus-h2-content-3.webp";
+import e1Bg from "../../assets/graphics/campuses/e1/campus-e1-bg.webp";
+import e1Icon from "../../assets/graphics/campuses/e1/campus-e1-icon.webp";
+import e1Content1 from "../../assets/graphics/campuses/e1/campus-e1-content-1.webp";
+import e2Bg from "../../assets/graphics/campuses/e2/campus-e2-bg.webp";
+import e2Icon from "../../assets/graphics/campuses/e2/campus-e2-icon.webp";
+import e2Content1 from "../../assets/graphics/campuses/e2/campus-e2-content-1.webp";
+import iconButton from "../../assets/icons/icon-button.svg";
 
 const tabs = [
   {
@@ -46,7 +67,13 @@ const tabs = [
 
 /* ── Content Panels ── */
 
-const FinancialContent = ({ isDark, isActive }: { isDark: boolean; isActive?: boolean }) => {
+const FinancialContent = ({
+  isDark,
+  isActive,
+}: {
+  isDark: boolean;
+  isActive?: boolean;
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
     if (!isActive) return;
@@ -90,13 +117,13 @@ const FinancialContent = ({ isDark, isActive }: { isDark: boolean; isActive?: bo
         ].map((item, idx) => (
           <div
             key={idx}
-            className="border-t-[0.5px] border-blue-primary w-full flex flex-col md:flex-row md:items-center md:justify-between gap-4 px-8 md:px-20 py-[clamp(1.5rem,4vh,3rem)]"
+            className="border-t-[0.5px] border-blue-primary w-full flex flex-col sm:flex-row md:items-center sm:justify-between gap-4 px-8 md:px-20 py-[clamp(1.5rem,4vh,3rem)]"
           >
             {/* Left: labels + stats */}
-            <div className="flex flex-row md:flex-col justify-between md:justify-start items-start gap-3 flex-wrap">
-              <div className="flex flex-col md:flex-row items-start md:items-center gap-1 md:gap-3">
+            <div className="flex flex-row sm:flex-col justify-between md:justify-start items-start gap-3 flex-wrap">
+              <div className="flex flex-col sm:flex-row items-start md:items-center gap-1 md:gap-3">
                 <p
-                  className="text-[max(0.75rem,0.625vw)] uppercase tracking-[0.02em] leading-[1.3]"
+                  className="text-[0.75rem] md:text-[1rem] uppercase tracking-[0.02em] leading-[1.3]"
                   style={{
                     color: isDark ? "#F3EDE3" : "#141C22",
                     ...floatIn(idx * 0.1),
@@ -105,16 +132,16 @@ const FinancialContent = ({ isDark, isActive }: { isDark: boolean; isActive?: bo
                   {item.label}
                 </p>
                 <p
-                  className="text-[max(0.75rem,0.625vw)] text-blue-primary tracking-[0.02em] leading-[1.3]"
+                  className="text-[0.75rem] md:text-[1rem] text-blue-primary tracking-[0.02em] leading-[1.3]"
                   style={floatIn(idx * 0.1 + 0.05)}
                 >
                   {item.eng}
                 </p>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-right gap-4 flex-col">
                 <div className="flex items-center gap-2">
                   <span
-                    className="text-[max(0.75rem,0.625vw)] tracking-[0.02em]"
+                    className="text-[max(0.75rem,0.625vw)] tracking-[0.02em] w-[5.5em]"
                     style={{
                       color: isDark ? "#F3EDE3" : "#141C22",
                       ...floatIn(idx * 0.1 + 0.1),
@@ -142,7 +169,7 @@ const FinancialContent = ({ isDark, isActive }: { isDark: boolean; isActive?: bo
                 {item.margin && (
                   <div className="flex items-center gap-2">
                     <span
-                      className="text-[max(0.75rem,0.625vw)] uppercase tracking-[0.02em]"
+                      className="text-[max(0.75rem,0.625vw)] tracking-[0.02em] w-[5.5em]"
                       style={{
                         color: isDark ? "#F3EDE3" : "#141C22",
                         ...floatIn(idx * 0.1 + 0.2),
@@ -204,216 +231,300 @@ const FinancialContent = ({ isDark, isActive }: { isDark: boolean; isActive?: bo
   );
 };
 
-const MAP_LOCATIONS = [
+const CAMPUSES = [
   {
-    id: "cibitung",
-    title: "CIBITUNG",
+    id: "h1",
+    name: "DCI H1 CAMPUS",
+    location: "Cibitung, West Java",
     description:
-      "Located in the industrial corridor of Cibitung, this campus serves as a key expansion site for DCI's growing infrastructure footprint.",
-    marker: { top: "20%", left: "45%" },
-    next: "jakarta",
+      "The Company has been operating JK1, JK2, JK3, and JK5 data center buildings. During 1st Q 2025, the Company added 36 MW capacity by operating JK6 data center building.\n\nFurther, the Company plans to build sustainable data center buildings on our total land of 8.5 hectares with a total capacity up to 300 MW.",
+    bgImage: h1Bg,
+    mapImage: h1Icon,
+    gallery: [h1Content1, h1Content2, h1Content3],
   },
   {
-    id: "jakarta",
-    title: "JAKARTA",
+    id: "h2",
+    name: "DCI PLATFORM H2 CAMPUS",
+    location: "Karawang, West Java",
     description:
-      "Serving as the primary hub for the DCI Platform, our Jakarta campus provides Tier IV infrastructure.",
-    marker: { top: "75%", left: "58%" },
-    next: "bintan",
+      "The Company has been operating H2-01 and H2-02 data center buildings. DCI-H2 Karawang was built in line with green principle and is supported by the solar panel facilities in the data center complex as renewable power resource.\n\nOn a plot of land of 86 hectares, DCI H2 Karawang has a potential capacity expansion to more than 600 MW with up to 30 MW of electricity generated by solar panels.",
+    bgImage: h2Bg,
+    mapImage: h2Icon,
+    gallery: [h2Content1, h2Content2, h2Content3],
   },
   {
-    id: "bintan",
-    title: "FUTURE PLAN - BINTAN",
+    id: "e1",
+    name: "DCI PLATFORM E1",
+    location: "DKI Jakarta",
     description:
-      "The company will continue to develop the DCI Platform by constructing data centers in multiple locations, such as Bintan.",
-    marker: { top: "80%", left: "88%" },
-    next: "cibitung",
+      "DCI E1 Jakarta is the first Tier IV downtown data center in Jakarta; it's built with 19 MW capacity.\n\nLocated strategically close to Indonesia's main internet exchange hub, DCI E1 Jakarta allows fast and efficient interconnection.",
+    bgImage: e1Bg,
+    mapImage: e1Icon,
+    gallery: [e1Content1],
+  },
+  {
+    id: "e2",
+    name: "DCI E2",
+    location: "Surabaya, East Java",
+    description:
+      "In 2025, the Company expanded its presence to Indonesia's second-largest city — Surabaya. The DCI E2 Surabaya data center is designed with a 9 MW capacity.\n\nDCI E2 Surabaya construction is expected to be completed in Q4 2025.",
+    bgImage: e2Bg,
+    mapImage: e2Icon,
+    gallery: [e2Content1],
   },
 ];
 
-const PlatformContent = ({
-  isDark,
-  activeMarker,
-  onMarkerChange,
-}: {
-  isDark: boolean;
-  activeMarker: string | null;
-  onMarkerChange: (id: string | null) => void;
-}) => {
-  const active = activeMarker;
-  const current = MAP_LOCATIONS.find((l) => l.id === active);
-  const transformRef = useRef<ReactZoomPanPinchContentRef>(null);
-  const wrapperDivRef = useRef<HTMLDivElement>(null);
-  const imgRef = useRef<HTMLImageElement>(null);
+const PlatformContent = ({ isDark }: { isDark: boolean }) => {
+  const [activeCampus, setActiveCampus] = useState<string | null>(null);
+  const [galleryIdx, setGalleryIdx] = useState(0);
 
-  const zoomTo = useCallback(
-    (locId: string) => {
-      onMarkerChange(locId);
-      const loc = MAP_LOCATIONS.find((l) => l.id === locId);
-      if (!loc || !transformRef.current || !wrapperDivRef.current) return;
+  const active = CAMPUSES.find((c) => c.id === activeCampus);
 
-      const wrapperRect = wrapperDivRef.current.getBoundingClientRect();
-      const imgEl = imgRef.current;
-      const imgWidth = imgEl ? imgEl.offsetWidth : 1000;
-      const imgHeight = imgEl ? imgEl.offsetHeight : 670;
-
-      const markerX = (parseFloat(loc.marker.left) / 100) * imgWidth;
-      const markerY = (parseFloat(loc.marker.top) / 100) * imgHeight;
-
-      const scale = 2.2;
-      const x = -(markerX * scale) + wrapperRect.width / 2;
-      const y = -(markerY * scale) + wrapperRect.height / 2;
-
-      transformRef.current.setTransform(x, y, scale, 300);
-    },
-    [onMarkerChange],
-  );
-
-  const resetView = useCallback(() => {
-    onMarkerChange(null);
-    transformRef.current?.resetTransform(300);
-  }, [onMarkerChange]);
-
-  const handleMarkerClick = (locId: string) => {
-    if (active === locId) {
-      resetView();
+  const toggleCampus = (id: string) => {
+    if (activeCampus === id) {
+      setActiveCampus(null);
     } else {
-      zoomTo(locId);
+      setActiveCampus(id);
+      setGalleryIdx(0);
     }
   };
 
-  // Restore zoom to saved marker on remount
-  useEffect(() => {
-    if (active) {
-      const timeout = setTimeout(() => {
-        const loc = MAP_LOCATIONS.find((l) => l.id === active);
-        if (!loc || !transformRef.current || !wrapperDivRef.current) return;
-
-        const wrapperRect = wrapperDivRef.current.getBoundingClientRect();
-        const imgEl = imgRef.current;
-        const imgWidth = imgEl ? imgEl.offsetWidth : 1000;
-        const imgHeight = imgEl ? imgEl.offsetHeight : 670;
-
-        const markerX = (parseFloat(loc.marker.left) / 100) * imgWidth;
-        const markerY = (parseFloat(loc.marker.top) / 100) * imgHeight;
-
-        const scale = 2.2;
-        const x = -(markerX * scale) + wrapperRect.width / 2;
-        const y = -(markerY * scale) + wrapperRect.height / 2;
-
-        transformRef.current.setTransform(x, y, scale, 300);
-      }, 150);
-      return () => clearTimeout(timeout);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
-    <div className="flex h-full overflow-hidden">
-      {/* Left Panel — Info */}
-      <div
-        className="w-1/2 relative flex flex-col justify-center px-[clamp(2rem,4.17vw,5rem)] py-[clamp(2rem,5.2vh,3.5rem)]"
-        style={{
-          borderRight: `1px solid ${isDark ? "rgba(6,182,212,0.15)" : "#d4cdb8"}`,
-        }}
-      >
-        <AnimatePresence mode="wait">
-          {active && current ? (
-            <motion.div
-              key={current.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="w-[320px]"
+    <div className="flex flex-col md:flex-row w-full">
+      {/* Left: Gallery (visible when a campus is active) */}
+      <AnimatePresence>
+        {active && (
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: "50%" }}
+            exit={{ width: 0 }}
+            transition={{
+              duration: 1.2,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="hidden lg:block overflow-hidden shrink-0"
+          >
+            <div
+              className="flex flex-col justify-between h-full pl-0 pr-8"
+              style={{ minWidth: "50vw" }}
             >
-              <div
-                className="bg-cyan-400 text-black px-6 py-2 text-[11px] font-black italic uppercase"
-                style={{
-                  clipPath: "polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%)",
-                }}
-              >
-                {current.title}
+              {/* Top line */}
+              <div className="w-full h-[0.5px] mb-4 bg-blue-primary shrink-0" />
+
+              {/* Main image */}
+              <div className="ml-8 flex-1 relative overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={`${activeCampus}-${galleryIdx}`}
+                    src={active.gallery[galleryIdx]}
+                    alt={active.name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                </AnimatePresence>
               </div>
-              <p className="mt-4 text-[11px] text-gray-400 leading-relaxed italic">
-                {current.description}
-              </p>
-              <button
-                onClick={() => zoomTo(current.next)}
-                className="mt-6 bg-cyan-400 text-black px-5 py-2 rounded-full text-[10px] font-black uppercase cursor-pointer"
-              >
-                VIEW {current.next.toUpperCase()} ›
-              </button>
-            </motion.div>
-          ) : (
-            <motion.p
-              key="placeholder"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-[11px] leading-relaxed italic"
-              style={{
-                color: isDark ? "rgba(243,237,227,0.4)" : "rgba(20,28,34,0.4)",
-              }}
+
+              {/* Thumbnails + nav */}
+              <div className="flex items-center justify-center gap-3 py-4 shrink-0">
+                {active.gallery.length > 1 && (
+                  <button
+                    onClick={() => setGalleryIdx((p) => Math.max(0, p - 1))}
+                    className="w-8 h-8 flex items-center justify-center cursor-pointer"
+                  >
+                    <img
+                      src={iconButton}
+                      alt="Previous"
+                      className="w-8 h-8"
+                      style={{ transform: "rotate(90deg)" }}
+                    />
+                  </button>
+                )}
+                {active.gallery.map((thumb, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setGalleryIdx(idx)}
+                    className={`w-12 h-9 overflow-hidden cursor-pointer border ${idx === galleryIdx ? "border-blue-primary" : "border-transparent opacity-50"}`}
+                  >
+                    <img
+                      src={thumb}
+                      alt=""
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+                {active.gallery.length > 1 && (
+                  <button
+                    onClick={() =>
+                      setGalleryIdx((p) =>
+                        Math.min(active.gallery.length - 1, p + 1),
+                      )
+                    }
+                    className="w-8 h-8 flex items-center justify-center cursor-pointer"
+                  >
+                    <img
+                      src={iconButton}
+                      alt="Next"
+                      className="w-8 h-8"
+                      style={{ transform: "rotate(-90deg)" }}
+                    />
+                  </button>
+                )}
+              </div>
+
+              {/* Bottom line */}
+              <div className="w-full h-[0.5px] bg-blue-primary shrink-0" />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Right: Accordion list */}
+      <div className="flex-1 flex flex-col">
+        {CAMPUSES.map((campus) => {
+          const isActive = activeCampus === campus.id;
+          return (
+            <div
+              key={campus.id}
+              className="border-t-[0.5px] border-blue-primary"
             >
-              Select a location on the map to view details.
-            </motion.p>
-          )}
-        </AnimatePresence>
-      </div>
-
-      {/* Right Panel — Interactive Map */}
-      <div ref={wrapperDivRef} className="w-1/2 relative overflow-hidden">
-        <TransformWrapper
-          ref={transformRef}
-          initialScale={1}
-          centerOnInit={true}
-          minScale={0.5}
-          maxScale={5}
-          smooth
-        >
-          <TransformComponent wrapperStyle={{ width: "100%", height: "100%" }}>
-            <div style={{ position: "relative", display: "inline-block" }}>
-              <img
-                ref={imgRef}
-                src={dci}
-                alt="Map"
-                style={{
-                  display: "block",
-                  width: "1000px",
-                  height: "auto",
-                  // opacity: isDark ? 1 : 1,
-                }}
-              />
-
-              {MAP_LOCATIONS.map((loc) => (
+              {/* Header — clickable */}
+              <div
+                className={`relative flex items-center justify-between px-16 py-6 cursor-pointer overflow-hidden ${active ? "h-fit" : "min-h-53.5"}`}
+                onClick={() => toggleCampus(campus.id)}
+              >
+                {/* Background image */}
                 <div
-                  key={loc.id}
-                  id={`marker-${loc.id}`}
+                  className="absolute inset-0"
                   style={{
-                    position: "absolute",
-                    top: loc.marker.top,
-                    left: loc.marker.left,
+                    backgroundImage: isActive
+                      ? "none"
+                      : `url(${campus.bgImage})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
                   }}
-                  className="absolute"
-                >
-                  <motion.div
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleMarkerClick(loc.id);
-                    }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 pointer-events-auto cursor-pointer rotate-45 border border-cyan-400/50 z-10"
-                    animate={{
-                      backgroundColor:
-                        active === loc.id ? "#22d3ee" : "transparent",
-                    }}
-                    transition={{ duration: 0.2 }}
+                />
+
+                <div className="relative z-10 flex-1">
+                  <p
+                    className="text-[1rem] md:text-[1.33rem] lg:text-[1.78rem] uppercase font-quantico"
+                    style={{ color: isDark ? "#F3EDE3" : "#141C22" }}
+                  >
+                    {campus.name}
+                  </p>
+                  <p className="text-[0.75rem] md:text-[1rem] text-blue-primary tracking-[0.02em]">
+                    {campus.location}
+                  </p>
+                </div>
+
+                {/* Map thumbnail + arrow */}
+                <div className="relative z-10 flex items-center gap-32">
+                  <img
+                    src={campus.mapImage}
+                    alt=""
+                    className={`w-auto object-contain ${active ? "h-20" : "h-30"}`}
+                  />
+                  <motion.img
+                    src={iconButton}
+                    alt=""
+                    className="w-8 h-8"
+                    animate={{ rotate: isActive ? 180 : 0 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 25 }}
                   />
                 </div>
-              ))}
+              </div>
+
+              {/* Expandable content — mobile: gallery + description */}
+              <AnimatePresence initial={false}>
+                {isActive && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{
+                      duration: 1,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="overflow-hidden"
+                  >
+                    {/* Mobile gallery */}
+                    <div className="border-t-[0.5px] border-blue-primary mx-2 lg:hidden" />
+                    <div className="lg:hidden flex flex-col py-4 px-4">
+                      <div className="relative aspect-video overflow-hidden">
+                        <img
+                          src={campus.gallery[galleryIdx]}
+                          alt={campus.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="flex items-center justify-center gap-3 py-4">
+                        {campus.gallery.length > 1 && (
+                          <button
+                            onClick={() =>
+                              setGalleryIdx((p) => Math.max(0, p - 1))
+                            }
+                            className="w-8 h-8 flex items-center justify-center cursor-pointer"
+                          >
+                            <img
+                              src={iconButton}
+                              alt="Previous"
+                              className="w-8 h-8"
+                              style={{ transform: "rotate(90deg)" }}
+                            />
+                          </button>
+                        )}
+                        {campus.gallery.map((thumb, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => setGalleryIdx(idx)}
+                            className={`w-12 h-9 overflow-hidden cursor-pointer border ${idx === galleryIdx ? "border-blue-primary" : "border-transparent opacity-50"}`}
+                          >
+                            <img
+                              src={thumb}
+                              alt=""
+                              className="w-full h-full object-cover"
+                            />
+                          </button>
+                        ))}
+                        {campus.gallery.length > 1 && (
+                          <button
+                            onClick={() =>
+                              setGalleryIdx((p) =>
+                                Math.min(campus.gallery.length - 1, p + 1),
+                              )
+                            }
+                            className="w-8 h-8 flex items-center justify-center cursor-pointer"
+                          >
+                            <img
+                              src={iconButton}
+                              alt="Next"
+                              className="w-8 h-8"
+                              style={{ transform: "rotate(-90deg)" }}
+                            />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="border-b-[0.5px] border-blue-primary mx-2 md:hidden" />
+
+                    {/* Description */}
+                    <div className="px-4 py-3 lg:px-16 lg:py-6">
+                      <p
+                        className="text-[max(0.75rem,0.625vw)] leading-relaxed whitespace-pre-line"
+                        style={{ color: isDark ? "#d1d5db" : "#374151" }}
+                      >
+                        {campus.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-          </TransformComponent>
-        </TransformWrapper>
+          );
+        })}
+        <div className="border-t-[0.5px] border-blue-primary" />
       </div>
     </div>
   );
@@ -439,7 +550,13 @@ const DiamondLine = () => (
   </div>
 );
 
-const EcosystemContent = ({ isDark, isActive }: { isDark: boolean; isActive?: boolean }) => {
+const EcosystemContent = ({
+  isDark,
+  isActive,
+}: {
+  isDark: boolean;
+  isActive?: boolean;
+}) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -524,115 +641,60 @@ const EcosystemContent = ({ isDark, isActive }: { isDark: boolean; isActive?: bo
   );
 };
 
-const OPERATIONAL_CELLS: (
-  | {
-      type: "text";
-      id: string;
-      titleId: string;
-      titleEn: string;
-      descId: string;
-      descEn: string;
-    }
-  | { type: "image"; src: string; alt: string }
-)[][] = [
-  // Page 1
-  [
-    {
-      type: "text",
-      id: "01",
-      titleId: "Ketersediaan Listrik 100%",
-      titleEn: "100% Power Uptime",
-      descId: "Pencapaian terkait ketersediaan listrik 100%",
-      descEn: "100% Power Uptime Achievement",
-    },
-    { type: "image", src: highlights1, alt: "Control Room" },
-    {
-      type: "text",
-      id: "03",
-      titleId: "Skalabilitas Platform",
-      titleEn: "Platform Scalability",
-      descId:
-        "Mengoperasikan pusat data DCI Platform di beberapa lokasi secara bersamaan",
-      descEn:
-        "Simultaneously operating data centers within the DCI Platform, across multiple locations",
-    },
-    { type: "image", src: highlights2, alt: "Server Racks" },
-    {
-      type: "text",
-      id: "02",
-      titleId: "Otomatisasi",
-      titleEn: "Automation",
-      descId:
-        "Fokus dan investasi pada automation dan predictive maintenance untuk meningkatkan efisiensi operasional",
-      descEn:
-        "Focuses and invests in automation and predictive maintenance to increase operational efficiency",
-    },
-    { type: "image", src: highlights1, alt: "Data Center" },
-  ],
-  // Page 2 — flipped: image-text-image on row 1, text-image-text on row 2
-  [
-    { type: "image", src: highlights2, alt: "Security Systems" },
-    {
-      type: "text",
-      id: "04",
-      titleId: "Keamanan Tier IV",
-      titleEn: "Tier IV Security",
-      descId:
-        "Standar keamanan fisik dan siber tertinggi untuk melindungi data pelanggan",
-      descEn:
-        "Highest physical and cyber security standards to protect customer data",
-    },
-    { type: "image", src: highlights1, alt: "Infrastructure" },
-    {
-      type: "text",
-      id: "05",
-      titleId: "Efisiensi Energi",
-      titleEn: "Energy Efficiency",
-      descId:
-        "Optimalisasi penggunaan energi melalui desain infrastruktur yang efisien",
-      descEn: "Optimizing energy usage through efficient infrastructure design",
-    },
-    { type: "image", src: highlights2, alt: "Green Energy" },
-    {
-      type: "text",
-      id: "06",
-      titleId: "Konektivitas Tinggi",
-      titleEn: "High Connectivity",
-      descId:
-        "Jaringan konektivitas yang luas dengan berbagai operator telekomunikasi",
-      descEn:
-        "Extensive connectivity network with various telecommunications operators",
-    },
-  ],
-];
+const OP_ITEMS = {
+  "01": {
+    id: "01",
+    title: "1,900 MW+ Scalable Capacity",
+    bullets: [
+      "DCI enables scalability up to 1,900 MW across 5+ locations in Indonesia",
+      "Supported by a total landbank of 6,500 ha for long-term expansion",
+    ],
+  },
+  "02": {
+    id: "02",
+    title: "12 Months Greenfield-to-RFS (incl. power); <6 Months Fit-Out",
+    bullets: [
+      "Proven track record of delivering 15 MW+ non-modular data centers within 12 months for hyperscalers",
+      "Built by local contractors to global standards, achieving >30% lower CapEx than the market average",
+    ],
+  },
+  "03": {
+    id: "03",
+    title: "100% Power Uptime",
+    bullets: [
+      "Achieved and maintained 100% power uptime since inception.",
+      "Ensured through Tier IV design, full redundancy, and multi-site resilience.",
+    ],
+  },
+  "04": {
+    id: "04",
+    title: "AI-Ready Infrastructure",
+    bullets: [
+      "AI-ready data halls with 120+ kW/rack density, liquid cooling, and flexible ramp-up.",
+      "Standard 2N redundancy configuration ensures maximum reliability.",
+    ],
+  },
+  "05": {
+    id: "05",
+    title: "Automation & Predictive Maintenance",
+    bullets: [
+      "Focused and invested in AI-based automation and predictive maintenance to enhance operational efficiency.",
+      "Automation minimizes human error and enables consistent 24/7 monitoring.",
+    ],
+  },
+  "06": {
+    id: "06",
+    title: "Platform-Wide Scalability",
+    bullets: [
+      "Operates multiple DCI campuses simultaneously under a unified operational platform.",
+      "Delivers consistent standards, flexibility, and seamless interconnectivity across regions.",
+    ],
+  },
+};
 
 const OperationalContent = ({ isDark }: { isDark: boolean }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
-
-  // Build text+image pairs for mobile
-  const mobilePairs: {
-    text: {
-      id: string;
-      titleId: string;
-      titleEn: string;
-      descId: string;
-      descEn: string;
-    };
-    image: { src: string; alt: string } | null;
-  }[] = [];
-  for (const page of OPERATIONAL_CELLS) {
-    for (let i = 0; i < page.length; i++) {
-      const cell = page[i];
-      if (cell.type === "text") {
-        const nextImage =
-          page[i + 1]?.type === "image"
-            ? (page[i + 1] as { type: "image"; src: string; alt: string })
-            : null;
-        mobilePairs.push({ text: cell, image: nextImage });
-      }
-    }
-  }
 
   const handleScroll = () => {
     const el = scrollRef.current;
@@ -641,25 +703,13 @@ const OperationalContent = ({ isDark }: { isDark: boolean }) => {
     setScrollProgress(max > 0 ? el.scrollLeft / max : 0);
   };
 
-  // const scroll = (direction: "left" | "right") => {
-  //   const el = scrollRef.current;
-  //   if (!el) return;
-  //   const pageWidth = el.clientWidth;
-  //   el.scrollBy({
-  //     left: direction === "left" ? -pageWidth : pageWidth,
-  //     behavior: "smooth",
-  //   });
-  // };
-
-  const renderTextCell = (cell: {
+  const renderCard = (item: {
     id: string;
-    titleId: string;
-    titleEn: string;
-    descId: string;
-    descEn: string;
+    title: string;
+    bullets: string[];
   }) => (
-    <div className="px-[clamp(1.5rem,2.5vw,2.5rem)] py-[clamp(1rem,2vh,2rem)] flex flex-col justify-center h-full">
-      <div className="flex items-center gap-3 mb-1">
+    <div className="flex flex-col gap-3 px-[clamp(1.5rem,2.5vw,2.5rem)] py-[clamp(1rem,2vh,2rem)]">
+      <div className="flex items-center gap-3">
         <div
           className="shrink-0 inline-flex items-center justify-center bg-blue-primary px-[19.5px] py-1"
           style={{
@@ -668,105 +718,157 @@ const OperationalContent = ({ isDark }: { isDark: boolean }) => {
           }}
         >
           <span className="font-quantico text-[1rem] font-normal text-dark-blue tracking-[-0.04em] uppercase whitespace-nowrap">
-            {cell.id}
+            {item.id}
           </span>
         </div>
         <h3
-          className="text-[clamp(1.1rem,2vw,1.5rem)] font-bold tracking-tight"
-          style={{ color: isDark ? "#ffffff" : "#111827" }}
+          className="text-[max(0.75rem,0.625vw)] font-bold tracking-tight"
+          style={{ color: isDark ? "#F3EDE3" : "#111827" }}
         >
-          {cell.titleId}
+          {item.title}
         </h3>
       </div>
-      <p
-        className="text-[clamp(0.7rem,1vw,0.85rem)] font-bold mb-3"
-        style={{ color: isDark ? "#22d3ee" : "#0891b2" }}
-      >
-        {cell.titleEn}
-      </p>
-      <p
-        className="text-[clamp(0.65rem,0.9vw,0.78rem)] leading-relaxed mb-1.5"
-        style={{ color: isDark ? "#d1d5db" : "#374151" }}
-      >
-        {cell.descId}
-      </p>
-      <p
-        className="text-[clamp(0.6rem,0.85vw,0.72rem)] italic leading-relaxed"
-        style={{ color: isDark ? "#9ca3af" : "#6b7280" }}
-      >
-        {cell.descEn}
-      </p>
+      <div className="flex flex-col gap-2 ml-2">
+        {item.bullets.map((bullet, bIdx) => (
+          <div key={bIdx} className="flex items-start gap-2">
+            <div className="w-1.5 h-1.5 rotate-45 bg-blue-primary shrink-0 mt-1.5" />
+            <p
+              className="text-[max(0.75rem,0.625vw)] leading-relaxed"
+              style={{ color: isDark ? "#d1d5db" : "#374151" }}
+            >
+              {bullet}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 
-  const renderImageCell = (cell: { src: string; alt: string }) => (
-    <div className="w-full h-full overflow-hidden">
-      <img
-        src={cell.src}
-        alt={cell.alt}
-        className="w-full h-full object-contain"
-      />
-    </div>
-  );
+  const renderImage = (src: string, alt: string) => {
+    const clipId = `pixelOctagon-${alt.replace(/\s/g, "")}`;
+    return (
+      <div className="w-full h-auto flex items-center justify-center p-4">
+        <div
+          className="w-full h-auto relative"
+          style={{ paddingBottom: "71.875%" }}
+        >
+          <div
+            className="absolute inset-0"
+            style={{
+              clipPath: `url(#${clipId})`,
+              backgroundImage: `url(${src})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+        </div>
+      </div>
+    );
+  };
 
   return (
-    <div className="flex flex-col w-full relative px-6 md:px-[5.42vw] py-10 md:py-16 gap-10">
+    <div className="flex flex-col w-full relative px-6 lg:px-[5.42vw] py-10 lg:py-16 gap-10">
       {/* Scrollable pages */}
       <div
         ref={scrollRef}
         onScroll={handleScroll}
         className="flex-1 min-h-0 overflow-x-auto overflow-y-hidden scrollbar-hide"
-        style={{ scrollSnapType: "x mandatory" }}
+        style={{ scrollSnapType: "x proximity" }}
       >
-        {/* Mobile: 1 text+image pair per snap page */}
-        <div
-          className="flex h-full md:hidden"
-          style={{ width: `${mobilePairs.length * 100}%` }}
-        >
-          {mobilePairs.map((pair, idx) => (
-            <div
-              key={idx}
-              className="flex flex-col w-full shrink-0"
-              style={{
-                width: `${100 / mobilePairs.length}%`,
-                scrollSnapAlign: "start",
-              }}
-            >
-              {renderTextCell(pair.text)}
-              {pair.image && renderImageCell(pair.image)}
+        {/* Mobile: 1 item per snap page, 02+03 counted as 1 */}
+        <div className="flex h-full md:hidden" style={{ width: `${5 * 100}%` }}>
+          {[
+            <div key="m1" className="flex flex-col">
+              {renderCard(OP_ITEMS["01"])}
+              {renderImage(highlights1, "DCI Campus")}
+            </div>,
+            <div key="m2" className="flex flex-col h-full">
+              {renderCard(OP_ITEMS["02"])}
+              <div className="h-[0.5px] bg-blue-primary mx-6" />
+              {renderCard(OP_ITEMS["03"])}
+            </div>,
+            <div key="m3" className="flex flex-col">
+              {renderCard(OP_ITEMS["04"])}
+              {renderImage(highlights4, "Server Room")}
+            </div>,
+            <div key="m4" className="flex flex-col">
+              {renderCard(OP_ITEMS["05"])}
+              {renderImage(highlights5, "Technician")}
+            </div>,
+            <div key="m5" className="flex flex-col">
+              {renderCard(OP_ITEMS["06"])}
+              {renderImage(highlights6, "DCI Building")}
+            </div>,
+          ].map((page, idx) => (
+            <div key={idx} className="w-full shrink-0" style={{ width: "20%" }}>
+              {page}
             </div>
           ))}
         </div>
 
-        {/* Desktop: grid pages */}
+        {/* Desktop: 2 pages */}
         <div
           className="hidden md:flex h-full"
-          style={{ width: `${OPERATIONAL_CELLS.length * 100}%` }}
+          style={{ width: `${100 + (100 * 2) / 3}%` }}
         >
-          {OPERATIONAL_CELLS.map((page, pageIdx) => (
-            <div
-              key={pageIdx}
-              className="h-full grid grid-rows-2 grid-cols-3"
-              style={{
-                width: `${100 / OPERATIONAL_CELLS.length}%`,
-                scrollSnapAlign: "start",
-              }}
-            >
-              {page.map((cell, cellIdx) => (
-                <div key={cellIdx} className="overflow-hidden">
-                  {cell.type === "text"
-                    ? renderTextCell(cell)
-                    : renderImageCell(cell)}
-                </div>
-              ))}
+          {/* Page 1 */}
+          <div
+            className="shrink-0 grid grid-cols-3 w-1/2"
+            style={{
+              width: `${(100 / (1 + 2 / 3)) * 1}%`,
+              gridTemplateRows: "auto auto",
+            }}
+          >
+            {/* Col 1: text top, image bottom */}
+            <div className="flex flex-col">
+              {renderCard(OP_ITEMS["01"])}
+              <div className="flex-1 overflow-hidden">
+                {renderImage(highlights1, "DCI Campus")}
+              </div>
             </div>
-          ))}
+            {/* Col 2: 02 top, separator + 03 bottom (text only) */}
+            <div className="flex flex-col">
+              <div className="flex-1">{renderCard(OP_ITEMS["02"])}</div>
+              <div className="h-[0.5px] bg-blue-primary mx-6" />
+              <div className="flex-1">{renderCard(OP_ITEMS["03"])}</div>
+            </div>
+            {/* Col 3: image top, text bottom */}
+            <div className="flex flex-col">
+              <div className="flex-1 overflow-hidden">
+                {renderImage(highlights4, "Server Room")}
+              </div>
+              {renderCard(OP_ITEMS["04"])}
+            </div>
+          </div>
+
+          {/* Page 2: same column pattern */}
+          <div
+            className="shrink-0 grid grid-cols-2 ml-4 gap-4"
+            style={{
+              scrollSnapAlign: "start",
+              width: `${(100 / (1 + 2 / 3)) * (2 / 3)}%`,
+            }}
+          >
+            {/* Col 1: text top, image bottom */}
+            <div className="flex flex-col">
+              {renderCard(OP_ITEMS["05"])}
+              <div className="flex-1 overflow-hidden">
+                {renderImage(highlights5, "Technician")}
+              </div>
+            </div>
+            {/* Col 2: image top, text bottom */}
+            <div className="flex flex-col">
+              <div className="flex-1 overflow-hidden">
+                {renderImage(highlights6, "DCI Building")}
+              </div>
+              {renderCard(OP_ITEMS["06"])}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Bottom bar: progress line + nav buttons */}
+      {/* Progress bar */}
       <div className="flex items-center justify-between px-[clamp(1.5rem,3vw,3rem)] py-3">
-        {/* Progress bar */}
         <div className="flex-1 relative h-[2px]">
           <div
             className="absolute inset-0"
@@ -794,30 +896,6 @@ const OperationalContent = ({ isDark }: { isDark: boolean }) => {
             style={{ backgroundColor: isDark ? "#22d3ee" : "#0891b2" }}
           />
         </div>
-
-        {/* Nav buttons */}
-        {/* <div className="flex gap-3">
-          <button
-            onClick={() => scroll("left")}
-            className="w-10 h-10  flex items-center justify-center cursor-pointer transition-colors hover:bg-cyan-400/10"
-            style={{
-              borderColor: isDark ? "#22d3ee" : "#0891b2",
-              color: isDark ? "#22d3ee" : "#0891b2",
-            }}
-          >
-            <img src={iconButtonLeft} />
-          </button>
-          <button
-            onClick={() => scroll("right")}
-            className="w-10 h-10 flex items-center justify-center cursor-pointer transition-colors hover:bg-cyan-400/10"
-            style={{
-              borderColor: isDark ? "#22d3ee" : "#0891b2",
-              color: isDark ? "#22d3ee" : "#0891b2",
-            }}
-          >
-            <img src={iconButtonRight} />
-          </button>
-        </div> */}
       </div>
     </div>
   );
@@ -835,7 +913,6 @@ const panels: React.ComponentType<any>[] = [
 
 export default function CardGrid({ isDark }: { isDark: boolean }) {
   const [activeTab, setActiveTab] = useState<number | null>(null);
-  const [platformMarker, setPlatformMarker] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
 
   return (
@@ -925,25 +1002,28 @@ export default function CardGrid({ isDark }: { isDark: boolean }) {
               <div className="absolute right-20 top-1/2 -translate-y-1/2 w-2 h-2 rotate-45 bg-blue-primary" />
             </motion.div>
 
-            {/* Expandable content — CSS grid transition for smooth height */}
-            <div
-              className="grid transition-[grid-template-rows] duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]"
-              style={{
-                gridTemplateRows: isActive ? "1fr" : "0fr",
-                backgroundColor: isDark ? "#141c22" : "#f3ede3",
-              }}
-            >
-              <div className="overflow-hidden">
-                <div className="relative flex flex-col items-center">
-                    {Content === PlatformContent ? (
-                      <PlatformContent
-                        isDark={isDark}
-                        activeMarker={platformMarker}
-                        onMarkerChange={setPlatformMarker}
-                      />
-                    ) : (
-                      <Content isDark={isDark} isActive={isActive} />
-                    )}
+            {/* Expandable content — only mounted when active */}
+            <AnimatePresence initial={false}>
+              {isActive && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={
+                    shouldReduceMotion
+                      ? { duration: 0 }
+                      : {
+                          duration: 1.2,
+                          ease: [0.16, 1, 0.3, 1],
+                        }
+                  }
+                  className="overflow-hidden"
+                  style={{
+                    backgroundColor: isDark ? "#141c22" : "#f3ede3",
+                  }}
+                >
+                  <div className="relative flex flex-col items-center">
+                    <Content isDark={isDark} isActive={isActive} />
 
                     {/* CLOSE BUTTON — bottom center */}
                     <button
@@ -982,8 +1062,9 @@ export default function CardGrid({ isDark }: { isDark: boolean }) {
                       </svg>
                     </button>
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         );
       })}

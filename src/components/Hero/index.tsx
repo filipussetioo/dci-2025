@@ -216,12 +216,12 @@ export const Hero = ({ isDark }: { isDark: boolean }) => {
       <img
         src={heartLeft}
         alt=""
-        className="absolute top-[20%] md:top-[15%] -left-[55%] md:left-14 w-[100%] md:w-[30%] min-[1399px]:w-[40%] md:max-w-140 md:min-w-100 pointer-events-none z-0"
+        className="absolute top-[20%] md:top-[20%] -left-[55%] md:left-14 w-full md:w-[48%] min-[1399px]:w-[40%] md:max-w-140 md:min-w-100 pointer-events-none z-0"
       />
       <img
         src={heartRight}
         alt=""
-        className="absolute top-[20%] md:top-[15%] -right-[55%] md:right-14 w-[100%] md:w-[30%] min-[1399px]:w-[40%] md:max-w-140 md:min-w-100 pointer-events-none z-0"
+        className="absolute top-[20%] md:top-[20%] -right-[55%] md:right-14 w-full md:w-[48%] min-[1399px]:w-[40%] md:max-w-140 md:min-w-100 pointer-events-none z-0"
       />
       {/* 2. Headline Container */}
       {/* Headline — near top */}
