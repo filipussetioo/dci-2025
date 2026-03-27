@@ -1,17 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-// import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-// import type { ReactZoomPanPinchContentRef } from "react-zoom-pan-pinch";
-// import dci from "../../assets/graphics/dci-map.svg";
-// import batikLow from "../../assets/graphics/batik-gradient.png";
-// import batikLowLight from "../../assets/graphics/batik-gradient-light.png";
 import iconArrowUp from "../../assets/icons/icon-arrow-up-black.svg";
 import highlights1 from "../../assets/graphics/ops-1.png";
 import highlights4 from "../../assets/graphics/ops-4.png";
 import highlights5 from "../../assets/graphics/ops-5.png";
 import highlights6 from "../../assets/graphics/ops-6.png";
-// import iconButtonLeft from "../../assets/icons/icon-button-left.svg";
-// import iconButtonRight from "../../assets/icons/icon-button-right.svg";
 import accordionRight from "../../assets/icons/accordion-right.svg";
 import accordionLeft from "../../assets/icons/accordion-left.svg";
 
@@ -152,7 +145,7 @@ const FinancialContent = ({
                   </span>
                   <div className="flex items-center">
                     <span
-                      className="px-[12.5px] py-[2px] bg-blue-primary text-dark-blue text-[0.75rem] font-normal uppercase tracking-[-0.04em]"
+                      className="px-[12.5px] py-0.5 bg-blue-primary text-dark-blue text-[0.75rem] font-normal uppercase tracking-[-0.04em]"
                       style={{
                         clipPath:
                           "polygon(10.5px 0%, calc(100% - 10.5px) 0%, 100% 50%, calc(100% - 10.5px) 100%, 10.5px 100%, 0% 50%)",

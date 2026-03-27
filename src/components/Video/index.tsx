@@ -136,7 +136,7 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
           )}
 
           {/* CUSTOM CONTROLS OVERLAY */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
+          <div className={`absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent transition-opacity duration-300 z-30 ${isPlaying ? "opacity-0 group-hover:opacity-100" : "opacity-100"}`}>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <button
