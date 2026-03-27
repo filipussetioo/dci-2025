@@ -85,12 +85,12 @@ export const PresidentMessage = ({ isDark }: { isDark: boolean }) => {
 
       <img
         src={heartLeft}
-        alt=""
+        alt="Decorative heart left"
         className="absolute top-[33%] left-14 w-[30%] pointer-events-none z-0"
       />
       <img
         src={heartRight}
-        alt=""
+        alt="Decorative heart right"
         className="absolute top-[33%] right-14 w-[30%] pointer-events-none z-0"
       />
       <div className="max-w-xl mx-auto relative z-10  flex flex-col gap-10">

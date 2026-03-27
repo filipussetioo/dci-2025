@@ -17,6 +17,7 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
   const [progress, setProgress] = useState(0);
 
   const [isExpanded, setIsExpanded] = useState(false);
+  const [hasInitialized, setHasInitialized] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -28,14 +29,14 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
       const rect = sectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      // Expand when 20px of the section is visible from the bottom
       if (rect.top < windowHeight - 20) {
         setIsExpanded(true);
+        setHasInitialized(true);
       }
 
-      // Collapse only when section is fully below viewport (scrolled back up)
       if (rect.top >= windowHeight) {
         setIsExpanded(false);
+        setHasInitialized(true);
       }
     };
 
@@ -103,7 +104,7 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
       <div className="absolute bottom-0 left-0 w-[208%] md:w-full pointer-events-none">
         <img
           src={isDark ? batikLow : batikLowLight}
-          alt=""
+          alt="Decorative batik pattern"
           className="w-full h-full object-cover"
         />
       </div>
@@ -115,14 +116,17 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
           style={{
             backgroundColor: isDark ? "#0d1424" : "#e8e4d8",
             clipPath: isExpanded ? "inset(0 0% 0 0%)" : "inset(0 50% 0 50%)",
-            transition:
-              "background-color 0.5s, clip-path 1s cubic-bezier(0.22, 1, 0.36, 1)",
+            transition: hasInitialized
+              ? "background-color 0.5s, clip-path 1s cubic-bezier(0.22, 1, 0.36, 1)"
+              : "none",
           }}
         >
           <video
             ref={videoRef}
             className="w-full h-full object-cover cursor-pointer"
             src="/video/dci.mp4"
+            poster="/video/dci-poster.jpg"
+            preload="metadata"
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
             onTimeUpdate={handleTimeUpdate}

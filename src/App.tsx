@@ -95,8 +95,9 @@ function App() {
       >
         <motion.img
           src={dciImageOne}
-          className="w-full h-auto will-change-transform"
+          className="w-full h-auto max-h-screen will-change-transform"
           style={{ scale: dciOneScale }}
+          alt="DCI Location 1"
         />
       </div>
       <CardGrid isDark={isDark} />
@@ -108,6 +109,7 @@ function App() {
           src={dciImageTwo}
           className="w-full h-auto will-change-transform"
           style={{ scale: dciTwoScale }}
+          alt="DCI Location 2"
         />
       </div>
       <DownloadSection isDark={isDark} />

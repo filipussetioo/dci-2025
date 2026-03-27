@@ -39,12 +39,12 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
       {/* Heart graphics — behind footer, above corners */}
       <img
         src={lungLeft}
-        alt=""
+        alt="Decorative lung graphic left"
         className="absolute md:-bottom-[40%] md:left-0 lg:left-6 lg:max-w-[40%] z-0 pointer-events-none md:w-1/2 top-[30%] md:top-[15%] -left-[55%] w-[100%]"
       />
       <img
         src={lungRight}
-        alt=""
+        alt="Decorative lung graphic right"
         className="absolute md:-bottom-[40%] md:right-0 lg:right-6 lg:max-w-[40%] z-0 pointer-events-none md:w-1/2 top-[30%] md:top-[15%] -right-[55%] w-[100%]"
       />
       <div className="relative z-10 pt-16 text-center px-6">
@@ -151,12 +151,12 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
       {/* Corner decorations — bottom */}
       <img
         src={cornersLeft}
-        alt=""
+        alt="Decorative corner left"
         className="absolute bottom-8 left-8 z-10 w-15 h-auto"
       />
       <img
         src={cornersRight}
-        alt=""
+        alt="Decorative corner right"
         className="absolute bottom-8 right-8 z-10 w-15 h-auto"
       />
     </section>

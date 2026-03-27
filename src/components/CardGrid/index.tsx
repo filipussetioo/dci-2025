@@ -156,7 +156,7 @@ const FinancialContent = ({
                     </span>
                     <img
                       src={iconArrowUp}
-                      alt=""
+                      alt="Increase"
                       className="w-5 h-5"
                       style={floatIn(idx * 0.1 + 0.15)}
                     />
@@ -346,7 +346,7 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
                   >
                     <img
                       src={thumb}
-                      alt=""
+                      alt={`${active.name} thumbnail ${idx + 1}`}
                       className="w-full h-full object-cover"
                     />
                   </button>
@@ -419,12 +419,12 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
                 <div className="relative z-10 flex items-center gap-8">
                   <img
                     src={campus.mapImage}
-                    alt=""
+                    alt={`${campus.name} map`}
                     className={`w-auto object-contain ${active ? "hidden md:block h-20" : "h-30"}`}
                   />
                   <motion.img
                     src={iconButton}
-                    alt=""
+                    alt="Toggle campus details"
                     className="w-8 h-8"
                     animate={{ rotate: isActive ? 180 : 0 }}
                     transition={{ type: "spring", stiffness: 200, damping: 25 }}
@@ -475,7 +475,7 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
                           >
                             <img
                               src={thumb}
-                              alt=""
+                              alt={`${campus.name} thumbnail ${idx + 1}`}
                               className="w-full h-full object-cover"
                             />
                           </button>
