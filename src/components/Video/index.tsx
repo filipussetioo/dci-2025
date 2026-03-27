@@ -13,7 +13,7 @@ import batikLowLight from "../../assets/graphics/batik-low-light.png";
 
 export default function VideoSection({ isDark }: { isDark: boolean }) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const [progress, setProgress] = useState(0);
 
   const [isExpanded, setIsExpanded] = useState(false);
