@@ -139,7 +139,7 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
           {/* Diamond play button centered */}
           {!isPlaying && progress === 0 && (
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <img src={iconPlay} className="w-10 md:w-16"></img>
+              <img src={iconPlay} alt="Play video" className="w-10 md:w-16"></img>
             </div>
           )}
 
@@ -150,6 +150,7 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
                 <button
                   onClick={togglePlay}
                   className="text-white hover:text-[#3bb8c4]"
+                  aria-label={isPlaying ? "Pause video" : "Play video"}
                 >
                   {isPlaying ? (
                     <Pause size={24} fill="currentColor" />
@@ -161,6 +162,7 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
                 <button
                   onClick={toggleMute}
                   className="text-white hover:text-[#3bb8c4]"
+                  aria-label={isMuted ? "Unmute video" : "Mute video"}
                 >
                   {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
                 </button>
@@ -170,6 +172,7 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
                 <button
                   onClick={(e) => skip(e, -10)}
                   className="text-white hover:text-[#3bb8c4] flex flex-col items-center"
+                  aria-label="Skip back 10 seconds"
                 >
                   <RotateCcw size={18} />
                   <span className="text-[8px] font-bold">-10s</span>
@@ -177,6 +180,7 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
                 <button
                   onClick={toggleFullscreen}
                   className="text-white hover:text-[#3bb8c4]"
+                  aria-label="Toggle fullscreen"
                 >
                   <Maximize size={20} />
                 </button>

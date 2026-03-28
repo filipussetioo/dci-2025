@@ -329,6 +329,7 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
                   <button
                     onClick={() => setGalleryIdx((p) => Math.max(0, p - 1))}
                     className="w-8 h-8 flex items-center justify-center cursor-pointer"
+                    aria-label="Previous image"
                   >
                     <img
                       src={iconButton}
@@ -343,6 +344,7 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
                     key={idx}
                     onClick={() => setGalleryIdx(idx)}
                     className={`w-12 h-9 overflow-hidden cursor-pointer border ${idx === galleryIdx ? "border-blue-primary" : "border-transparent opacity-50"}`}
+                    aria-label={`View ${active.name} image ${idx + 1}`}
                   >
                     <img
                       src={thumb}
@@ -359,6 +361,7 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
                       )
                     }
                     className="w-8 h-8 flex items-center justify-center cursor-pointer"
+                    aria-label="Next image"
                   >
                     <img
                       src={iconButton}
@@ -481,6 +484,7 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
                               setGalleryIdx((p) => Math.max(0, p - 1))
                             }
                             className="w-8 h-8 flex items-center justify-center cursor-pointer"
+                            aria-label="Previous image"
                           >
                             <img
                               src={iconButton}
@@ -495,6 +499,7 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
                             key={idx}
                             onClick={() => setGalleryIdx(idx)}
                             className={`w-12 h-9 overflow-hidden cursor-pointer border ${idx === galleryIdx ? "border-blue-primary" : "border-transparent opacity-50"}`}
+                            aria-label={`View ${campus.name} image ${idx + 1}`}
                           >
                             <img
                               src={thumb}
@@ -511,6 +516,7 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
                               )
                             }
                             className="w-8 h-8 flex items-center justify-center cursor-pointer"
+                            aria-label="Next image"
                           >
                             <img
                               src={iconButton}
@@ -973,6 +979,7 @@ export default function CardGrid({ isDark }: { isDark: boolean }) {
               {/* Left arrow (pointing right) */}
               <motion.img
                 src={accordionLeft}
+                alt=""
                 className="hidden md:block w-[102px] h-[118px] shrink-0 rotate-90"
               />
 
@@ -996,19 +1003,20 @@ export default function CardGrid({ isDark }: { isDark: boolean }) {
                   {tab.num}
                 </motion.span>
               ) : (
-                <motion.h3
+                <motion.h2
                   className="font-quantico text-[1.33rem] md:text-[1.78rem] lg:text-[max(2.37rem,2.107vw)] uppercase tracking-[-0.04em] leading-[0.95] text-center whitespace-pre-line font-normal"
                   style={{ color: isDark ? "#F3EDE3" : "#141C22" }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.2 }}
                 >
                   {tab.title}
-                </motion.h3>
+                </motion.h2>
               )}
 
               {/* Right arrow (pointing left) */}
               <motion.img
                 src={accordionRight}
+                alt=""
                 className="hidden md:block w-25.5 h-29.5 shrink-0 rotate-90"
               />
 
@@ -1046,6 +1054,7 @@ export default function CardGrid({ isDark }: { isDark: boolean }) {
                         setActiveTab(null);
                       }}
                       className="w-6 h-6 my-6 z-50 group cursor-pointer text-blue-primary"
+                      aria-label="Close section"
                     >
                       <svg
                         viewBox="0 0 100 100"

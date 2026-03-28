@@ -87,32 +87,34 @@ function App() {
         {/* <DCIDashboard /> */}
         <VideoSection isDark={isDark} />
       </div>
-      {/* <MapSection isDark={isDark} /> */}
-      <PresidentMessage isDark={isDark} />
-      <div
-        ref={dciOneRef}
-        className="overflow-hidden px-0 min-[1600px]:px-73.25 lg:pt-63.25 "
-      >
-        <motion.img
-          src={dciImageOne}
-          className="w-full h-auto max-h-screen will-change-transform"
-          style={{ scale: dciOneScale }}
-          alt="DCI Location 1"
-        />
-      </div>
-      <CardGrid isDark={isDark} />
-      <div
-        ref={dciTwoRef}
-        className="overflow-hidden px-0 min-[1600px]:px-73.25"
-      >
-        <motion.img
-          src={dciImageTwo}
-          className="w-full h-auto will-change-transform"
-          style={{ scale: dciTwoScale }}
-          alt="DCI Location 2"
-        />
-      </div>
-      <DownloadSection isDark={isDark} />
+      <main>
+        {/* <MapSection isDark={isDark} /> */}
+        <PresidentMessage isDark={isDark} />
+        <div
+          ref={dciOneRef}
+          className="overflow-hidden px-0 min-[1600px]:px-73.25 lg:pt-63.25 "
+        >
+          <motion.img
+            src={dciImageOne}
+            className="w-full h-auto max-h-screen will-change-transform"
+            style={{ scale: dciOneScale }}
+            alt="DCI Location 1"
+          />
+        </div>
+        <CardGrid isDark={isDark} />
+        <div
+          ref={dciTwoRef}
+          className="overflow-hidden px-0 min-[1600px]:px-73.25"
+        >
+          <motion.img
+            src={dciImageTwo}
+            className="w-full h-auto will-change-transform"
+            style={{ scale: dciTwoScale }}
+            alt="DCI Location 2"
+          />
+        </div>
+        <DownloadSection isDark={isDark} />
+      </main>
       {/* <Footer isDark={isDark} /> */}
     </div>
   );

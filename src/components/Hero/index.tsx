@@ -236,7 +236,7 @@ export const Hero = ({ isDark }: { isDark: boolean }) => {
           {["Powering the", "Foundations of", "Indonesia's AI Future"].map(
             (line, i) => (
               <span key={line} className="overflow-hidden block">
-                <h1
+                <span
                   className="block"
                   style={{
                     transform: isReady ? "translateY(0)" : "translateY(100%)",
@@ -244,7 +244,7 @@ export const Hero = ({ isDark }: { isDark: boolean }) => {
                   }}
                 >
                   {line}
-                </h1>
+                </span>
               </span>
             ),
           )}
@@ -281,7 +281,7 @@ export const Hero = ({ isDark }: { isDark: boolean }) => {
         >
           {/* Animated or static arrow */}
           <div className="w-8 h-auto text-blue-primary">
-            <img src={iconArrowDown} className="w-full h-full" />
+            <img src={iconArrowDown} alt="Scroll down" className="w-full h-full" />
           </div>
         </div>
       </div>
