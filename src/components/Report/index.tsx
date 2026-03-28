@@ -40,11 +40,13 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
       <img
         src={lungLeft}
         alt="Decorative lung graphic left"
+        loading="lazy"
         className="absolute md:-bottom-[40%] md:left-0 lg:left-6 lg:max-w-[40%] z-0 pointer-events-none md:w-1/2 top-[30%] md:top-[15%] -left-[55%] w-[100%]"
       />
       <img
         src={lungRight}
         alt="Decorative lung graphic right"
+        loading="lazy"
         className="absolute md:-bottom-[40%] md:right-0 lg:right-6 lg:max-w-[40%] z-0 pointer-events-none md:w-1/2 top-[30%] md:top-[15%] -right-[55%] w-[100%]"
       />
       <div className="relative z-10 pt-16 text-center px-6">

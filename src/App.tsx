@@ -99,6 +99,7 @@ function App() {
             className="w-full h-auto max-h-screen will-change-transform"
             style={{ scale: dciOneScale }}
             alt="DCI Location 1"
+            loading="lazy"
           />
         </div>
         <CardGrid isDark={isDark} />
@@ -111,6 +112,7 @@ function App() {
             className="w-full h-auto will-change-transform"
             style={{ scale: dciTwoScale }}
             alt="DCI Location 2"
+            loading="lazy"
           />
         </div>
         <DownloadSection isDark={isDark} />
