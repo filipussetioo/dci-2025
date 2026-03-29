@@ -26,9 +26,10 @@ pnpm dev
 
 Opens at `http://localhost:5173`
 
-### Build
+### Production Build
 
 ```bash
+pnpm install
 pnpm build
 pnpm preview
 ```
