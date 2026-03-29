@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:portfolio": "VITE_BASE_URL=/annual-report/2025/ tsc -b && VITE_BASE_URL=/annual-report/2025/ vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

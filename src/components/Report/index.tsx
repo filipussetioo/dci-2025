@@ -37,7 +37,7 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
 
         {/* DOWNLOAD REPORT button */}
         <a
-          href="/pdf/DCI ARSR 2025.pdf"
+          href={import.meta.env.VITE_PDF_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="group mt-16 inline-block cursor-pointer font-quantico "

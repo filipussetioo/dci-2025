@@ -124,8 +124,8 @@ export default function VideoSection({ isDark }: { isDark: boolean }) {
           <video
             ref={videoRef}
             className="w-full h-full object-cover cursor-pointer"
-            src="/video/dci.mp4"
-            poster="/video/dci-poster.jpg"
+            src={`${import.meta.env.BASE_URL}video/dci.mp4`}
+            poster={`${import.meta.env.BASE_URL}video/dci-poster.jpg`}
             preload="metadata"
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}

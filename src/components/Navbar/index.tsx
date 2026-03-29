@@ -80,7 +80,7 @@ const Navbar = ({
           <div className="lg:flex items-center gap-[clamp(1.5rem,2.08vw,2.5rem)] font-quantico text-[clamp(0.625rem,0.73vw,0.875rem)]">
             {/* DOWNLOAD REPORT — hexagonal outline button */}
             <a
-              href="/pdf/DCI ARSR 2025.pdf"
+              href={import.meta.env.VITE_PDF_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="cursor-pointer group relative"
