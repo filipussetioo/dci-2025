@@ -4,19 +4,14 @@ import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 import "./App.css";
 import CardGrid from "./components/CardGrid";
-// import { Footer } from "./components/Footer";
 import { Hero } from "./components/Hero";
 import Navbar from "./components/Navbar";
 import { PresidentMessage } from "./components/PresidentMessage";
 import { DownloadSection } from "./components/Report";
 import VideoSection from "./components/Video";
-// import IndonesiaMap from "./components/Maps";
-// import DCIDashboard from "./components/Maps";
+
 import dciImageOne from "./assets/graphics/dci-1-opt.jpg";
 import dciImageTwo from "./assets/graphics/dci-2-opt.jpg";
-// import heroGraphic from "./assets/graphics/hero.png";
-// import heroGraphicLight from "./assets/graphics/hero-light.png";
-// import { MapSection } from "./components/Maps";
 
 function App() {
   const [isDark, setIsDark] = useState(true);
@@ -73,22 +68,13 @@ function App() {
       }}
     >
       <div className="relative">
-        {/* Batik graphic spanning hero + video */}
-        {/* <img
-          src={isDark ? heroGraphic : heroGraphicLight}
-          alt=""
-          className="absolute px-[clamp(1.5rem,2.08vw,2.5rem)] w-full pointer-events-none z-10 top-[8%]"
-        /> */}
-
         <div className="h-screen flex flex-col relative z-20">
           <Navbar isDark={isDark} onToggle={toggleDark} />
           <Hero isDark={isDark} />
         </div>
-        {/* <DCIDashboard /> */}
         <VideoSection isDark={isDark} />
       </div>
       <main>
-        {/* <MapSection isDark={isDark} /> */}
         <PresidentMessage isDark={isDark} />
         <div
           ref={dciOneRef}
@@ -117,7 +103,6 @@ function App() {
         </div>
         <DownloadSection isDark={isDark} />
       </main>
-      {/* <Footer isDark={isDark} /> */}
     </div>
   );
 }

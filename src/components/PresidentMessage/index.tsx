@@ -37,52 +37,6 @@ export const PresidentMessage = ({ isDark }: { isDark: boolean }) => {
         transition: "color 0.5s",
       }}
     >
-      {/* Batik bg pattern */}
-      {/* <div className="absolute inset-0 pointer-events-none">
-      <svg
-        viewBox="0 0 800 600"
-        className="w-full h-full"
-        style={{
-          color: isDark ? "#1a3a5a" : "#c5b990",
-          opacity: isDark ? 0.06 : 0.15,
-          transition: "color 0.5s, opacity 0.5s",
-        }}
-      >
-        <pattern
-          id="batik-msg"
-          x="0"
-          y="0"
-          width="60"
-          height="60"
-          patternUnits="userSpaceOnUse"
-        >
-          <path
-            d="M30 0L60 30L30 60L0 30Z"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="0.8"
-          />
-          <circle
-            cx="30"
-            cy="30"
-            r="6"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="0.6"
-          />
-          <circle cx="30" cy="30" r="2" fill="currentColor" opacity="0.4" />
-          <path
-            d="M15 15L45 15L45 45L15 45Z"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="0.3"
-            opacity="0.5"
-          />
-        </pattern>
-        <rect width="800" height="600" fill="url(#batik-msg)" />
-      </svg>
-    </div> */}
-
       <img
         src={heartLeft}
         alt="Decorative heart left"

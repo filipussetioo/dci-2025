@@ -1,7 +1,5 @@
 import logoDark from "../../assets/icons/logo-dark.svg";
 import logoLight from "../../assets/icons/logo-light.svg";
-// import batikLow from "../../assets/graphics/batik-download.png";
-// import batikLowLight from "../../assets/graphics/batik-download-light.png";
 import lungLeft from "../../assets/graphics/lungs-left.svg";
 import lungRight from "../../assets/graphics/lungs-right.svg";
 import cornersLeft from "../../assets/graphics/corners-left.svg";
@@ -17,37 +15,18 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
         transition: "color 0.5s",
       }}
     >
-      {/* Background */}
-      {/* <div className="absolute inset-0" style={{ backgroundColor: isDark ? "#1a2235" : "#f0ebe0", transition: "background-color 0.5s" }}>
-        {isDark && <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-900" />}
-        {isDark && <div className="absolute inset-0 bg-black/40" />}
-        {!isDark && (
-          <div className="absolute inset-0 pointer-events-none">
-            <svg viewBox="0 0 800 600" className="w-full h-full text-[#c5b990] opacity-20">
-              <pattern id="batik-report" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-                <path d="M30 0L60 30L30 60L0 30Z" fill="none" stroke="currentColor" strokeWidth="0.8" />
-                <circle cx="30" cy="30" r="6" fill="none" stroke="currentColor" strokeWidth="0.6" />
-                <circle cx="30" cy="30" r="2" fill="currentColor" opacity="0.4" />
-                <path d="M15 15L45 15L45 45L15 45Z" fill="none" stroke="currentColor" strokeWidth="0.3" opacity="0.5" />
-              </pattern>
-              <rect width="800" height="600" fill="url(#batik-report)" />
-            </svg>
-          </div>
-        )}
-      </div> */}
-
       {/* Heart graphics — behind footer, above corners */}
       <img
         src={lungLeft}
         alt="Decorative lung graphic left"
         loading="lazy"
-        className="absolute md:-bottom-[40%] md:left-0 lg:left-6 lg:max-w-[40%] z-0 pointer-events-none md:w-1/2 top-[30%] md:top-[15%] -left-[55%] w-[100%]"
+        className="absolute md:-bottom-[40%] md:left-0 lg:left-6 lg:max-w-[40%] z-0 pointer-events-none md:w-1/2 top-[30%] md:top-[15%] -left-[55%] w-full"
       />
       <img
         src={lungRight}
         alt="Decorative lung graphic right"
         loading="lazy"
-        className="absolute md:-bottom-[40%] md:right-0 lg:right-6 lg:max-w-[40%] z-0 pointer-events-none md:w-1/2 top-[30%] md:top-[15%] -right-[55%] w-[100%]"
+        className="absolute md:-bottom-[40%] md:right-0 lg:right-6 lg:max-w-[40%] z-0 pointer-events-none md:w-1/2 top-[30%] md:top-[15%] -right-[55%] w-full"
       />
       <div className="relative z-10 pt-16 text-center px-6">
         <h2 className="font-quantico text-[1.78rem] md:text-[3.16rem] lg:text-[max(4.21rem,3.742vw)] uppercase leading-[0.95] tracking-[-0.04em]">
@@ -57,7 +36,12 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
         </h2>
 
         {/* DOWNLOAD REPORT button */}
-        <button className="group mt-16 inline-block cursor-pointer font-quantico ">
+        <a
+          href="/pdf/DCI ARSR 2025.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group mt-16 inline-block cursor-pointer font-quantico "
+        >
           <div
             className="bg-blue-primary group-hover:bg-blue-hover px-[24.5px] py-2 uppercase text-black text-[1em] font-normal tracking-[-0.04em]"
             style={{
@@ -74,7 +58,7 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
               </span>
             </span>
           </div>
-        </button>
+        </a>
       </div>
 
       {/* Footer section */}
@@ -88,9 +72,6 @@ export const DownloadSection = ({ isDark }: { isDark: boolean }) => {
               className="h-auto w-8"
             />
           </div>
-
-          {/* Teal divider */}
-          {/* <div className="w-16 h-[2px] bg-[#3bb8c4] mx-auto mb-6" /> */}
 
           {/* Description text */}
           <p className="font-archivo text-[max(0.56rem,0.498vw)] mx-auto leading-[1.3] tracking-[0.02em]">

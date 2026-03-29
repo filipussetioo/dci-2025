@@ -58,8 +58,6 @@ const tabs = [
   },
 ];
 
-/* ── Content Panels ── */
-
 const FinancialContent = ({
   isDark,
   isActive,
@@ -467,78 +465,78 @@ const PlatformContent = ({ isDark }: { isDark: boolean }) => {
                 }}
               >
                 <div className="overflow-hidden">
-                    {/* Mobile gallery */}
-                    <div className="border-t-[0.5px] border-blue-primary mx-2 lg:hidden" />
-                    <div className="lg:hidden flex flex-col py-4 px-4">
-                      <div className="relative aspect-video overflow-hidden">
-                        <img
-                          src={campus.gallery[galleryIdx]}
-                          alt={campus.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="flex items-center justify-center gap-3 py-4">
-                        {campus.gallery.length > 1 && (
-                          <button
-                            onClick={() =>
-                              setGalleryIdx((p) => Math.max(0, p - 1))
-                            }
-                            className="w-8 h-8 flex items-center justify-center cursor-pointer"
-                            aria-label="Previous image"
-                          >
-                            <img
-                              src={iconButton}
-                              alt="Previous"
-                              className="w-8 h-8"
-                              style={{ transform: "rotate(90deg)" }}
-                            />
-                          </button>
-                        )}
-                        {campus.gallery.map((thumb, idx) => (
-                          <button
-                            key={idx}
-                            onClick={() => setGalleryIdx(idx)}
-                            className={`w-12 h-9 overflow-hidden cursor-pointer border ${idx === galleryIdx ? "border-blue-primary" : "border-transparent opacity-50"}`}
-                            aria-label={`View ${campus.name} image ${idx + 1}`}
-                          >
-                            <img
-                              src={thumb}
-                              alt={`${campus.name} thumbnail ${idx + 1}`}
-                              className="w-full h-full object-cover"
-                            />
-                          </button>
-                        ))}
-                        {campus.gallery.length > 1 && (
-                          <button
-                            onClick={() =>
-                              setGalleryIdx((p) =>
-                                Math.min(campus.gallery.length - 1, p + 1),
-                              )
-                            }
-                            className="w-8 h-8 flex items-center justify-center cursor-pointer"
-                            aria-label="Next image"
-                          >
-                            <img
-                              src={iconButton}
-                              alt="Next"
-                              className="w-8 h-8"
-                              style={{ transform: "rotate(-90deg)" }}
-                            />
-                          </button>
-                        )}
-                      </div>
+                  {/* Mobile gallery */}
+                  <div className="border-t-[0.5px] border-blue-primary mx-2 lg:hidden" />
+                  <div className="lg:hidden flex flex-col py-4 px-4">
+                    <div className="relative aspect-video overflow-hidden">
+                      <img
+                        src={campus.gallery[galleryIdx]}
+                        alt={campus.name}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
-                    <div className="border-b-[0.5px] border-blue-primary mx-2 md:hidden" />
+                    <div className="flex items-center justify-center gap-3 py-4">
+                      {campus.gallery.length > 1 && (
+                        <button
+                          onClick={() =>
+                            setGalleryIdx((p) => Math.max(0, p - 1))
+                          }
+                          className="w-8 h-8 flex items-center justify-center cursor-pointer"
+                          aria-label="Previous image"
+                        >
+                          <img
+                            src={iconButton}
+                            alt="Previous"
+                            className="w-8 h-8"
+                            style={{ transform: "rotate(90deg)" }}
+                          />
+                        </button>
+                      )}
+                      {campus.gallery.map((thumb, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setGalleryIdx(idx)}
+                          className={`w-12 h-9 overflow-hidden cursor-pointer border ${idx === galleryIdx ? "border-blue-primary" : "border-transparent opacity-50"}`}
+                          aria-label={`View ${campus.name} image ${idx + 1}`}
+                        >
+                          <img
+                            src={thumb}
+                            alt={`${campus.name} thumbnail ${idx + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </button>
+                      ))}
+                      {campus.gallery.length > 1 && (
+                        <button
+                          onClick={() =>
+                            setGalleryIdx((p) =>
+                              Math.min(campus.gallery.length - 1, p + 1),
+                            )
+                          }
+                          className="w-8 h-8 flex items-center justify-center cursor-pointer"
+                          aria-label="Next image"
+                        >
+                          <img
+                            src={iconButton}
+                            alt="Next"
+                            className="w-8 h-8"
+                            style={{ transform: "rotate(-90deg)" }}
+                          />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div className="border-b-[0.5px] border-blue-primary mx-2 md:hidden" />
 
-                    {/* Description */}
-                    <div className="px-4 py-3 lg:px-16 lg:py-6">
-                      <p
-                        className="text-[max(0.75rem,0.625vw)] leading-relaxed whitespace-pre-line"
-                        style={{ color: isDark ? "#d1d5db" : "#374151" }}
-                      >
-                        {campus.description}
-                      </p>
-                    </div>
+                  {/* Description */}
+                  <div className="px-4 py-3 lg:px-16 lg:py-6">
+                    <p
+                      className="text-[max(0.75rem,0.625vw)] leading-relaxed whitespace-pre-line"
+                      style={{ color: isDark ? "#d1d5db" : "#374151" }}
+                    >
+                      {campus.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -564,7 +562,7 @@ const ecosystemItems = [
 /* Diamond line divider component */
 const DiamondLine = () => (
   <div className="relative flex items-center w-full h-1.5">
-    <div className="absolute left-[3px] right-[3px] top-1/2 -translate-y-1/2 h-[0.5px] bg-blue-primary" />
+    <div className="absolute left-0.75 right-0.75 top-1/2 -translate-y-1/2 h-[0.5px] bg-blue-primary" />
     <div className="absolute left-0 top-1/2 -translate-y-1/2 rotate-45 w-1.5 h-1.5 bg-blue-primary" />
     <div className="absolute right-0 top-1/2 -translate-y-1/2 rotate-45 w-1.5 h-1.5 bg-blue-primary" />
   </div>
@@ -929,8 +927,6 @@ const panels: React.ComponentType<any>[] = [
   OperationalContent,
 ];
 
-/* ── Main Layout ── */
-
 export default function CardGrid({ isDark }: { isDark: boolean }) {
   const [activeTab, setActiveTab] = useState<number | null>(null);
   const shouldReduceMotion = useReducedMotion();
@@ -980,7 +976,7 @@ export default function CardGrid({ isDark }: { isDark: boolean }) {
               <motion.img
                 src={accordionLeft}
                 alt=""
-                className="hidden md:block w-[102px] h-[118px] shrink-0 rotate-90"
+                className="hidden md:block w-25.5 h-29.5 shrink-0 rotate-90"
               />
 
               {/* Title or Number */}
