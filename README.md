@@ -25,10 +25,10 @@ Copy `.env.example` to `.env` and fill in the values:
 cp .env.example .env
 ```
 
-| Variable | Description | Example |
-|---|---|---|
-| `VITE_BASE_URL` | Base path for the app | `/` or `/annual-report/2025/` |
-| `VITE_PDF_URL` | URL to the annual report PDF | `https://example.com/report.pdf` |
+| Variable        | Description                  | Example                          |
+| --------------- | ---------------------------- | -------------------------------- |
+| `VITE_BASE_URL` | Base path for the app        | `/` or `/annual-report/2025/`    |
+| `VITE_PDF_URL`  | URL to the annual report PDF | `https://example.com/report.pdf` |
 
 ### Development
 
@@ -41,17 +41,12 @@ Opens at `http://localhost:5173`
 
 ### Production Build
 
-**Standalone** (deployed at root `/`):
 ```bash
 pnpm build
 ```
 
-**Portfolio** (deployed at `/annual-report/2025/`):
-```bash
-pnpm build:portfolio
-```
+Preview the website:
 
-Preview locally:
 ```bash
 pnpm preview
 ```
@@ -86,6 +81,7 @@ docker rm dci2025container
 ### Build output
 
 The `dist/` folder is the finished product — all static files, no server needed:
+
 - `index.html` — entry point
 - `assets/` — JS, CSS, fonts, images (all bundled)
 - `video/` — video files
@@ -100,6 +96,7 @@ pnpm build
 ### Deploy to server
 
 Copy `dist/` contents to the server:
+
 ```bash
 scp -r dist/* user@server-ip:/var/www/annual-report/2025/
 ```
@@ -116,6 +113,7 @@ location /annual-report/2025/ {
 ```
 
 Then test and reload:
+
 ```bash
 sudo nginx -t
 sudo nginx -s reload
@@ -124,6 +122,7 @@ sudo nginx -s reload
 ### Updating the site
 
 Rebuild and re-copy whenever you make changes:
+
 ```bash
 pnpm build
 scp -r dist/* user@server-ip:/var/www/annual-report/2025/
