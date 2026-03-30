@@ -62,14 +62,8 @@ Build output is in `dist/`.
 
 ### Build image
 
-**Portfolio build** (default):
 ```bash
 docker build --no-cache -t dci2025 -f Dockerfile .
-```
-
-**Standalone build**:
-```bash
-docker build --no-cache --build-arg BUILD_MODE=standalone -t dci2025 -f Dockerfile .
 ```
 
 ### Run container
@@ -87,129 +81,52 @@ docker stop dci2025container
 docker rm dci2025container
 ```
 
-## AWS Deployment
+## Deployment
 
-Below are the possible ways to deploy this app on AWS depending on the existing infrastructure.
+### Build output
 
-### Option 1: S3 + CloudFront
+The `dist/` folder is the finished product — all static files, no server needed:
+- `index.html` — entry point
+- `assets/` — JS, CSS, fonts, images (all bundled)
+- `video/` — video files
+- `pdf/` — downloadable PDFs
 
-Best for: static site hosting with CDN.
+### Build
 
-1. Set `VITE_BASE_URL` in `.env` (use `/` for root, or `/annual-report/2025/` for subpath)
-2. Build:
-   ```bash
-   pnpm build
-   ```
-3. Upload `dist/` to S3:
-   ```bash
-   aws s3 sync dist/ s3://your-bucket-name/ --delete
-   ```
-4. Create a CloudFront distribution pointing to the S3 bucket
-5. For SPA routing, add a custom error response: 404 → `/index.html` (200)
-
-**If deploying to a subpath on an existing site:**
-- Upload to `s3://their-bucket/annual-report/2025/` instead
-- Add a CloudFront **behavior** for `/annual-report/2025/*` → the S3 origin
-
-### Option 2: Amplify
-
-Best for: auto-deploy from GitHub.
-
-**As a standalone app:**
-1. Connect your GitHub repo in Amplify console
-2. Amplify auto-detects Vite and builds on push
-
-**Inside an existing Amplify site:**
-1. Build locally: `pnpm build`
-2. Copy `dist/` contents into their repo's `public/annual-report/2025/`
-3. Add rewrite rule in their Amplify console (Rewrites and redirects):
-   ```
-   Source: /annual-report/2025/<*>
-   Target: /annual-report/2025/index.html
-   Type: 200 (Rewrite)
-   ```
-4. Push to their repo → auto-deploys
-
-### Option 3: Elastic Beanstalk
-
-Best for: managed platform with auto-deploy from GitHub.
-
-**Inside an existing Beanstalk app:**
-1. Build locally: `pnpm build`
-2. Copy `dist/` contents into their `public/annual-report/2025/`
-3. Add Nginx config in `.platform/nginx/conf.d/annual-report.conf`:
-   ```nginx
-   location /annual-report/2025/ {
-       alias /var/app/current/public/annual-report/2025/;
-       try_files $uri /annual-report/2025/index.html;
-   }
-   ```
-4. Push to their repo → auto-deploys
-
-### Option 4: EC2
-
-Best for: full control over the server.
-
-1. SSH into the EC2 instance
-2. Copy `dist/` to `/var/www/annual-report/2025/`
-3. Add Nginx config:
-   ```nginx
-   location /annual-report/2025/ {
-       alias /var/www/annual-report/2025/;
-       try_files $uri /annual-report/2025/index.html;
-   }
-   ```
-4. Reload Nginx: `sudo nginx -s reload`
-
-**Or run with Docker on EC2:**
 ```bash
-docker build --no-cache -t dci2025 -f Dockerfile .
-docker run -d -p 5173:5173 --name dci2025container dci2025
+pnpm build
 ```
-Then add Nginx reverse proxy for `/annual-report/2025/` → `localhost:5173`.
 
-### Option 5: ECS (Fargate)
+### Deploy to server
 
-Best for: containerized deployment, managed by AWS.
+Copy `dist/` contents to the server:
+```bash
+scp -r dist/* user@server-ip:/var/www/annual-report/2025/
+```
 
-1. Build and push Docker image to ECR:
-   ```bash
-   aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin <account-id>.dkr.ecr.ap-southeast-1.amazonaws.com
-   docker build -t dci2025 -f Dockerfile .
-   docker tag dci2025 <account-id>.dkr.ecr.ap-southeast-1.amazonaws.com/dci2025
-   docker push <account-id>.dkr.ecr.ap-southeast-1.amazonaws.com/dci2025
-   ```
-2. Create ECS service with the image
-3. Add ALB listener rule: path `/annual-report/2025/*` → your target group
+### Nginx config
 
-### Option 6: EKS (Kubernetes)
+This app is deployed as a standalone site. To serve it under a subpath (e.g. `/annual-report/2025/`) on an existing domain, add a reverse proxy or alias on their Nginx:
 
-Best for: existing Kubernetes cluster.
+```nginx
+location /annual-report/2025/ {
+    alias /var/www/annual-report/2025/;
+    try_files $uri /annual-report/2025/index.html;
+}
+```
 
-1. Push Docker image to ECR (same as ECS above)
-2. Deploy with a Kubernetes manifest and add Ingress rule:
-   ```yaml
-   - path: /annual-report/2025/
-     pathType: Prefix
-     backend:
-       service:
-         name: dci2025
-         port:
-           number: 5173
-   ```
+Then test and reload:
+```bash
+sudo nginx -t
+sudo nginx -s reload
+```
 
-### Option 7: App Runner
+### Updating the site
 
-Best for: simplest container hosting, no infra to manage.
+Rebuild and re-copy whenever you make changes:
+```bash
+pnpm build
+scp -r dist/* user@server-ip:/var/www/annual-report/2025/
+```
 
-1. Push Docker image to ECR (same as ECS above)
-2. Create App Runner service pointing to the image
-3. If integrating with existing site, add a CloudFront **behavior** for `/annual-report/2025/*` → App Runner URL as origin
-
----
-
-### Note on `VITE_BASE_URL`
-
-- `pnpm build` uses `.env` (`VITE_BASE_URL=/`) for standalone deployment
-- `pnpm build:portfolio` sets `VITE_BASE_URL=/annual-report/2025/` for subpath deployment
-- Docker defaults to portfolio build; pass `--build-arg BUILD_MODE=standalone` for standalone
+No Nginx restart needed — files are replaced in place.
