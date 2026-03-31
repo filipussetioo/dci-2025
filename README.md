@@ -78,33 +78,86 @@ docker rm dci2025container
 
 ## Deployment
 
-### Build output
-
-The `dist/` folder is the finished product — all static files, no server needed:
-
+Build output is in `dist/` — all static files, no server needed:
 - `index.html` — entry point
 - `assets/` — JS, CSS, fonts, images (all bundled)
 - `video/` — video files
 - `pdf/` — downloadable PDFs
 
-### Build
+### Nginx proxy config
+
+All methods below run the app on `localhost:5173`. Add this to the server's Nginx config to serve it under a subpath:
+
+```nginx
+location /annual-report/2025/ {
+    proxy_pass http://localhost:5173/;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+}
+```
+
+Then test and reload:
+```bash
+sudo nginx -t
+sudo nginx -s reload
+```
+
+---
+
+### Method 1: Docker (recommended)
+
+Auto-restarts on crash or reboot.
 
 ```bash
 pnpm build
+docker build --no-cache -t dci2025 -f Dockerfile .
+docker run -d -p 5173:5173 --restart always --name dci2025container dci2025
 ```
 
-### Deploy to server
-
-Copy `dist/` contents to the server:
-
+**Update:**
 ```bash
+docker stop dci2025container && docker rm dci2025container
+pnpm build
+docker build --no-cache -t dci2025 -f Dockerfile .
+docker run -d -p 5173:5173 --restart always --name dci2025container dci2025
+```
+
+---
+
+### Method 2: serve + pm2
+
+No Docker needed. Install once on the server:
+```bash
+npm install -g serve pm2
+```
+
+Build and start:
+```bash
+pnpm build
+pm2 start serve --name dci2025 -- -s dist -l 5173
+pm2 save
+pm2 startup
+```
+
+**Update:**
+```bash
+pnpm build
+pm2 restart dci2025
+```
+
+---
+
+### Method 3: Static files
+
+No process running. Nginx serves the files directly.
+
+Build and copy to server:
+```bash
+pnpm build
 scp -r dist/* user@server-ip:/var/www/annual-report/2025/
 ```
 
-### Nginx config
-
-This app is deployed as a standalone site. To serve it under a subpath (e.g. `/annual-report/2025/`) on an existing domain, add a reverse proxy or alias on their Nginx:
-
+Use this Nginx config instead of the proxy config above:
 ```nginx
 location /annual-report/2025/ {
     alias /var/www/annual-report/2025/;
@@ -112,17 +165,7 @@ location /annual-report/2025/ {
 }
 ```
 
-Then test and reload:
-
-```bash
-sudo nginx -t
-sudo nginx -s reload
-```
-
-### Updating the site
-
-Rebuild and re-copy whenever you make changes:
-
+**Update:**
 ```bash
 pnpm build
 scp -r dist/* user@server-ip:/var/www/annual-report/2025/
